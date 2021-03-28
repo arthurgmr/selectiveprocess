@@ -48,11 +48,11 @@ module.exports = {
                 password
             } = req.body
 
-            
-            birth_date = Date.parse(birth_date);
-            password = await hash(password, 8);
-            cpf.replace(/\D/g,"");
-            cep.replace(/\D/g, "");
+        
+            birth_date = Date.parse(birth_date)
+            password = await hash(password, 8)
+            cpf.replace(/\D/g, "")
+            cep.replace(/\D/g, "")
 
             const userId = await User.create({
                 name,
