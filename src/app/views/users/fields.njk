@@ -1,0 +1,278 @@
+<div class="sub-title">
+    <h4>Dados Cadastrais</h4>
+</div>
+
+<div class="item">
+    <div>Nome Completo</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="name"
+            value="{{ user.name }}"
+            style="text-transform: uppercase;"
+        >           
+    </div>
+</div>
+
+<div class="grid">
+    <div class="item">
+        <div>CPF</div>
+        <div class="input">
+            <input 
+                type="text" 
+                name="cpf"
+                autocomplete="off"
+                value="{{ user.cpf }}"
+                onkeydown="Mask.apply(this, 'cpf')"
+                onblur="Validate.apply(this, 'isCpf')" 
+
+            >           
+        </div>
+    </div>
+    <div class="item">
+        <div>Data de Nascimento </div>
+        <div class="input">
+            <input 
+                type="date" 
+                name="birth_date"
+                value="{{ user.date }}" 
+            >           
+        </div>
+    </div>
+    <div class="item">
+        <div>CEP</div>
+        <div class="input">
+            <input 
+                type="text" 
+                name="cep"
+                value="{{ user.cep }}"
+                onkeydown="Mask.apply(this, 'cep')"
+                onblur="Validate.apply(this, 'isCep')" 
+
+
+            >           
+        </div>
+    </div>
+</div>
+
+<div class="item">
+    <div>Logradouro/Endereço</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="address"
+            value="{{ user.address }}"
+            style="text-transform: uppercase;" 
+        >           
+    </div>
+</div>
+
+<div class="grid">
+<div class="item">
+    <div>Número</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="address_number"
+            value="{{ user.address_number }}"
+            style="text-transform: uppercase;" 
+        >           
+    </div>
+</div>
+<div class="item">
+    <div>Complemento</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="address_complement"
+            value="{{ user.address_complement }}"
+            style="text-transform: uppercase;" 
+        >           
+    </div>
+</div>
+<div class="item">
+    <div>Bairro</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="address_district"
+            value="{{ user.address_district }}"
+            style="text-transform: uppercase;" 
+        >           
+    </div>
+</div>
+</div>
+
+<div class="sub-title">
+    <h4>Dados Educacionais</h4>
+</div>
+
+<div class="grid">
+    <div class="item">
+        <div>Selecione o Curso Superior</div>
+        <div> 
+            <select name="course_id">
+                <option value="" disabled selected>Selecione uma opção</option>
+                {% for course in courses %}
+                    <option value="{{course.id}}" {% if user.course_id == course.id %}selected{% endif %}>
+                        {{course.name}}
+                    </option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+
+    <div class="item">
+        <div>Selecione a Instituição</div>
+        <div> 
+            <select name="college_id">
+                <option value="" disabled selected>Selecione uma opção</option>
+                {% for college in colleges %}
+                    <option value="{{college.id}}" {% if user.college_id == college.id %}selected{% endif %}>
+                        {{college.name}}
+                    </option>
+                {% endfor %}
+
+            </select>
+        </div>
+    </div>
+
+
+<div class="item">
+    <div>Selecione o Período/Semestre</div>
+    <div>
+        <select name="period_course">
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option {% if user.period_course == '1° Período/Semestre' %}selected{% endif %}>
+                1° Período/Semestre
+            </option>
+            <option {% if user.period_course == '2° Período/Semestre' %}selected{% endif %}>
+                2° Período/Semestre
+            </option>
+            <option {% if user.period_course == '3° Período/Semestre' %}selected{% endif %}>
+                3° Período/Semestre
+            </option>
+            <option {% if user.period_course == '4° Período/Semestre' %}selected{% endif %}>
+                4° Período/Semestre
+            </option>
+            <option {% if user.period_course == '5° Período/Semestre' %}selected{% endif %}>
+                5° Período/Semestre
+            </option>
+            <option {% if user.period_course == '6° Período/Semestre' %}selected{% endif %}>
+                6° Período/Semestre
+            </option>
+            <option {% if user.period_course == '7° Período/Semestre' %}selected{% endif %}>
+                7° Período/Semestre
+            </option>
+            <option {% if user.period_course == '8° Período/Semestre' %}selected{% endif %}>
+                8° Período/Semestre
+            </option>
+            
+        </select>
+    </div>
+</div>
+
+<div class="item">
+    <div>Possui Curso Normal ou Magistério?</div>
+    <div class="radio">        
+        <span>
+            <input
+                id="radio1" 
+                type="radio" 
+                name="specialization" 
+                value="1" 
+                {% if user.specialization == '1'%}
+                    checked
+                {% endif %}
+                > 
+            <label for="radio1">Sim</label>
+            
+        </span>
+    
+        <span>
+            <input
+            id="radio2" 
+            type="radio" 
+            name="specialization" 
+            value="0"
+            {% if user.specialization == '0'%}
+                checked
+            {% endif %}
+            >
+            <label for="radio2">Não</label>
+        </span>
+
+    </div>
+</div>
+</div>
+<div class="sub-title">
+    <h4>Contatos</h4>
+</div>
+
+<div class="item">
+    <div>E-mail</div>
+    <div class="input">
+        <input 
+            type="email" 
+            name="email"
+            value="{{ user.email }}"
+            onblur="Validate.apply(this, 'isEmail')" 
+        >           
+    </div>
+</div>
+
+<div class="grid">
+    <div class="item">
+        <div>N° Telefone Celular 1</div>
+        <div class="input">
+            <input 
+                type="text" 
+                name="phone"
+                value="{{ user.phone1 }}"
+                onkeydown="Mask.apply(this, 'phone')"
+                onblur="Validate.apply(this, 'isPhone')" 
+            >           
+        </div>
+    </div>
+    <div class="item">
+        <div>N° Telefone Celular 2</div>
+        <div class="input">
+            <input 
+                type="text" 
+                name="phone"
+                value="{{ user.phone2 }}"
+                onkeydown="Mask.apply(this, 'phone')"
+            >           
+        </div>
+    </div>
+</div>
+
+<div class="sub-title">
+    <h4>Segurança</h4>
+</div>
+
+<div class="item">
+    <div>Crie uma Senha</div>
+    <div class="input">
+        <input 
+            type="password" 
+            name="password"
+        >           
+    </div>
+</div>
+
+{% if not user.id %}
+
+<div class="item">
+    <div>Repita a Senha Criada</div>
+    <div class="input">
+        <input 
+            type="password" 
+            name="passwordRepeat"
+        >           
+    </div>
+</div>
+
+{% endif %}
+

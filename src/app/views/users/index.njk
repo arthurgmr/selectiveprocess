@@ -1,0 +1,40 @@
+{% extends "layout.njk" %}
+
+{% import "parts/card.njk" as card %}
+
+{% block content %}
+
+{% call card.render('Datails', 'user-dashboard container') %}
+
+    <form method="POST" action="/users?_method=PUT">
+
+        <div class="fields">
+            {% include 'users/fields.njk' %} 
+
+            <input 
+                type="hidden" 
+                name="id" 
+                value={{user.id}}>   
+
+        </div>
+
+        <button class="button edit" type="submit">Update</button>
+    </form>
+    <form id="form-delete" method="POST" action="/users?_method=DELETE">
+            <input type="hidden" name="id" value={{user.id}}>
+            <button class="button delete" type="submit">Delete</button>
+    </form>
+
+{% endcall %}
+
+<script>
+    const formDelete = document.querySelector("#form-delete")
+    formDelete.addEventListener("submit", function (event) {
+        const confirmation = confirm("Confirm delete user?")
+        if (!confirmation) {
+            event.preventDefault()
+        }
+    })
+</script>
+
+{% endblock content %}

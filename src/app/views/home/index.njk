@@ -1,0 +1,36 @@
+{% extends "layout.njk" %}
+
+{% import "parts/card.njk" as card %}
+
+
+
+{% block content %}
+
+
+{% call card.render('Insira o CPF para iniciar a inscrição', 'login container') %}
+
+    <form method="POST" action="/">
+
+        <div class="fields">
+            <div class="item">
+                <div>CPF</div>
+                <div class="input">
+                    <input 
+                        type="text" 
+                        name="cpf"
+                        autocomplete="off"
+                        onkeydown="Mask.apply(this, 'cpf')"
+                        onblur="Validate.apply(this, 'isCpf')"            
+                    >           
+                </div>
+            </div> 
+
+        </div>
+
+        <button class="button" type="submit">Iniciar Inscrição</button>
+
+    </form>
+
+{% endcall %}
+
+{% endblock content %}
