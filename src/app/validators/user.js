@@ -18,13 +18,13 @@ function checkAllFields(body) {
 }
 
 
-async function show(req, res, next) {
+async function index(req, res, next) {
     const { userId: id } = req.session
 
     const user = await User.findOne({where: {id}})
 
         if (!user) return res.render("users/register", {
-            error: "User not found!"
+            error: "Usuário não encontrado"
         })
 
         req.user = user
@@ -101,6 +101,6 @@ async function update (req, res, next) {
 
 module.exports = {
     post,
-    show,
+    index,
     update
 }

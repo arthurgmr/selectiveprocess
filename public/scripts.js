@@ -1,19 +1,19 @@
-// const input = document.querySelector('input[name="price"]')
+// INPUT UPPERCASE
+const fields = document.querySelectorAll(' .item input[type="text"], .item select')
 
-// input.addEventListener("keydown", function(e){
-//     setTimeout(function() {
-//         let { value } = e.target
-    
-//     value = value.replace(/\D/g,"")
+if(fields) {
+    function forceInputUppercase(e) {
+        var start = e.target.selectionStart;
+        var end = e.target.selectionEnd;
+        e.target.value = e.target.value.toUpperCase();
+        e.target.setSelectionRange(start, end);
+    }
+    for(field of fields) {
+        field.addEventListener("keyup", forceInputUppercase, false);
+    }
+}
 
-//     value = new Intl.NumberFormat('pt-BR', {
-//         style: 'currency',
-//         currency: 'BRL'
-//     }).format(value/100)
 
-//     e.target.value = value
-//     }, 1)
-// })
 
 // MASK INPUT
 

@@ -1,0 +1,21 @@
+{% extends "layout.njk" %}
+
+{% import "parts/card.njk" as card %}
+
+{% block content %}
+
+{% call card.render('Inscrição não realizada', 'subscription-error  container') %}
+
+<div class="error-lottie"></div>
+
+    <p>
+        Desculpe, mas algo deu errado em sua inscrição.</br>
+        Entre em contato pelo e-mail <a href="mailto:educacao@muriae.mg.gov.br">educacao@muriae.mg.gov.br</a>
+    </p>
+
+</div>
+
+{% endcall %}
+
+
+{% endblock content %}
