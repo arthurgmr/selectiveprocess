@@ -12,7 +12,6 @@ module.exports = {
         }
         return age
     },
-
 /*  Função para converter a data de mile segundo para o formato html(yyy-mm-dd); */
     date(timestamp) {
         
@@ -41,7 +40,6 @@ module.exports = {
             format: `${day}/${month}/${year}`
         }
     },
-
 /*  Função para converter em moeda; */
     formatPrice(price) {
         return value = new Intl.NumberFormat('pt-BR', {
@@ -49,7 +47,6 @@ module.exports = {
             currency: 'BRL'
         }).format(price/100)
     },
-
     formatCep(value) {
         value = value
             .replace(/\D/g,"")
@@ -61,7 +58,6 @@ module.exports = {
         return value
 
     },
-
     formatCpf(value) {
         value = value.replace(/\D/g,"")
 
@@ -77,4 +73,8 @@ module.exports = {
     
         return value
     },
+    getFirstName(value) {
+        return value
+            .replace(/(')/g, "$1'").split(' ').slice(0, 1).join(' ');
+    }
 }

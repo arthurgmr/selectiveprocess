@@ -3,7 +3,8 @@ const { hash} = require('bcryptjs')
 const User = require('../models/User')
 const Colleges = require('../models/Colleges')
 const Courses = require('../models/Courses')
-const { index } = require('./HomeController')
+
+const { getFirstName } = require('../../lib/utils')
 
 
 
@@ -15,28 +16,6 @@ module.exports = {
 
         return res.render("users/register", { colleges, courses })
     },
-    async index(req, res) {
-        try {
-            const { user } = req
-
-            return res.render('users/index', { user })
-        } catch (err) {
-            console.log(err)
-        }
-    },
-    // async show(req, res) {
-    //     try {
-    //         const { user } = req
-
-    //         user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
-    //         user.cep = formatCep(user.cep)
-            
-    //         return res.render('users/index', { user })
-
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // },
     async post (req, res) {
         try {
             let {
@@ -88,35 +67,70 @@ module.exports = {
         }
 
     },
-    // async update(req, res ){
-    //     try {
-    //         const { user } = req
-    //         let { name, email, cpf_cnpj, cep, address} = req.body
+    async index(req, res) {
+        try {
+            const { user } = req
+
+            const firstNameUser = getFirstName(user.name)
+
+            return res.render('users/index', { user, firstNameUser })
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    async printForm(req, res) {
+        try {
+            const { user } = req
+         
+            return res.render('users/print-form', { user })
+
+        }catch(err) {
+            console.log(err)
+        }
+    },
+    async edit(req, res) {
+        try {
+            const { user } = req
+
+            //build LoadUserService to format inputs
+
+            //verify buttons
+         
+            return res.render('users/edit', { user })
+
+        }catch(err) {
+            console.log(err)
+        }
+    },
+    async put(req, res ){
+        try {
+            const { user } = req
+            let { name, email, cpf_cnpj, cep, address} = req.body
 
             
-    //         cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
-    //         cep = cep.replace(/\D/g,"")
+            cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
+            cep = cep.replace(/\D/g,"")
 
-    //         await User.update(user.id, {
-    //             name,
-    //             email,
-    //             cpf_cnpj,
-    //             cep,
-    //             address
-    //         })
+            await User.update(user.id, {
+                name,
+                email,
+                cpf_cnpj,
+                cep,
+                address
+            })
 
-    //         return res.render("users/index", {
-    //             user: req.body,
-    //             success: "User updated with success!"
-    //         })
+            return res.render("users/index", {
+                user: req.body,
+                success: "User updated with success!"
+            })
 
-    //     }catch(err) {
-    //         console.log(err)
-    //         return res.render("users/index", {
-    //             error: "Some error happened!"
-    //         })
-    //     }
-    // },
+        }catch(err) {
+            console.log(err)
+            return res.render("users/index", {
+                error: "Some error happened!"
+            })
+        }
+    },
     // async delete(req, res) {
     //     try {
             

@@ -4,37 +4,31 @@
 
 {% block content %}
 
-{% call card.render('Datails', 'user-dashboard container') %}
+{% call card.render('Painel de Controle', 'user-dashboard container') %}
 
-    <form method="POST" action="/users?_method=PUT">
+<h4>Olá {{firstNameUser}}, seja bem vido(a).</h4>
 
-        <div class="fields">
-            {% include 'users/fields.njk' %} 
+<div class="content">
 
-            <input 
-                type="hidden" 
-                name="id" 
-                value={{user.id}}>   
+    <div class="options">
+        <a href="/users/print-form">Imprimir Ficha de Inscrição</a>
+        <a href="/users/edit">Atualizar Dados Cadastrais</a>
+    </div>
 
-        </div>
+    <div class="classification">
+        <p>Classificação Parcial</p>
+        <div><p>10°</p></div>        
+    </div>
+    
 
-        <button class="button edit" type="submit">Update</button>
-    </form>
-    <form id="form-delete" method="POST" action="/users?_method=DELETE">
-            <input type="hidden" name="id" value={{user.id}}>
-            <button class="button delete" type="submit">Delete</button>
-    </form>
+</div>
+
+<div class="footer">
+    <p>Dúvidas? Entre em contato por <a href="mailto:educacao@muriae.mg.gov.br">educacao@muriae.mg.gov.br</a></p>
+</div>
 
 {% endcall %}
 
-<script>
-    const formDelete = document.querySelector("#form-delete")
-    formDelete.addEventListener("submit", function (event) {
-        const confirmation = confirm("Confirm delete user?")
-        if (!confirmation) {
-            event.preventDefault()
-        }
-    })
-</script>
+
 
 {% endblock content %}

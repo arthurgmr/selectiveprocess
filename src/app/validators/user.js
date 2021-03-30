@@ -71,7 +71,7 @@ async function post(req, res, next) {
     next()
 }
 
-async function update (req, res, next) {
+async function put(req, res, next) {
     //check if has all fields
     const fillAllFields = checkAllFields(req.body)
     if(fillAllFields) {
@@ -102,5 +102,5 @@ async function update (req, res, next) {
 module.exports = {
     post,
     index,
-    update
+    put
 }
