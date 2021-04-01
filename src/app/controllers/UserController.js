@@ -1,4 +1,5 @@
 const { hash} = require('bcryptjs')
+const puppeteer = require('puppeteer')
 
 const User = require('../models/User')
 const Colleges = require('../models/Colleges')
@@ -84,13 +85,43 @@ module.exports = {
     },
     async printForm(req, res) {
         try {
-            const { user } = req
+            const { id } = req.params
+
+            const colleges = await Colleges.findAll()
+            const courses = await Courses.findAll()
+
+            const user = await LoadUserServices.load('userDataComplete', id)
          
-            return res.render('users/print-form', { user })
+            return res.render('users/print-form', { user, colleges, courses })
 
         }catch(err) {
             console.log(err)
         }
+    },
+    async formPdf(req, res) {
+        const { id } = req.params
+
+        const browser = await puppeteer.launch()
+        const page = await browser.newPage()
+
+        await page.goto(`http://localhost:3000/users/print-form/${id}`, { 
+            waitUntil: 'networkidle0'
+        })
+
+        console.log(page)
+
+        const pdf = await page.pdf({
+            printBackground: true,
+            format: 'Letter',
+
+        })
+
+        await browser.close()
+
+        res.contentType('application/pdf')
+
+        return res.send(pdf)
+
     },
     async edit(req, res) {
         try {

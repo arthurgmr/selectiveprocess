@@ -1,40 +1,215 @@
-{% extends "layout.njk" %}
+<!DOCTYPE html>
 
-{% import "parts/card.njk" as card %}
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-{% block content %}
 
-{% call card.render('Ficha de Inscrição', 'user-dashboard container') %}
+        <link rel="stylesheet" href="/styles/print-form.css">
 
-    <form method="POST" action="/users?_method=PUT">
+        <title>Ficha de Inscrição</title>             
+        
+    </head>
 
-        <div class="fields">
-            {% include 'users/fields.njk' %} 
+    <body>
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo-pq-5.png" alt="">
+                    </a>  
+                </div>
+                <div class="title">
+                    <h3>
+                        Ficha de Inscrição </br>
+                        Processe Seletivo Estágio - Edital n°00/2021
+                    </h3>
+                </div>
+            </div>
+            
+        </header>
+        <section class="content container">
+            <div class="sub-title">
+                <h4>Dados Cadastrais</h4>
+            </div>
+            
+            <div class="item">
+                <div>Nome Completo</div>
+                <div class="input">
+                    <p>{{ user.name }}</p>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="item">
+                    <div>CPF</div>
+                    <div class="input">
+                        <p>{{ user.cpf }}</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>Data de Nascimento </div>
+                    <div class="input">
+                        <p>{{ user.birth_date }}</p>
+                    </div>
+                </div>
 
-            <input 
-                type="hidden" 
-                name="id" 
-                value={{user.id}}>   
+            </div>
 
-        </div>
+            <div class="item">
+                <div>CEP</div>
+                <div class="input">
+                    <p>{{ user.cep }}</p>
+                </div>
+            </div>          
+            
+            <div class="item">
+                <div>Logradouro/Endereço</div>
+                <div class="input">
+                    <p>{{ user.address }}</p>          
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="item">
+                    <div>Número</div>
+                    <div class="input">
+                        <p>{{ user.address_number }}</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div>Complemento</div>
+                    <div class="input">
+                        <p>{{ user.address_complement }}</p>
+                    </div>
+                </div>
+            </div>
 
-        <button class="button edit" type="submit">Update</button>
-    </form>
-    <form id="form-delete" method="POST" action="/users?_method=DELETE">
-            <input type="hidden" name="id" value={{user.id}}>
-            <button class="button delete" type="submit">Delete</button>
-    </form>
+            <div class="item">
+                <div>Bairro</div>
+                <div class="input">
+                    <p>{{ user.address_district }}</p>
+                </div>
+            </div>
+            
+            
+            <div class="sub-title">
+                <h4>Dados Educacionais</h4>
+            </div>
+            
+            <div class="grid">
+                <div class="item">
+                    <div>Selecione o Curso Superior</div>
+                    <div class="input"> 
+                        <p>{{ user.course_name }}</p>
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div>Selecione a Instituição</div>
+                    <div class="input"> 
+                        <p>{{ user.college_name }}</p>
+                    </div>
+                </div>
+            
+            
+                <div class="item">
+                    <div>Selecione o Período/Semestre</div>
+                    <div class="input">
+                        <p>{{ user.period_course }}</p>
+                    </div>
+                </div>
+            
+                <div class="item">
+                    <div>Possui Curso Normal ou Magistério?</div>
+                    <div class="radio">        
+                        <span>
+                            <input
+                                id="radio1" 
+                                type="radio" 
+                                name="specialization" 
+                                value="1"
+                                disabled="" 
+                                {% if user.specialization == '1'%}
+                                    checked
+                                {% endif %}
+                                > 
+                            <label for="radio1">Sim</label>
+                            
+                        </span>
+                    
+                        <span>
+                            <input
+                            id="radio2" 
+                            type="radio" 
+                            name="specialization" 
+                            value="0"
+                            disabled=""
+                            {% if user.specialization == '0'%}
+                                checked
+                            {% endif %}
+                            >
+                            <label for="radio2">Não</label>
+                        </span>
+                
+                    </div>
+                </div>
+            </div>
 
-{% endcall %}
+            <div class="sub-title">
+                <h4>Contatos</h4>
+            </div>
+            
+            <div class="item">
+                <div>E-mail</div>
+                <div class="input">
+                    <p>{{ user.email }}</p>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="item">
+                    <div>N° Telefone Celular 1</div>
+                    <div class="input">
+                        <p>{{ user.phone1 }}</p>           
+                    </div>
+                </div>
+                <div class="item">
+                    <div>N° Telefone Celular 2</div>
+                    <div class="input">
+                        <p>{{ user.phone2 }}</p>           
+                    </div>
+                </div>
+            </div>
 
-<script>
-    const formDelete = document.querySelector("#form-delete")
-    formDelete.addEventListener("submit", function (event) {
-        const confirmation = confirm("Confirm delete user?")
-        if (!confirmation) {
-            event.preventDefault()
-        }
-    })
-</script>
+            <div class="sub-title">
+                <h4>Autenticação</h4>
+            </div>
 
-{% endblock content %}
+            <div class="item authentication">
+                <div>Declaração</div>
+                <div class="input">
+                    <p>
+                        Declaro ter ciência de todos os procedimentos estabelecidos no 
+                        Edital nº 00/2021 e conhecimento que a declaração de informações 
+                        incorretas acarretará na exclusão do processo seletivo, conforme 
+                        previsto no item 1.8 deste edital.
+                    </p>
+                    <p>Muriaé, DATA ATUAL.</p>
+                    <p>Assinatura legível do candidato, conforme Carteira de Identidade ou CNH</p>           
+                </div>
+            </div>
+
+        </section>
+        <footer>
+            <p>Av. Maestro Sansão, 236 - Centro, Muriaé/MG - 1º Andar - Tel.: (32) 3729-1233 - E-mail: educacao@muriae.mg.gov.br</p>
+        </footer>
+
+        <script src="/scripts.js"></script>
+    </body>
+
+
+
+
+</html>

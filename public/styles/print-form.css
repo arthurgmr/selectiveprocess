@@ -1,0 +1,158 @@
+
+:root {
+    --primary-color: #18286B;
+    --secundary-color: #D4AF68;
+    --third-color: #5c689e;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    text-decoration: none;
+    list-style-type: none;
+    border: none;
+}
+
+html, body {
+    height: 1096px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 711px;
+    max-width: 790px;
+    margin: 0 auto;
+}
+
+footer {
+    margin-top: auto;
+}
+
+/* HEADER AND FOOTER */
+
+footer {
+    color: #A5A5A5;
+    padding: 24px 0;
+    font-size: 14px;
+}
+
+header, footer {
+    background-color: #EEEEEE;
+    
+    width: 100%;
+    text-align: center;
+}
+
+header h3{
+    text-align: right;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+header div.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header div.container a {
+    justify-self: start;
+}
+
+/* LOGO */
+
+.logo img {
+    width: 253px;
+    height: 93px;
+}
+
+/* CONTENT */
+
+.content {
+    background-color: white;
+
+    padding: 32px 24px;
+    margin: 32px auto;
+
+    box-shadow: 0px 4px 8px -4px rgb(0, 0, 0, .6);
+    border-radius: 4px;
+
+    width: 690px;
+}
+
+/* FORM */
+
+section .sub-title h4 {
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+
+    font-weight: bold;
+    color: var(--secundary-color);
+    border-bottom: 1px solid #eee;
+
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+section .item {
+    margin-bottom: 16px;
+}
+
+section .item > div:nth-child(1){
+    color: #777;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+section .item .input {
+    width: 100%;
+
+    padding: 8px 16px;
+
+    box-shadow: 2px 2px 2px -4px rgb(60, 60, .9);
+
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+
+    font-size: 16px;
+}
+
+section .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+    margin-top: 20px;
+}
+
+section .authentication .input p {
+    font-size: 14px;
+    text-align: justify; 
+}
+
+section .authentication .input p:first-child {
+    margin-bottom: 20px;
+}
+
+section .authentication .input p:last-child {
+    font-size: 10px;
+    margin-top: 40px;
+    border-top: 1px solid #d1d1d1;
+}
+
