@@ -16,7 +16,7 @@ routes.post('/register', UserValidator.post, UserController.post)
 
 routes.get('/', onlyUsers, UserValidator.index, UserController.index)
 routes.get('/print-form', onlyUsers, UserValidator.index, UserController.printForm)
-routes.get('/edit', onlyUsers, UserValidator.index, UserController.edit)
+routes.get('/edit', onlyUsers, UserController.edit)
 routes.put('/edit', onlyUsers, UserValidator.put, UserController.put)
 // routes.put('/', UserValidator.update, UserController.update)
 // routes.delete('/', UserController.delete)

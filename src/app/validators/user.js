@@ -75,23 +75,30 @@ async function put(req, res, next) {
     //check if has all fields
     const fillAllFields = checkAllFields(req.body)
     if(fillAllFields) {
-        return res.render("users/index", fillAllFields)
+        return res.render("users/edit", fillAllFields)
     }
+
+    const colleges = await Colleges.findAll()
+    const courses = await Courses.findAll() 
 
     const { id, password } = req.body
 
-    if(!password) return res.render("users/index", {
+    if(!password) return res.render("users/edit", {
+        colleges,
+        courses,
         user: req.body,
-        error: "Type your password to register update."
+        error: "Digite sua senha para atualizar as informações."
     })
 
     const user = await User.findOne({ where: {id} })
 
     const passed = await compare(password, user.password)
 
-    if (!passed) return res.render("users/index", {
+    if (!passed) return res.render("users/edit", {
+        colleges,
+        courses,
         user: req.body,
-        error: "Incorrect password!"
+        error: "Senha Incoreta"
     })
 
     req.user = user

@@ -4,10 +4,12 @@ const routes = express.Router()
 const HomeController = require('../app/controllers/HomeController')
 const HomeValidator = require('../app/validators/home')
 
+const { isLoggedRedirectToUsers } = require('../app/middlewares/session')
+
 const users = require('./users')
 const session = require('./session')
 
-routes.get('/', HomeController.index)
+routes.get('/',isLoggedRedirectToUsers, HomeController.index)
 routes.post('/', HomeValidator.post, HomeController.post)
 
 routes.use('/users', users)

@@ -75,7 +75,7 @@ footer {
 }
 
 .button.edit:hover {
-    background-color: #065ac1;
+    background-color: var(--third-color);
 }
 
 .button.delete:hover {

@@ -4,6 +4,7 @@ const User = require('../models/User')
 const Colleges = require('../models/Colleges')
 const Courses = require('../models/Courses')
 
+const LoadUserServices = require('../services/LoadUserServices')
 const { getFirstName } = require('../../lib/utils')
 
 
@@ -25,23 +26,24 @@ module.exports = {
                 cep,
                 address,
                 address_number,
+                address_complement,
                 address_district,
                 course_id,
                 college_id,
                 period_course,
                 specialization,
                 email,
-                phone,
+                phone1,
+                phone2,
                 password
             } = req.body
 
-            name.toUpperCase()
-            address.toUpperCase()
-            address_district.toUpperCase()
-            birth_date = Date.parse(birth_date)
-            password = await hash(password, 8)
-            cpf.replace(/\D/g, "")
-            cep.replace(/\D/g, "")
+            birth_date = Date.parse(birth_date);
+            password = await hash(password, 8);
+            cpf = cpf.replace(/\D/g, "");
+            cep = cep.replace(/\D/g, "");
+            phone1 = phone1.replace(/\D/g, "");
+            phone2 = phone2.replace(/\D/g, "");
 
             const userId = await User.create({
                 name,
@@ -50,13 +52,15 @@ module.exports = {
                 cep,
                 address,
                 address_number,
+                address_complement,
                 address_district,
                 course_id,
                 college_id,
                 period_course,
                 specialization,
                 email,
-                phone,
+                phone1,
+                phone2,
                 password
             })
             
@@ -90,13 +94,14 @@ module.exports = {
     },
     async edit(req, res) {
         try {
-            const { user } = req
+            const { userId: id } = req.session
 
-            //build LoadUserService to format inputs
+            const colleges = await Colleges.findAll()
+            const courses = await Courses.findAll()
 
-            //verify buttons
+            const user = await LoadUserServices.load('userDataComplete', id)
          
-            return res.render('users/edit', { user })
+            return res.render('users/edit', { user, colleges, courses })
 
         }catch(err) {
             console.log(err)
@@ -105,29 +110,56 @@ module.exports = {
     async put(req, res ){
         try {
             const { user } = req
-            let { name, email, cpf_cnpj, cep, address} = req.body
+            let {                
+                name,
+                cpf,
+                birth_date,
+                cep,
+                address,
+                address_number,
+                address_complement,
+                address_district,
+                course_id,
+                college_id,
+                period_course,
+                specialization,
+                email,
+                phone1,
+                phone2 } = req.body
 
-            
-            cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
-            cep = cep.replace(/\D/g,"")
+                birth_date = Date.parse(birth_date);
+                cpf = cpf.replace(/\D/g, "")
+                cep = cep.replace(/\D/g, "");
+                phone1 = phone1.replace(/\D/g, "");
+                phone2 = phone2.replace(/\D/g, "");
 
             await User.update(user.id, {
                 name,
-                email,
-                cpf_cnpj,
+                cpf,
+                birth_date,
                 cep,
-                address
+                address,
+                address_number,
+                address_complement,
+                address_district,
+                course_id,
+                college_id,
+                period_course,
+                specialization,
+                email,
+                phone1,
+                phone2
             })
 
             return res.render("users/index", {
                 user: req.body,
-                success: "User updated with success!"
+                success: "Dados Atualizados com Sucesso"
             })
 
         }catch(err) {
             console.log(err)
             return res.render("users/index", {
-                error: "Some error happened!"
+                error: "Algum erro aconteceu"
             })
         }
     },

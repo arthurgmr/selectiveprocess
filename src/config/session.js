@@ -6,11 +6,11 @@ module.exports = session({
     store: new pgSession({
         pool: db
     }),
-    secret: '#Agmr1275',
+    secret: '_0#@!($msT',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 30 * 24 * 60 * 60 * 1000
+        maxAge: 30000
     }
 })
 

@@ -4,11 +4,12 @@
 
 {% block content %}
 
-{% call card.render('Ficha de Inscrição', 'user-dashboard container') %}
+{% call card.render('Ficha de Inscrição', 'user-edit container') %}
 
-    <form method="POST" action="/users?_method=PUT">
+    <form method="POST" action="/users/edit?_method=PUT">
 
         <div class="fields">
+
             {% include 'users/fields.njk' %} 
 
             <input 
@@ -18,23 +19,11 @@
 
         </div>
 
-        <button class="button edit" type="submit">Update</button>
+        <button class="button edit" type="submit">Atualizar</button>
     </form>
-    <form id="form-delete" method="POST" action="/users?_method=DELETE">
-            <input type="hidden" name="id" value={{user.id}}>
-            <button class="button delete" type="submit">Delete</button>
-    </form>
+    <a href="/users">Voltar</a>
 
 {% endcall %}
 
-<script>
-    const formDelete = document.querySelector("#form-delete")
-    formDelete.addEventListener("submit", function (event) {
-        const confirmation = confirm("Confirm delete user?")
-        if (!confirmation) {
-            event.preventDefault()
-        }
-    })
-</script>
 
 {% endblock content %}

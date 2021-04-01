@@ -1,3 +1,5 @@
+/* USER-DASHBOARD */
+
 .user-dashboard h4 {
     font-size: 16px;
     font-weight: 400;
@@ -11,7 +13,8 @@
     align-items: center;
 }
 
-.user-dashboard .content .options a {
+.user-dashboard .content .options a,
+.user-edit a {
 
     background-color: var(--primary-color);
     color: white;
@@ -36,7 +39,8 @@
     transition: all 0.2s;
 }
 
-.user-dashboard .content .options a:hover {
+.user-dashboard .content .options a:hover,
+.user-edit a:hover {
     background-color: var(--third-color);
 }
 
@@ -84,6 +88,8 @@
 .user-dashboard .footer a{
     color: var(--primary-color);
 }
+
+
 
 
 

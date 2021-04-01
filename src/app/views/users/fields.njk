@@ -34,8 +34,8 @@
             <input 
                 type="date" 
                 name="birth_date"
-                value="{{ user.date }}" 
-            >           
+                value="{{ user.birth_date }}" 
+            >          
         </div>
     </div>
     <div class="item">
@@ -227,7 +227,7 @@
         <div class="input">
             <input 
                 type="text" 
-                name="phone"
+                name="phone1"
                 value="{{ user.phone1 }}"
                 onkeydown="Mask.apply(this, 'phone')"
                 onblur="Validate.apply(this, 'isPhone')" 
@@ -239,7 +239,7 @@
         <div class="input">
             <input 
                 type="text" 
-                name="phone"
+                name="phone2"
                 value="{{ user.phone2 }}"
                 onkeydown="Mask.apply(this, 'phone')"
             >           
@@ -252,7 +252,11 @@
 </div>
 
 <div class="item">
-    <div>Crie uma Senha</div>
+    {% if not user.id %}
+        <div>Crie uma Senha</div>
+    {% else %}
+        <div>Insira sua senha para atualizar os dados</div>
+    {% endif %}
     <div class="input">
         <input 
             type="password" 
