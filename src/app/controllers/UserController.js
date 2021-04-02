@@ -100,20 +100,23 @@ module.exports = {
     },
     async formPdf(req, res) {
         const { id } = req.params
+        const user = await LoadUserServices.load('userDataComplete', id)
 
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
 
-        await page.goto(`http://localhost:3000/users/print-form/${id}`, { 
-            waitUntil: 'networkidle0'
-        })
-
-        console.log(page)
+        await page.goto(`http://localhost:3000/session/login`, { waitUntil: 'networkidle0'})
+        await page.type('input[type="email"]', user.email)
+        await page.type('input[type="password"]', '123')
+        await page.click('button[type="submit"]')
+        await page.waitForNavigation()
+        await page.goto(`http://localhost:3000/users/print-form/${id}`, { waitUntil: 'networkidle0'})
+        const cookies = await page.cookies(`http://localhost:3000/users/print-form/${id}`)
+        await page.deleteCookie(...cookies)
 
         const pdf = await page.pdf({
             printBackground: true,
-            format: 'Letter',
-
+            format: 'Letter'
         })
 
         await browser.close()
@@ -182,7 +185,7 @@ module.exports = {
                 phone2
             })
 
-            return res.render("users/index", {
+            return res.render("users/edit", {
                 user: req.body,
                 success: "Dados Atualizados com Sucesso"
             })
