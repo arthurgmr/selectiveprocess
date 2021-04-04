@@ -38,19 +38,51 @@
             >          
         </div>
     </div>
+
     <div class="item">
-        <div>CEP</div>
-        <div class="input">
-            <input 
-                type="text" 
-                name="cep"
-                value="{{ user.cep }}"
-                onkeydown="Mask.apply(this, 'cep')"
-                onblur="Validate.apply(this, 'isCep')" 
+        <div>Possui Necessidades Especiais?</div>
+        <div class="radio">        
+            <span>
+                <input
+                    id="radio1" 
+                    type="radio" 
+                    name="deficient" 
+                    value="1" 
+                    {% if user.deficient == '1'%}
+                        checked
+                    {% endif %}
+                    > 
+                <label for="radio1">Sim</label>
+                
+            </span>
+        
+            <span>
+                <input
+                id="radio2" 
+                type="radio" 
+                name="deficient" 
+                value="0"
+                {% if user.deficient == '0'%}
+                    checked
+                {% endif %}
+                >
+                <label for="radio2">Não</label>
+            </span>
 
-
-            >           
         </div>
+    </div>
+</div>
+
+<div class="item">
+    <div>CEP</div>
+    <div class="input">
+        <input 
+            type="text" 
+            name="cep"
+            value="{{ user.cep }}"
+            onkeydown="Mask.apply(this, 'cep')"
+            onblur="Validate.apply(this, 'isCep')" 
+        >           
     </div>
 </div>
 
@@ -137,73 +169,73 @@
         </div>
     </div>
 
-
-<div class="item">
-    <div>Selecione o Período/Semestre</div>
-    <div>
-        <select name="period_course">
-            <option value="" disabled selected>Selecione uma opção</option>
-            <option {% if user.period_course == '1° Período/Semestre' %}selected{% endif %}>
-                1° Período/Semestre
-            </option>
-            <option {% if user.period_course == '2° Período/Semestre' %}selected{% endif %}>
-                2° Período/Semestre
-            </option>
-            <option {% if user.period_course == '3° Período/Semestre' %}selected{% endif %}>
-                3° Período/Semestre
-            </option>
-            <option {% if user.period_course == '4° Período/Semestre' %}selected{% endif %}>
-                4° Período/Semestre
-            </option>
-            <option {% if user.period_course == '5° Período/Semestre' %}selected{% endif %}>
-                5° Período/Semestre
-            </option>
-            <option {% if user.period_course == '6° Período/Semestre' %}selected{% endif %}>
-                6° Período/Semestre
-            </option>
-            <option {% if user.period_course == '7° Período/Semestre' %}selected{% endif %}>
-                7° Período/Semestre
-            </option>
-            <option {% if user.period_course == '8° Período/Semestre' %}selected{% endif %}>
-                8° Período/Semestre
-            </option>
-            
-        </select>
+    <div class="item">
+        <div>Selecione o Período/Semestre</div>
+        <div>
+            <select name="period_course">
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option {% if user.period_course == '1° Período/Semestre' %}selected{% endif %}>
+                    1° Período/Semestre
+                </option>
+                <option {% if user.period_course == '2° Período/Semestre' %}selected{% endif %}>
+                    2° Período/Semestre
+                </option>
+                <option {% if user.period_course == '3° Período/Semestre' %}selected{% endif %}>
+                    3° Período/Semestre
+                </option>
+                <option {% if user.period_course == '4° Período/Semestre' %}selected{% endif %}>
+                    4° Período/Semestre
+                </option>
+                <option {% if user.period_course == '5° Período/Semestre' %}selected{% endif %}>
+                    5° Período/Semestre
+                </option>
+                <option {% if user.period_course == '6° Período/Semestre' %}selected{% endif %}>
+                    6° Período/Semestre
+                </option>
+                <option {% if user.period_course == '7° Período/Semestre' %}selected{% endif %}>
+                    7° Período/Semestre
+                </option>
+                <option {% if user.period_course == '8° Período/Semestre' %}selected{% endif %}>
+                    8° Período/Semestre
+                </option>
+                
+            </select>
+        </div>
     </div>
-</div>
 
-<div class="item">
-    <div>Possui Curso Normal ou Magistério?</div>
-    <div class="radio">        
-        <span>
-            <input
-                id="radio1" 
+    <div class="item">
+        <div>Possui Curso Normal ou Magistério?</div>
+        <div class="radio">        
+            <span>
+                <input
+                    id="radio1" 
+                    type="radio" 
+                    name="specialization" 
+                    value="1" 
+                    {% if user.specialization == '1'%}
+                        checked
+                    {% endif %}
+                    > 
+                <label for="radio1">Sim</label>
+                
+            </span>
+        
+            <span>
+                <input
+                id="radio2" 
                 type="radio" 
                 name="specialization" 
-                value="1" 
-                {% if user.specialization == '1'%}
+                value="0"
+                {% if user.specialization == '0'%}
                     checked
                 {% endif %}
-                > 
-            <label for="radio1">Sim</label>
-            
-        </span>
-    
-        <span>
-            <input
-            id="radio2" 
-            type="radio" 
-            name="specialization" 
-            value="0"
-            {% if user.specialization == '0'%}
-                checked
-            {% endif %}
-            >
-            <label for="radio2">Não</label>
-        </span>
+                >
+                <label for="radio2">Não</label>
+            </span>
 
+        </div>
     </div>
-</div>
+
 </div>
 <div class="sub-title">
     <h4>Contatos</h4>

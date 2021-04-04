@@ -58,6 +58,40 @@
             </div>
 
             <div class="item">
+                <div>Possui Necessidades Especiais?</div>
+                <div class="radio">        
+                    <span>
+                        <input
+                            id="radio1" 
+                            type="radio" 
+                            name="deficient" 
+                            value="1" 
+                            {% if user.deficient == '1'%}
+                                checked
+                            {% endif %}
+                            > 
+                        <label for="radio1">Sim</label>
+                        
+                    </span>
+                
+                    <span>
+                        <input
+                        id="radio2" 
+                        type="radio" 
+                        name="deficient" 
+                        value="0"
+                        {% if user.deficient == '0'%}
+                            checked
+                        {% endif %}
+                        >
+                        <label for="radio2">Não</label>
+                    </span>
+        
+                </div>
+            </div>
+
+
+            <div class="item">
                 <div>Logradouro/Endereço</div>
                 <div class="input">
                     <p>{{ user.address }}</p>          

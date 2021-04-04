@@ -41,10 +41,14 @@ form .item select {
     font-size: 16px;
 }
 
+form .item input[name="cep"] {
+    width: 48%;
+}
+
 form .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 16px;
+    grid-gap: 0 16px;
     margin-top: 20px;
 }
 
@@ -66,10 +70,13 @@ form .item select {
 }
 
 form .radio {
-    display: flex;
-    justify-content: space-evenly;
     margin-top: 16px;
 }
+
+form .radio label:last-child {
+    margin-left: 10px;
+}
+
 
 
 form .fields {

@@ -5,6 +5,7 @@ CREATE TABLE "users" (
   "name" text NOT NULL,
   "cpf" text NOT NULL,
   "birth_date" text NOT NULL,
+  "deficient" text NOT NULL,
   "cep" text NOT NULL,
   "address" text NOT NULL,
   "address_number" text NOT NULL,
