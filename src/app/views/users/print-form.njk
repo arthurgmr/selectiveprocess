@@ -65,7 +65,8 @@
                             id="radio1" 
                             type="radio" 
                             name="deficient" 
-                            value="1" 
+                            value="1"
+                            disabled=""
                             {% if user.deficient == '1'%}
                                 checked
                             {% endif %}
@@ -80,6 +81,7 @@
                         type="radio" 
                         name="deficient" 
                         value="0"
+                        disabled=""
                         {% if user.deficient == '0'%}
                             checked
                         {% endif %}
@@ -131,14 +133,14 @@
             
             <div class="grid">
                 <div class="item">
-                    <div>Selecione o Curso Superior</div>
+                    <div>Curso Superior</div>
                     <div class="input"> 
                         <p>{{ user.course_name }}</p>
                     </div>
                 </div>
             
                 <div class="item">
-                    <div>Selecione a Instituição</div>
+                    <div>Instituição</div>
                     <div class="input"> 
                         <p>{{ user.college_name }}</p>
                     </div>
@@ -146,7 +148,7 @@
             
             
                 <div class="item">
-                    <div>Selecione o Período/Semestre</div>
+                    <div>Período/Semestre</div>
                     <div class="input">
                         <p>{{ user.period_course }}</p>
                     </div>

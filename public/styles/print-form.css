@@ -137,6 +137,17 @@ section .item .input {
 
 section .item .radio {
     font-size: 12px;
+    display:flex;
+    flex-direction: row;
+}
+
+section .item .radio span  {
+    display: flex;
+    flex-direction: row;
+}
+
+section .item .radio span label {
+  margin: 0 5px;
 }
 
 section .grid {

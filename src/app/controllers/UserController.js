@@ -24,6 +24,7 @@ module.exports = {
                 name,
                 cpf,
                 birth_date,
+                deficient,
                 cep,
                 address,
                 address_number,
@@ -50,6 +51,7 @@ module.exports = {
                 name,
                 cpf,
                 birth_date,
+                deficient,
                 cep,
                 address,
                 address_number,
@@ -103,7 +105,7 @@ module.exports = {
         const user = await LoadUserServices.load('userDataComplete', id)
 
         const browser = await puppeteer.launch()
-        const page = await browser.newPage()
+        const page = await browser.newPage({headless: false})
 
         await page.goto(`http://localhost:3000/session/login`, { waitUntil: 'networkidle0'})
         await page.type('input[type="email"]', user.email)
