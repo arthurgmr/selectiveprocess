@@ -10,7 +10,7 @@ async function login(req, res, next) {
 
         if (!user) return res.render("session/login", {
             user: req.body,
-            error: "User not register!"
+            error: "Usuário não registrado"
         })
 
         // check password matching
@@ -18,7 +18,7 @@ async function login(req, res, next) {
 
         if (!passed) return res.render("session/login", {
             user: req.body,
-            error: "Incorrect password!"
+            error: "Dados incorretos"
         })
     
         req.user = user
@@ -34,7 +34,7 @@ async function forgot(req, res, next) {
 
         if(!user) return res.render("session/forgot-password", {
             user: req.body,
-            error: "Email not registered!"
+            error: "Usuário não registrado"
         })
 
         req.user = user
@@ -44,7 +44,7 @@ async function forgot(req, res, next) {
     }catch(err) {
         console.log(err)
         return res.render("session/forgot-password", {
-            error: "Some error happened!"
+            error: "Algum erro aconteceu, contacte o administrador."
         })
     }
 }
@@ -60,7 +60,7 @@ async function reset (req, res, next) {
         if(!user) return res.render("session/password-reset", {
             user: req.body,
             token,
-            error: "Email not registered!"
+            error: "E-mail não cadastrado"
         })
         
         //if password match
@@ -68,14 +68,14 @@ async function reset (req, res, next) {
         return res.render('session/password-reset', {
             user: req.body,
             token,            
-            error: 'Password mismatch!'
+            error: 'As senhas não conferem'
         })
 
         //check match token
         if(token != user.reset_token) return res.render('session/password-reset', {
             user: req.body,
             token,            
-            error: 'Token mismatch!'
+            error: 'Token não confere'
         })
 
         //check if token has expired
@@ -85,7 +85,7 @@ async function reset (req, res, next) {
         if(now > user.reset_token_expires) return res.render('session/password-reset', {
             user: req.body,
             token,            
-            error: 'Expired token!!'
+            error: 'Token expirado'
         })
 
         req.user = user
@@ -95,7 +95,7 @@ async function reset (req, res, next) {
     }catch(err) {
         console.log(err)
         return res.render("session/password-reset", {
-            error: "Some error happened!"
+            error: "Algum erro aconteceu, contacte o administrador."
         })
     }
     

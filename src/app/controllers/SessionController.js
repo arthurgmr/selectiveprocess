@@ -4,6 +4,8 @@ const crypto = require('crypto')
 const mailer = require('../../lib/mailer')
 const { hash } = require('bcryptjs')
 
+
+
 module.exports = {
     loginForm(req, res) {
         try {
@@ -46,28 +48,33 @@ module.exports = {
             // send email with recover link
             await mailer.sendMail({
                 to: user.email,
-                from: 'no-reply@launchstore.com',
-                subject: 'Password Recovery',
-                html: `<h2>Lost your Key?</h2>
-                <p>Don't worry, click the link to recover your password!</p>
+                from: 'no-reply@edu.muriae.mg.gov.br',
+                subject: 'Recuperar Senha | Processo Seletico Estágio',
+                html: `<h2>Você perdeu sua senha?</h2>
+                <p>Não se preocupe, clique no link abaixo para criar uma nova senha</p>
                 <p>
-                    <a href="http://localhost:3000/users/password-reset?token=${token}" target="_blank">
-                        RECOVER PASSWORD
+                    <a href="http://localhost:3000/session/password-reset?token=${token}" target="_blank">
+                        RECUPERAR SENHA
                     </a>
+                </p>
+                <p>
+                Estamos a disposição para qualquer dúvudas </br></br>
+                Atenciosamente, </br>
+                Secretaria Municipal de Educação - Muriaé/MG
                 </p>
                 `
             })
 
             // notify user 
             return res.render("session/forgot-password", {
-                success: "Check your email to reset password!"
+                success: "Verifique seu e-mail para criar uma nova senha"
             })
 
 
         }catch(err) {
             console.log(err)
             return res.render("session/forgot-password", {
-                error: "Some error happened!"
+                error: "Algum erro aconteceu, contacte o administrador."
             })
         }
     },
@@ -93,7 +100,7 @@ module.exports = {
             //notify user about new password
             return res.render("session/login", {
                 user: req.body,
-                success: "Password updated wiht success!",
+                success: "Senha atualizada com sucesso",
             })
 
         }catch(err) {
@@ -101,7 +108,7 @@ module.exports = {
             return res.render("session/password-reset", {
                 user: req.body,
                 token,
-                error: "Some error happened!"
+                error: "Algum erro aconteceu, contacte o administrador."
             })
         }
     }
