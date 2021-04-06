@@ -14,10 +14,15 @@
                         <i class="material-icons">account_circle</i>
                         Área Restrita
                     </a>
-                    {% if session.userId %}                    
+                    {% if session.userId or session.userIdAdmin %}                    
                         <ul class="submenu">
                             <li>
-                                <a href="/users">Painel de Controle</a>
+                                <a href="{% if session.userId %}
+                                            /users
+                                        {% else %}
+                                            /admin
+                                        {% endif %}"                                   
+                                >Painel de Controle</a>
                             </li>
                             <li>
                                 <form action="/session/logout" method="POST">

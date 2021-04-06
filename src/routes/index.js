@@ -7,14 +7,14 @@ const HomeValidator = require('../app/validators/home')
 const { isLoggedRedirectToUsers } = require('../app/middlewares/session')
 
 const users = require('./users')
-const usersAdmin = require('./users-admin')
+const admin = require('./admin')
 const session = require('./session')
 
 routes.get('/',isLoggedRedirectToUsers, HomeController.index)
 routes.post('/', HomeValidator.post, HomeController.post)
 
 routes.use('/users', users)
-routes.use('users-admin', usersAdmin)
+routes.use('/admin', admin)
 routes.use('/session', session)
 
 // routes.use('/admin', products) 

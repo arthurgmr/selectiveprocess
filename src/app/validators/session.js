@@ -1,5 +1,6 @@
 const { compare } = require('bcryptjs')
 const User = require('../models/User')
+const UserAdmin = require('../models/UserAdmin')
 
 async function login(req, res, next) {
     
@@ -7,21 +8,22 @@ async function login(req, res, next) {
     
     // check register user
     const user = await User.findOne({ where: {email} })
+    const userAdmin = await UserAdmin.findOne({ where: {email} })
 
-        if (!user) return res.render("session/login", {
+        if (!user && !userAdmin) return res.render("session/login", {
             user: req.body,
-            error: "Usuário não registrado"
+            error: "Dados incorretos"
         })
 
         // check password matching
-        const passed = await compare(password, user.password)
+        const passed = user ? await compare(password, user.password) : await compare(password, userAdmin.password);
 
         if (!passed) return res.render("session/login", {
             user: req.body,
             error: "Dados incorretos"
         })
-    
-        req.user = user
+        
+        user ? req.user = user : req.userAdmin = userAdmin;
     
         next()
 }

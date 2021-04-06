@@ -16,9 +16,15 @@ module.exports = {
     },
     login(req, res) {     
         // put user in req.session
-        req.session.userId = req.user.id
-
-        return res.redirect("/users")
+        const { user, userAdmin } = req
+        if(user) {
+            req.session.userId = user.id
+            return res.redirect("/users")
+        } else {
+            req.session.userIdAdmin = userAdmin.id
+            return res.redirect("/admin")
+        }
+        
 
     },
     logout(req, res) {

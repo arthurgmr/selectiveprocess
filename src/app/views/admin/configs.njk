@@ -1,0 +1,32 @@
+{% extends "admin/layout-adm.njk" %}
+
+{% import "parts/card.njk" as card %}
+
+{% block content %}
+
+{% call card.render('Painel de Controle', 'user-dashboard container') %}
+
+<h4>Olá Admin, seja bem vido(a).</h4>
+
+<div class="content">
+
+    <div class="options">
+        <a href="/" target="_blank">Pesquisar Candidato(a)</a>
+        <a href="/">Classificação Parcial</a>
+        <a href="/">Classificação Final</a>
+        <a href="/">Configuração do Processo</a>
+    </div>
+
+    <div class="classification">
+        <p>Número de inscritos</p>
+        <div><p>200</p></div>        
+    </div>
+
+</div>
+
+
+{% endcall %}
+
+
+
+{% endblock content %}

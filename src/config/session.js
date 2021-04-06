@@ -10,7 +10,7 @@ module.exports = session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 3000000000000000
+        maxAge: 10800000
     }
 })
 
