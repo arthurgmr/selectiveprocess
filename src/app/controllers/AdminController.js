@@ -1,6 +1,7 @@
 const { hash} = require('bcryptjs')
 const puppeteer = require('puppeteer')
 
+const Configs = require('../models/Configs')
 const User = require('../models/User')
 const Colleges = require('../models/Colleges')
 const Courses = require('../models/Courses')
@@ -76,162 +77,113 @@ module.exports = {
     // },
     async index(req, res) {
         try {
+            //make logic to show subscripters number;
             
             return res.render('admin/index')
         } catch (err) {
             console.log(err)
         }
     },
-    // async printForm(req, res) {
-    //     try {
-    //         const { id } = req.params
 
-    //         const colleges = await Colleges.findAll()
-    //         const courses = await Courses.findAll()
+    //route configs
+    async configs(req, res) {
+        try {
+            const config = await Configs.findAll()
 
-    //         const user = await LoadUserServices.load('userDataComplete', id)
-         
-    //         return res.render('users/print-form', { user, colleges, courses })
+            return res.render('admin/configs', { config })
 
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // },
-    // async formPdf(req, res) {
-    //     const { id } = req.params
-    //     const user = await LoadUserServices.load('userDataComplete', id)
+        } catch (err) {
+            console.log(err)
+            return res.render('admin/configs', {
+                error: "Algum erro aconteceu, contacte o administrador."
+            })
+        }
+    },
+    async configsCreate(req, res) {
+        try {
 
-    //     const browser = await puppeteer.launch()
-    //     const page = await browser.newPage()
+            let = {
+                process_name, 
+                edict_number, 
+                date_edict, 
+                inicial_date, 
+                final_date, 
+                declaration, 
+                warnings,
+            } = req.body
 
-    //     await page.goto(`http://localhost:3000/session/login`, { waitUntil: 'networkidle0'})
-    //     await page.type('input[type="email"]', user.email)
-    //     await page.type('input[type="password"]', '123')
-    //     await page.click('button[type="submit"]')
-    //     await page.goto(`http://localhost:3000/users/print-form/${id}`, { waitUntil: 'networkidle0'})
-    //     const cookies = await page.cookies(`http://localhost:3000/users/print-form/${id}`)
-    //     await page.deleteCookie(...cookies)
+            const config = await Configs.create({
+                process_name, 
+                edict_number, 
+                date_edict, 
+                inicial_date, 
+                final_date, 
+                declaration, 
+                warnings,
+            })
 
-    //     const pdf = await page.pdf({
-    //         printBackground: true,
-    //         format: 'Letter'
-    //     })
+            return res.render('admin/config', { 
+                config,
+                success: "Configurações Salvas" 
+            })
 
-    //     await browser.close()
+        } catch (err) {
+            console.log(err)
+            return res.render('admin/config', {
+                error: "Algum erro aconteceu, contacte o administrador."
+            })
+        }
+    },
+    async configsEdit(req, res) {
+        try {
+            let = {
+                process_name, 
+                edict_number, 
+                date_edict, 
+                inicial_date, 
+                final_date, 
+                declaration, 
+                warnings,
+            } = req.body
+    
+            const config = Configs.update(1, {
+                process_name, 
+                edict_number, 
+                date_edict, 
+                inicial_date, 
+                final_date, 
+                declaration, 
+                warnings,
+            })
+    
+            return res.render('admin/config', { 
+                config,
+                success: "Configurações Atualizadas" 
+            })
 
-    //     res.contentType('application/pdf')
-
-    //     return res.send(pdf)
-
-    // },
-    // async edit(req, res) {
-    //     try {
-    //         const { userId: id } = req.session
-
-    //         const colleges = await Colleges.findAll()
-    //         const courses = await Courses.findAll()
-
-    //         const user = await LoadUserServices.load('userDataComplete', id)
-         
-    //         return res.render('users/edit', { user, colleges, courses })
-
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-    // },
-    // async put(req, res ){
-    //     try {
-    //         const { user } = req
-    //         let {                
-    //             name,
-    //             cpf,
-    //             birth_date,
-    //             cep,
-    //             address,
-    //             address_number,
-    //             address_complement,
-    //             address_district,
-    //             course_id,
-    //             college_id,
-    //             period_course,
-    //             specialization,
-    //             email,
-    //             phone1,
-    //             phone2 } = req.body
-
-    //             birth_date = Date.parse(birth_date);
-    //             cpf = cpf.replace(/\D/g, "")
-    //             cep = cep.replace(/\D/g, "");
-    //             phone1 = phone1.replace(/\D/g, "");
-    //             phone2 = phone2.replace(/\D/g, "");
-
-    //         await User.update(user.id, {
-    //             name,
-    //             cpf,
-    //             birth_date,
-    //             cep,
-    //             address,
-    //             address_number,
-    //             address_complement,
-    //             address_district,
-    //             course_id,
-    //             college_id,
-    //             period_course,
-    //             specialization,
-    //             email,
-    //             phone1,
-    //             phone2
-    //         })
-
-    //         return res.render("users/edit", {
-    //             user: req.body,
-    //             success: "Dados Atualizados com Sucesso"
-    //         })
-
-    //     }catch(err) {
-    //         console.log(err)
-    //         return res.render("users/index", {
-    //             error: "Algum erro aconteceu"
-    //         })
-    //     }
-    // },
-    // async delete(req, res) {
-    //     try {
+        } catch (err) {
+            console.log(err)
+            return res.render('admin/config', {
+                error: "Algum erro aconteceu, contacte o administrador."
+            })
             
-    //         const products = await Product.findAll({where: {user_id: req.body.id}})
+        }
+    },
+    async configsDelete(req, res) {
+        try {
+            
+            await Configs.delete(1)
 
-    //         //get all images of products
-    //         const allFilesPromise = products.map(product => 
-    //             Product.files(product.id))
-                
-    //         let promiseResults = await Promise.all(allFilesPromise)
+            return res.render('admin/config', { 
+                success: "Configurações Deletadas"    
+            })
 
-    //         //remove user
-    //         await User.delete(req.body.id)
-    //         req.session.destroy()
-
-    //         //remove images from public folder
-    //         promiseResults.map(files => {
-    //             files.map(file => unlinkSync(file.path))
-    //         })
-
-    //         return res.render("session/login", {
-    //             success: "Account Successfully Deleted"
-    //         })    
-
-    //     }catch(err) {
-    //         console.log(err)
-    //         return res.render("users/index", {
-    //             user: req.body,
-    //             error: "Some error happened!"
-    //         })
-    //     }
-    // },
-    // async ads(req, res) {
-    //     const products = await LoadProductService.load('products', {
-    //         where: { user_id: req.session.userId }
-    //     })
-
-    //     return res.render("users/ads", { products })
-    // }
+        } catch (err) {
+            console.log(err)
+            return res.render('admin/config', {
+                error: "Algum erro aconteceu, contacte o administrador."
+            })
+            
+        }
+    }
 }

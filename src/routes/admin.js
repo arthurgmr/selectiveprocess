@@ -3,10 +3,12 @@ const routes = express.Router()
 
 const AdminController = require('../app/controllers/AdminController')
 
-const { onlyUsers }= require('../app/middlewares/session')
+routes.get('/', AdminController.index)
 
-
-routes.get('/', onlyUsers, AdminController.index)
+routes.get('/configs', AdminController.configs)
+routes.post('/configs', AdminController.configsCreate)
+routes.put('/configs', AdminController.configsEdit)
+routes.delete('/configs', AdminController.configsDelete)
 
 // routes.get('/print-form/:id', onlyUsers, UserController.printForm)
 // routes.get('/print-form/:id/pdf',onlyUsers, UserController.formPdf)

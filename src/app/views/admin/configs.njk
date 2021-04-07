@@ -4,23 +4,92 @@
 
 {% block content %}
 
-{% call card.render('Painel de Controle', 'user-dashboard container') %}
+{% call card.render('Configurações do Processo Seletivo', 'configs-dashboard container') %}
 
-<h4>Olá Admin, seja bem vido(a).</h4>
+<h4>Todas as informações são necessárias para funcionamento do processo.</h4>
 
 <div class="content">
 
-    <div class="options">
-        <a href="/" target="_blank">Pesquisar Candidato(a)</a>
-        <a href="/">Classificação Parcial</a>
-        <a href="/">Classificação Final</a>
-        <a href="/">Configuração do Processo</a>
-    </div>
+    <form action="/admin/configs" method="post">
+        <div class="fields">
 
-    <div class="classification">
-        <p>Número de inscritos</p>
-        <div><p>200</p></div>        
-    </div>
+            <div class="item">
+                <div>Nome do Processo Seletivo</div>
+                <div class="input">
+                    <input 
+                        type="text" 
+                        name="process_name"
+                        value="{{ config.process_name }}"
+                    >           
+                </div>
+            </div>
+            <div class="grid">
+                <div class="item">
+                    <div>Número do Edital</div>
+                    <div class="input">
+                        <input 
+                            type="number" 
+                            name="edict_number"
+                            value="{{ config.edict_number }}"
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Data do Edital</div>
+                    <div class="input">
+                        <input 
+                            type="date" 
+                            name="date_edict"
+                            value="{{ config.date_edict }}"
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Data Inicial da Inscrição</div>
+                    <div class="input">
+                        <input 
+                            type="date" 
+                            name="inicial_date"
+                            value="{{ config.inicial_date }}"
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Data Final de Inscrição</div>
+                    <div class="input">
+                        <input 
+                            type="date" 
+                            name="final_date"
+                            value="{{ config.final_date }}"
+                        >           
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div>Declaração de Responsabilidade</div>
+                <div class="input">
+                    <textarea 
+                        name="declaration" 
+                        id="" 
+                        cols="30" 
+                        rows="10">
+                            {{ config.declaration }}
+                    </textarea>        
+                </div>
+            </div>
+
+        </div>
+
+        <div class="buttons">
+            <button type="submit">Salvar</button>
+            <button type="submit">Deletar</button>
+
+        </div>
+    </form>
 
 </div>
 
