@@ -6,8 +6,8 @@ const AdminController = require('../app/controllers/AdminController')
 routes.get('/', AdminController.index)
 
 routes.get('/configs', AdminController.configs)
-routes.post('/configs', AdminController.configsCreate)
-routes.put('/configs', AdminController.configsEdit)
+routes.post('/configs', AdminController.configsCreateAndEdit)
+// routes.put('/configs', AdminController.configsEdit)
 routes.delete('/configs', AdminController.configsDelete)
 
 // routes.get('/print-form/:id', onlyUsers, UserController.printForm)

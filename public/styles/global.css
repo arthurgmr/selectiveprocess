@@ -38,6 +38,10 @@ footer {
     margin-top: auto;
 }
 
+textarea, input[type="date"] {
+    font-family: 'Roboto', sans-serif;
+}
+
 .button {
     background-color: var(--primary-color);
     color: white;

@@ -88,9 +88,11 @@ module.exports = {
     //route configs
     async configs(req, res) {
         try {
-            const config = await Configs.findAll()
 
+            const config = await Configs.findOne()
+            
             return res.render('admin/configs', { config })
+  
 
         } catch (err) {
             console.log(err)
@@ -99,88 +101,86 @@ module.exports = {
             })
         }
     },
-    async configsCreate(req, res) {
+    async configsCreateAndEdit(req, res) {
         try {
 
-            let = {
-                process_name, 
-                edict_number, 
-                date_edict, 
-                inicial_date, 
-                final_date, 
-                declaration, 
-                warnings,
-            } = req.body
+            const config = await Configs.findOne()
 
-            const config = await Configs.create({
-                process_name, 
-                edict_number, 
-                date_edict, 
-                inicial_date, 
-                final_date, 
-                declaration, 
-                warnings,
-            })
+            if(config) {
 
-            return res.render('admin/config', { 
-                config,
-                success: "Configurações Salvas" 
-            })
+                let = {
+                    process_name, 
+                    edict_number, 
+                    date_edict, 
+                    inicial_date, 
+                    final_date, 
+                    declaration, 
+                    warnings,
+                } = req.body
+        
+                await Configs.update(config.id, {
+                    process_name, 
+                    edict_number, 
+                    date_edict, 
+                    inicial_date, 
+                    final_date, 
+                    declaration, 
+                    warnings,
+                })
+        
+                return res.render('admin/configs', { 
+                    config: await Configs.findOne(),
+                    success: "Configurações Atualizadas" 
+                })
+
+            } else {
+
+                let = {
+                    process_name, 
+                    edict_number, 
+                    date_edict, 
+                    inicial_date, 
+                    final_date, 
+                    declaration, 
+                    warnings,
+                } = req.body
+    
+                await Configs.create({
+                    process_name, 
+                    edict_number, 
+                    date_edict, 
+                    inicial_date, 
+                    final_date, 
+                    declaration, 
+                    warnings,
+                })
+    
+                return res.render('admin/configs', { 
+                    config: await Configs.findOne(),
+                    success: "Configurações Salvas" 
+                })
+            }
 
         } catch (err) {
             console.log(err)
-            return res.render('admin/config', {
+            return res.render('admin/configs', {
                 error: "Algum erro aconteceu, contacte o administrador."
             })
-        }
-    },
-    async configsEdit(req, res) {
-        try {
-            let = {
-                process_name, 
-                edict_number, 
-                date_edict, 
-                inicial_date, 
-                final_date, 
-                declaration, 
-                warnings,
-            } = req.body
-    
-            const config = Configs.update(1, {
-                process_name, 
-                edict_number, 
-                date_edict, 
-                inicial_date, 
-                final_date, 
-                declaration, 
-                warnings,
-            })
-    
-            return res.render('admin/config', { 
-                config,
-                success: "Configurações Atualizadas" 
-            })
-
-        } catch (err) {
-            console.log(err)
-            return res.render('admin/config', {
-                error: "Algum erro aconteceu, contacte o administrador."
-            })
-            
         }
     },
     async configsDelete(req, res) {
         try {
+            const { configId } = req.body
             
-            await Configs.delete(1)
+            await Configs.delete(configId)
 
-            return res.render('admin/config', { 
+            return res.render('admin/configs', { 
                 success: "Configurações Deletadas"    
             })
 
         } catch (err) {
             console.log(err)
-            return res.render('admin/config', {
+            return res.render('admin/configs', {
                 error: "Algum erro aconteceu, contacte o administrador."
             })
             

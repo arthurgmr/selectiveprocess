@@ -4,8 +4,17 @@
     margin-bottom: 18px;
 }
 
-form .item .input[type="textarea"] {
-    height: 50px;
+form .item .input textarea {
+    width: 100%;
+
+    padding: 8px 16px;
+
+    box-shadow: 2px 2px 2px -4px rgb(60, 60, .9);
+
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+
+    font-size: 16px;
 }
 
 

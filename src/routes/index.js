@@ -4,7 +4,7 @@ const routes = express.Router()
 const HomeController = require('../app/controllers/HomeController')
 const HomeValidator = require('../app/validators/home')
 
-const { onlyUsers, onlyUsersAdmin, isLoggedRedirectToUsers } = require('../app/middlewares/session')
+const { onlyUsersAdmin, isLoggedRedirectToUsers } = require('../app/middlewares/session')
 
 
 const users = require('./users')

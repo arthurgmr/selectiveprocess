@@ -6,7 +6,7 @@
 
 {% call card.render('Configurações do Processo Seletivo', 'configs-dashboard container') %}
 
-<h4>Todas as informações são necessárias para funcionamento do processo.</h4>
+<h4>Todas as informações são necessárias para funcionamento do processo e serão apresentadas para o usuário.</h4>
 
 <div class="content">
 
@@ -76,21 +76,24 @@
                         name="declaration" 
                         id="" 
                         cols="30" 
-                        rows="10">
-                            {{ config.declaration }}
-                    </textarea>        
+                        rows="10"
+                        placeholder="Essa declaração será fixada no Ficha de Inscrição"
+                        >{{ config.declaration }}</textarea>        
                 </div>
             </div>
 
         </div>
 
         <div class="buttons">
-            <button type="submit">Salvar</button>
-            <button type="submit">Deletar</button>
-
+            <button class="button" type="submit">Salvar</button> 
+            <button class="button delete" type="submit" form="delete-config">Deletar</button>
+               
         </div>
     </form>
-
+    <form action="/admin/configs/?_method=DELETE" method="post" id="delete-config">
+        <input type="hidden" name="configId" value="{{config.id}}">
+    </form>
+    </form> 
 </div>
 
 
