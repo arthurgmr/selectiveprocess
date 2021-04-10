@@ -23,8 +23,39 @@ module.exports = {
             console.log(err)
         }
     },
+    //controllers search
+    async indexSearch(req, res) {
+        return res.render('admin/index-search')
+    },
+    async search(req, res) {
 
-    //route configs
+        try {
+
+            let { filter } = req.query
+
+            filter = filter.replace(/\D/g, "")
+
+            if(!filter || filter.toLowerCase() == 'todos candidatos') filter = null
+    
+            let users = await User.search({filter})
+    
+            const usersPromise = users.map(LoadUserServices.formatDate)
+    
+            users = await Promise.all(usersPromise)
+    
+            const search = {
+                term: filter || 'Todos Candidatos',
+                total: users.length
+            }
+    
+            return res.render('admin/index-search', { users, search })
+
+        } catch (err) {
+            console.log(err)
+        }
+    },
+
+    //controlers configs
     async configs(req, res) {
         try {
 
@@ -138,5 +169,5 @@ module.exports = {
         }
     }
 
-    
+
 }

@@ -5,6 +5,9 @@ const AdminController = require('../app/controllers/AdminController')
 
 routes.get('/', AdminController.index)
 
+routes.get('/search', AdminController.indexSearch)
+routes.get('/search-', AdminController.search)
+
 routes.get('/configs', AdminController.configs)
 routes.post('/configs', AdminController.configsCreateAndEdit)
 routes.delete('/configs', AdminController.configsDelete)

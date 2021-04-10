@@ -10,6 +10,14 @@ async function format(user) {
     return user
 }
 
+async function formatDate(user) {
+    const { format } = date(Number(user.birth_date))
+    
+    user.birth_date = format
+
+    return user
+}
+
 const LoadService = {
     load(service, filter) {
         this.filter = filter
@@ -32,7 +40,8 @@ const LoadService = {
         } catch (err) {
             console.log(err)
         }
-    }
+    },
+    formatDate
 }
 
 module.exports = LoadService

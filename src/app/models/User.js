@@ -17,6 +17,26 @@ module.exports = {
         WHERE users.id = $1`, [id])
 
         return results.rows[0]
+    },
+
+    async search({filter}) {
+        
+        let query = `
+            SELECT users.*, 
+                courses.name AS course_name, 
+                colleges.name AS college_name
+            FROM users
+            LEFT JOIN courses ON(courses.id = users.college_id)
+            LEFT JOIN colleges ON(colleges.id = users.college_id)
+            WHERE 1 = 1
+        `
+        if(filter) {
+            query += `AND users.name ILIKE '%${filter}%'
+            OR users.cpf ILIKE '%${filter}%'` 
+        }
+
+        const results = await db.query(query)
+        return results.rows
     }
 
 
