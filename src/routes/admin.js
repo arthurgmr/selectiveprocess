@@ -7,7 +7,6 @@ routes.get('/', AdminController.index)
 
 routes.get('/configs', AdminController.configs)
 routes.post('/configs', AdminController.configsCreateAndEdit)
-// routes.put('/configs', AdminController.configsEdit)
 routes.delete('/configs', AdminController.configsDelete)
 
 // routes.get('/print-form/:id', onlyUsers, UserController.printForm)

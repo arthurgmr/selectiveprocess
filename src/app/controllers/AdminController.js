@@ -7,74 +7,13 @@ const Colleges = require('../models/Colleges')
 const Courses = require('../models/Courses')
 
 const LoadUserServices = require('../services/LoadUserServices')
-const { getFirstName } = require('../../lib/utils')
+const { getFirstName, date } = require('../../lib/utils')
 
 
 
 
 module.exports = {
-    // async registerForm(req, res) {
-    //     const colleges = await Colleges.findAll()
-    //     const courses = await Courses.findAll()
 
-    //     return res.render("users/register", { colleges, courses })
-    // },
-    // async post (req, res) {
-    //     try {
-    //         let {
-    //             name,
-    //             cpf,
-    //             birth_date,
-    //             deficient,
-    //             cep,
-    //             address,
-    //             address_number,
-    //             address_complement,
-    //             address_district,
-    //             course_id,
-    //             college_id,
-    //             period_course,
-    //             specialization,
-    //             email,
-    //             phone1,
-    //             phone2,
-    //             password
-    //         } = req.body
-
-    //         birth_date = Date.parse(birth_date);
-    //         password = await hash(password, 8);
-    //         cpf = cpf.replace(/\D/g, "");
-    //         cep = cep.replace(/\D/g, "");
-    //         phone1 = phone1.replace(/\D/g, "");
-    //         phone2 = phone2.replace(/\D/g, "");
-
-    //         const userId = await User.create({
-    //             name,
-    //             cpf,
-    //             birth_date,
-    //             deficient,
-    //             cep,
-    //             address,
-    //             address_number,
-    //             address_complement,
-    //             address_district,
-    //             course_id,
-    //             college_id,
-    //             period_course,
-    //             specialization,
-    //             email,
-    //             phone1,
-    //             phone2,
-    //             password
-    //         })
-            
-    //         return res.render('users/success')
-
-    //     }catch(err) {
-    //         console.log(err)
-    //     }
-
-    // },
     async index(req, res) {
         try {
             //make logic to show subscripters number;
@@ -90,6 +29,10 @@ module.exports = {
         try {
 
             const config = await Configs.findOne()
+
+            config.date_edict = date(Number(config.date_edict)).iso
+            config.inicial_date = date(Number(config.inicial_date)).iso
+            config.final_date = date(Number(config.final_date)).iso
             
             return res.render('admin/configs', { config })
   
@@ -117,6 +60,10 @@ module.exports = {
                     declaration, 
                     warnings,
                 } = req.body
+
+                date_edict = Date.parse(date_edict)
+                inicial_date = Date.parse(inicial_date)
+                final_date = Date.parse(final_date)
         
                 await Configs.update(config.id, {
                     process_name, 
@@ -144,6 +91,10 @@ module.exports = {
                     declaration, 
                     warnings,
                 } = req.body
+
+                date_edict = Date.parse(date_edict)
+                inicial_date = Date.parse(inicial_date)
+                final_date = Date.parse(final_date)
     
                 await Configs.create({
                     process_name, 
@@ -186,4 +137,6 @@ module.exports = {
             
         }
     }
+
+    
 }
