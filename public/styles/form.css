@@ -28,7 +28,8 @@ form .item > div:nth-child(1){
 form .item .input input,
 form .item input[type="text"],
 form .item input[type="number"],
-form .item select {
+form .item select,
+.search-admin input    {
     width: 100%;
 
     padding: 8px 16px;

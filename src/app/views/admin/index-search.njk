@@ -6,7 +6,7 @@
 
 {% call card.render('Pesquisar Candidato(a)', 'search-admin container') %}
 
-<div class="menu">
+<div class="search-bar">
     <form action="/admin/search-" method="get">
         <input 
             type="text" 
@@ -19,32 +19,6 @@
         <button type="submit">Buscar</button>
     </form>
 </div>
-
-<div class="content">
-
-    <table width="100%">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Data Nascim</th>
-                <th>CPF</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{user.name}}</td>
-                    <td>{{user.birth_date}}</td>
-                    <td>{{user.cpf}}</td>
-                    <td><a href="#">Visualizar</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-</div>
-
 
 {% endcall %}
 

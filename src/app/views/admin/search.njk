@@ -1,0 +1,60 @@
+{% extends "admin/layout-adm.njk" %}
+
+{% import "parts/card.njk" as card %}
+
+{% block content %}
+
+{% call card.render('Pesquisar Candidato(a)', 'search-admin container') %}
+
+<div class="search-bar">
+    <form action="/admin/search-" method="get">
+        <input 
+            type="text" 
+            name="filter" 
+            placeholder="Digite o nome ou CPF do(a) Candidato(a)"
+            {% if search.term %}
+                value="{{search.term}}"
+            {% endif %}
+        > 
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+
+<div class="content">
+
+    <table width="100%">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data Nasc</th>
+                <th>CPF</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{user.name}}</td>
+                    <td>{{user.birth_date}}</td>
+                    <td>{{user.cpf}}</td>
+                    <td>
+                        <a class="button-edit" href="/admin/users/{{ user.id }}" title="Editar Usuário">
+                            <img src="/images/edit-24.svg" alt="Editar Usuário">
+                        </a>
+                        <button class="button-delete" title="Excluir Usuário">
+                            <img src="/images/trash-24.svg" alt="Excluir Usuário" />
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endcall %}
+
+
+
+{% endblock content %}

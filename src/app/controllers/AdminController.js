@@ -33,7 +33,7 @@ module.exports = {
 
             let { filter } = req.query
 
-            filter = filter.replace(/\D/g, "")
+            filter = filter.replace(/[.,\s]/g, "")
 
             if(!filter || filter.toLowerCase() == 'todos candidatos') filter = null
     
@@ -48,7 +48,7 @@ module.exports = {
                 total: users.length
             }
     
-            return res.render('admin/index-search', { users, search })
+            return res.render('admin/search', { users, search })
 
         } catch (err) {
             console.log(err)
