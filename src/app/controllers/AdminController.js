@@ -16,13 +16,16 @@ module.exports = {
 
     async index(req, res) {
         try {
-            //make logic to show subscripters number;
             
-            return res.render('admin/index')
+            const users = await User.findAll()
+            const totalUsers = users.length
+            
+            return res.render('admin/index', { totalUsers })
         } catch (err) {
             console.log(err)
         }
     },
+
     //controllers search
     async indexSearch(req, res) {
         return res.render('admin/index-search')
@@ -121,6 +124,29 @@ module.exports = {
                 error: "Algum erro aconteceu, contacte o administrador."
             })
         }
+    },
+    async deleteUser(req, res) {
+
+        const { id } = req.body
+
+        await User.delete(id)
+
+        return res.render('admin/index-search', { 
+            success: 'Cadastro deletado com Sucesso.'
+        })
+
+    },
+
+    //controller to partial classification
+    async showClassification(req, res) {
+        
+        //save users in the array already ordered;
+        const classifiedUsers = await User.classification()
+
+
+        //make map in users saving classification in column partialClassf
+
+        return
     },
 
     //controlers configs

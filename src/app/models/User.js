@@ -37,6 +37,23 @@ module.exports = {
 
         const results = await db.query(query)
         return results.rows
+    },
+
+    async classification() {
+        const results = await db.query (`
+        SELECT users.*, 
+            courses.name AS course_name, 
+            colleges.name AS college_name
+        FROM users
+        LEFT JOIN courses ON(courses.id = users.college_id)
+        LEFT JOIN colleges ON(colleges.id = users.college_id)
+        ORDER BY 
+            deficient DESC, 
+            specialization DESC, 
+            period_course DESC, 
+            birth_date ASC
+        `)
+        return results.rows
     }
 
 

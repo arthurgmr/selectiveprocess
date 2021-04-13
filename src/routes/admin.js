@@ -15,6 +15,6 @@ routes.delete('/configs', AdminController.configsDelete)
 
 routes.get('/user/:id', AdminController.showUser)
 routes.put('/user/:id', AdminValidator.editUser, AdminController.putUser)
-//make delete route;
+routes.delete('/user', AdminController.deleteUser)
 
 module.exports = routes

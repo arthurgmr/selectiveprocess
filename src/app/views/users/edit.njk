@@ -6,7 +6,8 @@
 
 {% call card.render('Ficha de Inscrição', 'user-edit container') %}
 
-    <form 
+    <form
+        id="register-user" 
         method="POST" 
         action="
             {% if session.userIdAdmin %} 
@@ -16,7 +17,6 @@
             {% endif %}
         "
     >
-
         <div class="fields">
 
             {% include 'users/fields.njk' %} 
@@ -24,13 +24,22 @@
             <input 
                 type="hidden" 
                 name="id" 
-                value={{user.id}}>
+                value="{{ user.id }}">
 
         </div>
-
-        <button class="button edit" type="submit" onclick="Validate.allFields(event)">Atualizar</button>
     </form>
-    <a href="/users">Voltar</a>
+
+    <form id="delete-user" method="POST" action="/admin/user?_method=DELETE" >
+        <input type="hidden" name="id" value="{{ user.id }}">
+    </form>
+
+    <div class="buttons">
+        <button class="button edit" type="submit" form="register-user" onclick="Validate.allFields(event)">Atualizar</button>
+        {% if session.userIdAdmin %}
+            <button class="button delete"type="submit" form="delete-user">Deletar Cadastro</button>
+        {% endif %}
+        <a href="#" onclick="history.back()">Voltar</a>
+    </div>
 
 {% endcall %}
 
