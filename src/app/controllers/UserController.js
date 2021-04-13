@@ -143,8 +143,11 @@ module.exports = {
         }
     },
     async put(req, res ){
+
         try {
+
             const { user } = req
+
             let {                
                 name,
                 cpf,
@@ -197,44 +200,5 @@ module.exports = {
                 error: "Algum erro aconteceu"
             })
         }
-    },
-    // async delete(req, res) {
-    //     try {
-            
-    //         const products = await Product.findAll({where: {user_id: req.body.id}})
-
-    //         //get all images of products
-    //         const allFilesPromise = products.map(product => 
-    //             Product.files(product.id))
-                
-    //         let promiseResults = await Promise.all(allFilesPromise)
-
-    //         //remove user
-    //         await User.delete(req.body.id)
-    //         req.session.destroy()
-
-    //         //remove images from public folder
-    //         promiseResults.map(files => {
-    //             files.map(file => unlinkSync(file.path))
-    //         })
-
-    //         return res.render("session/login", {
-    //             success: "Account Successfully Deleted"
-    //         })    
-
-    //     }catch(err) {
-    //         console.log(err)
-    //         return res.render("users/index", {
-    //             user: req.body,
-    //             error: "Some error happened!"
-    //         })
-    //     }
-    // },
-    // async ads(req, res) {
-    //     const products = await LoadProductService.load('products', {
-    //         where: { user_id: req.session.userId }
-    //     })
-
-    //     return res.render("users/ads", { products })
-    // }
+    }
 }

@@ -2,12 +2,9 @@ const express = require('express')
 const routes = express.Router()
 
 const SessionController = require('../app/controllers/SessionController')
-const UserController = require('../app/controllers/UserController')
 
-const UserValidator = require('../app/validators/user')
 const SessionValidator = require('../app/validators/session')
 const { isLoggedRedirectToUsers } = require('../app/middlewares/session')
-const { onlyUsers }= require('../app/middlewares/session')
 
 
 // // login/logout

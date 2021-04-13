@@ -38,10 +38,32 @@
     border-bottom: none;
 }
 
-.search-admin .content table tr td .button-edit {
+.search-admin .content table tr td .action {
+    background: #FCFDFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-admin .content table tr td .action .button-action {
     background: #FCFDFF;
     border: 1px solid #E1E3E6;
-    width: 4px;
-    height: 4px;
+    border-radius: 4px;
     padding: 0;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 200ms;
+    
+}
+
+.search-admin .content table tr td .action .button-action:hover {
+    background: #F0F2F5;
+}
+
+.search-admin .content table tr td .action .button-action.delete {
+    margin-left: 8px;
+    cursor: pointer;
 }

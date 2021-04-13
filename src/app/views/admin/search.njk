@@ -38,12 +38,14 @@
                     <td>{{user.birth_date}}</td>
                     <td>{{user.cpf}}</td>
                     <td>
-                        <a class="button-edit" href="/admin/users/{{ user.id }}" title="Editar Usuário">
-                            <img src="/images/edit-24.svg" alt="Editar Usuário">
-                        </a>
-                        <button class="button-delete" title="Excluir Usuário">
-                            <img src="/images/trash-24.svg" alt="Excluir Usuário" />
-                        </button>
+                        <div class="action">
+                            <a class="button-action" href="/admin/user/{{ user.id }}" title="Editar Usuário">
+                                <img src="/images/edit-24.svg" alt="Editar Usuário">
+                            </a>
+                            <button class="button-action delete" title="Excluir Usuário">
+                                <img src="/images/trash-24.svg" alt="Excluir Usuário" />
+                            </button>
+                        </div>
                     </td>
                 </tr>
             {% endfor %}

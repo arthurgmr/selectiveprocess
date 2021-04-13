@@ -6,7 +6,16 @@
 
 {% call card.render('Ficha de Inscrição', 'user-edit container') %}
 
-    <form method="POST" action="/users/edit?_method=PUT">
+    <form 
+        method="POST" 
+        action="
+            {% if session.userIdAdmin %} 
+                /admin/user/{{ user.id }}?_method=PUT
+            {% else %}
+                /users/edit?_method=PUT
+            {% endif %}
+        "
+    >
 
         <div class="fields">
 
@@ -15,11 +24,11 @@
             <input 
                 type="hidden" 
                 name="id" 
-                value={{user.id}}>   
+                value={{user.id}}>
 
         </div>
 
-        <button class="button edit" type="submit">Atualizar</button>
+        <button class="button edit" type="submit" onclick="Validate.allFields(event)">Atualizar</button>
     </form>
     <a href="/users">Voltar</a>
 

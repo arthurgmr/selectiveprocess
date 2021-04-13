@@ -55,6 +55,74 @@ module.exports = {
         }
     },
 
+    //controllers to edit and delete users;
+    async showUser(req, res) {
+        const { id } = req.params
+
+        const colleges = await Colleges.findAll()
+        const courses = await Courses.findAll()
+
+        const user = await LoadUserServices.load('userDataComplete', id)
+
+        return res.render('users/edit', { user, colleges, courses })
+    },
+    async putUser(req, res) {
+
+        try {
+            const { user } = req
+            let {                
+                name,
+                cpf,
+                birth_date,
+                cep,
+                address,
+                address_number,
+                address_complement,
+                address_district,
+                course_id,
+                college_id,
+                period_course,
+                specialization,
+                email,
+                phone1,
+                phone2 } = req.body
+
+                birth_date = Date.parse(birth_date);
+                cpf = cpf.replace(/\D/g, "")
+                cep = cep.replace(/\D/g, "");
+                phone1 = phone1.replace(/\D/g, "");
+                phone2 = phone2.replace(/\D/g, "");
+
+            await User.update(user.id, {
+                name,
+                cpf,
+                birth_date,
+                cep,
+                address,
+                address_number,
+                address_complement,
+                address_district,
+                course_id,
+                college_id,
+                period_course,
+                specialization,
+                email,
+                phone1,
+                phone2
+            })
+
+            return res.render('admin/index-search', {
+                success: "Dados Atualizados com Sucesso"
+            })
+
+        }catch(err) {
+            console.log(err)
+            return res.render('admin/index-search', {
+                error: "Algum erro aconteceu, contacte o administrador."
+            })
+        }
+    },
+
     //controlers configs
     async configs(req, res) {
         try {

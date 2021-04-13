@@ -11,7 +11,7 @@ function checkAllFields(body) {
         if (body[key] == "") {
             return {
                 user: body,
-                error: 'Por favor, preencha os campos obrigatórios'
+                error: 'Os campos obrigatórios não foram preenchidos.'
             }
         }           
     }
@@ -72,10 +72,10 @@ async function post(req, res, next) {
 }
 
 async function put(req, res, next) {
-    //check if has all fields
+    // check if has all fields
     const fillAllFields = checkAllFields(req.body)
     if(fillAllFields) {
-        return res.render("users/edit", fillAllFields)
+        return res.render("users/index", fillAllFields)
     }
 
     const colleges = await Colleges.findAll()
@@ -98,7 +98,7 @@ async function put(req, res, next) {
         colleges,
         courses,
         user: req.body,
-        error: "Senha Incoreta"
+        error: "Senha Incorreta"
     })
 
     req.user = user

@@ -6,9 +6,8 @@ const HomeValidator = require('../app/validators/home')
 
 const { onlyUsersAdmin, isLoggedRedirectToUsers } = require('../app/middlewares/session')
 
-
-const users = require('./users')
 const admin = require('./admin')
+const users = require('./users')
 const session = require('./session')
 
 routes.get('/',isLoggedRedirectToUsers, HomeController.index)

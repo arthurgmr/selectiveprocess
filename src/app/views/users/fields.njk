@@ -279,35 +279,37 @@
     </div>
 </div>
 
-<div class="sub-title">
-    <h4>Segurança</h4>
-</div>
+{% if not session.userIdAdmin %}
 
-<div class="item">
+    <div class="sub-title">
+        <h4>Segurança</h4>
+    </div>
+
+    <div class="item">
+        {% if not user.id %}
+            <div>Crie uma Senha</div>
+        {% else %}
+            <div>Insira sua senha para atualizar os dados</div>
+        {% endif %}
+        <div class="input">
+            <input
+                type="password" 
+                name="password"
+            >           
+        </div>
+    </div>
+
     {% if not user.id %}
-        <div>Crie uma Senha</div>
-    {% else %}
-        <div>Insira sua senha para atualizar os dados</div>
+
+    <div class="item">
+        <div>Repita a Senha Criada</div>
+        <div class="input">
+            <input 
+                type="password" 
+                name="passwordRepeat"
+            >           
+        </div>
+    </div>
+
     {% endif %}
-    <div class="input">
-        <input 
-            type="password" 
-            name="password"
-        >           
-    </div>
-</div>
-
-{% if not user.id %}
-
-<div class="item">
-    <div>Repita a Senha Criada</div>
-    <div class="input">
-        <input 
-            type="password" 
-            name="passwordRepeat"
-        >           
-    </div>
-</div>
-
 {% endif %}
-

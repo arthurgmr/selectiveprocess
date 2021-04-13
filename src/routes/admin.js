@@ -2,6 +2,7 @@ const express = require('express')
 const routes = express.Router()
 
 const AdminController = require('../app/controllers/AdminController')
+const AdminValidator = require('../app/validators/admin')
 
 routes.get('/', AdminController.index)
 
@@ -12,10 +13,8 @@ routes.get('/configs', AdminController.configs)
 routes.post('/configs', AdminController.configsCreateAndEdit)
 routes.delete('/configs', AdminController.configsDelete)
 
-// routes.get('/print-form/:id', onlyUsers, UserController.printForm)
-// routes.get('/print-form/:id/pdf',onlyUsers, UserController.formPdf)
-// routes.get('/edit', onlyUsers, UserController.edit)
-// routes.put('/edit', onlyUsers, UserValidator.put, UserController.put)
-// routes.delete('/', UserController.delete)
+routes.get('/user/:id', AdminController.showUser)
+routes.put('/user/:id', AdminValidator.editUser, AdminController.putUser)
+//make delete route;
 
 module.exports = routes
