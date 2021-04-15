@@ -1,4 +1,5 @@
 const { hash} = require('bcryptjs')
+const crypto = require('crypto')
 const puppeteer = require('puppeteer')
 
 const User = require('../models/User')
@@ -6,7 +7,7 @@ const Colleges = require('../models/Colleges')
 const Courses = require('../models/Courses')
 
 const LoadUserServices = require('../services/LoadUserServices')
-const { getFirstName } = require('../../lib/utils')
+const { getFirstName, date} = require('../../lib/utils')
 
 
 
@@ -40,14 +41,15 @@ module.exports = {
                 password
             } = req.body
 
-            birth_date = Date.parse(birth_date);
-            password = await hash(password, 8);
             cpf = cpf.replace(/\D/g, "");
+            birth_date = Date.parse(birth_date);
             cep = cep.replace(/\D/g, "");
+            email = email.toLowerCase()
             phone1 = phone1.replace(/\D/g, "");
             phone2 = phone2.replace(/\D/g, "");
+            password = await hash(password, 8);
 
-            const userId = await User.create({
+            await User.create({
                 name,
                 cpf,
                 birth_date,
@@ -85,35 +87,38 @@ module.exports = {
             console.log(err)
         }
     },
+
     async printForm(req, res) {
         try {
-            const { id } = req.params
+            const { userId: id } = req.session
 
-            const colleges = await Colleges.findAll()
-            const courses = await Courses.findAll()
+            // create token to user
+            const token =  crypto.randomBytes(20).toString("hex")
+            
+            // create expire token
+            let now = new Date()
+            now = now.setHours(now.getHours() + 1)
 
-            const user = await LoadUserServices.load('userDataComplete', id)
+            await User.update(id, {
+                reset_token: token,
+                reset_token_expires: now
+            })
          
-            return res.render('users/print-form', { user, colleges, courses })
+            return res.redirect(`/users/print-form/pdf?tk=${token}`)
 
         }catch(err) {
             console.log(err)
         }
     },
     async formPdf(req, res) {
-        const { id } = req.params
-        const user = await LoadUserServices.load('userDataComplete', id)
+        const { userId: id } = req.session
 
-        const browser = await puppeteer.launch()
+        const { tk: token } = req.query
+
+        const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
 
-        await page.goto(`http://localhost:3000/session/login`, { waitUntil: 'networkidle0'})
-        await page.type('input[type="email"]', user.email)
-        await page.type('input[type="password"]', '123')
-        await page.click('button[type="submit"]')
-        await page.goto(`http://localhost:3000/users/print-form/${id}`, { waitUntil: 'networkidle0'})
-        const cookies = await page.cookies(`http://localhost:3000/users/print-form/${id}`)
-        await page.deleteCookie(...cookies)
+        await page.goto(`http://localhost:3000/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
 
         const pdf = await page.pdf({
             printBackground: true,
@@ -122,11 +127,27 @@ module.exports = {
 
         await browser.close()
 
+        //update user
+        await User.update(id, {
+            reset_token: "",
+            reset_token_expires: ""
+        })
+
         res.contentType('application/pdf')
 
         return res.send(pdf)
 
     },
+    async formatPdf (req, res) {
+        let { user } = req
+
+        user = await LoadUserServices.load('userDataComplete', user.id)
+        user.birth_date = date(user.birth_date).format
+
+        return res.render('users/print-form', { user })
+
+    },
+
     async edit(req, res) {
         try {
             const { userId: id } = req.session

@@ -132,7 +132,7 @@ const Validate = {
         const cleanValues = value.replace(/\D/g, "")
 
         if (cleanValues.length !== 8) {
-            error = "Invalid CEP!"
+            error = "CEP inválido"
         }
 
         return {
@@ -143,8 +143,9 @@ const Validate = {
     allFields(e) {
         const itens = document.querySelectorAll(' .item input, .item select')
 
+
         for (item of itens) {
-            if (item.value == "") {
+            if (item.value == "" && item.id != "not_required") {
                 const message = document.createElement('div')
                 message.classList.add('messages')
                 message.classList.add('error')

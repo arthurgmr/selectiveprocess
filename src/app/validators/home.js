@@ -14,7 +14,9 @@ async function post(req, res, next) {
         }                    
     }
     
-    const { cpf } = req.body
+    let { cpf } = req.body
+
+    cpf = cpf.replace(/\D/g, "");
     
     // check register user
     const user = await User.findOne({ where: {cpf} })

@@ -73,6 +73,14 @@ module.exports = {
     
         return value
     },
+    formatPhone(value) {
+        return value
+            .replace(/\D/g,"")
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+            .replace(/(\d{4})-(\d)(\d{4})/, '$1$2-$3')
+
+    },
     getFirstName(value) {
         return value
             .replace(/(')/g, "$1'").split(' ').slice(0, 1).join(' ');

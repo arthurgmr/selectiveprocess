@@ -1,10 +1,14 @@
 const User = require('../models/User')
 
-const { date } = require('../../lib/utils')
+const { date, formatCpf, formatCep, formatPhone } = require('../../lib/utils')
 
 async function format(user) {
     const { iso } = date(Number(user.birth_date))
-    
+
+    user.cpf = formatCpf(user.cpf)
+    user.cep = formatCep(user.cep)
+    user.phone1 = formatPhone(user.phone1)
+    user.phone2 = formatPhone(user.phone2)
     user.birth_date = iso
 
     return user
@@ -13,6 +17,7 @@ async function format(user) {
 async function formatDate(user) {
     const { format } = date(Number(user.birth_date))
     
+    user.cpf = formatCpf(user.cpf)
     user.birth_date = format
 
     return user

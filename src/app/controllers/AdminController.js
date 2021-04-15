@@ -36,7 +36,7 @@ module.exports = {
 
             let { filter } = req.query
 
-            filter = filter.replace(/[.,\s]/g, "")
+            filter = filter.replace(/[.,]/g, "")
 
             if(!filter || filter.toLowerCase() == 'todos candidatos') filter = null
     
@@ -142,6 +142,12 @@ module.exports = {
         
         //save users in the array already ordered;
         const classifiedUsers = await User.classification()
+        console.log(classifiedUsers)
+
+        classifiedUsers.map(user => {
+            const position = classifiedUsers.indexOf(`${user.id}`)
+            console.log(position)
+        })
 
 
         //make map in users saving classification in column partialClassf

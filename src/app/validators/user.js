@@ -5,7 +5,9 @@ const User = require('../models/User')
 
 function checkAllFields(body) {
     //check if has all fields
-    const keys = Object.keys(body)
+    let keys = Object.keys(body)
+    
+    keys = keys.filter(key => key !== 'address_complement' && key !== 'phone2')
 
     for(key of keys) {
         if (body[key] == "") {
@@ -41,6 +43,8 @@ async function post(req, res, next) {
         
 
     let { email, cpf, password, passwordRepeat } = req.body
+    
+    email = email.toLowerCase()
     cpf = cpf.replace(/\D/g,"")
 
     //check if user exists [email cpf_cnpj]    
@@ -56,7 +60,7 @@ async function post(req, res, next) {
         user: req.body,
         colleges,
         courses,
-        error: 'CPF ou E-mail já cadastrados!'
+        error: 'CPF ou E-mail já cadastrados'
     })
 
     //check if passwords match
@@ -65,7 +69,7 @@ async function post(req, res, next) {
             user: req.body, 
             colleges,
             courses,                       
-            error: 'As senhas não conferem!'
+            error: 'As senhas não conferem'
         })
 
     next()
@@ -87,7 +91,7 @@ async function put(req, res, next) {
         colleges,
         courses,
         user: req.body,
-        error: "Digite sua senha para atualizar as informações."
+        error: "Digite sua senha para atualizar as informações"
     })
 
     const user = await User.findOne({ where: {id} })
@@ -98,7 +102,7 @@ async function put(req, res, next) {
         colleges,
         courses,
         user: req.body,
-        error: "Senha Incorreta"
+        error: "Senha incorreta"
     })
 
     req.user = user
