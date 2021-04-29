@@ -140,6 +140,8 @@ module.exports = {
       };
     });
 
+    console.log(classifiedUsers);
+
     return res.render("admin/partial-classif", { classifiedUsers });
   },
 
