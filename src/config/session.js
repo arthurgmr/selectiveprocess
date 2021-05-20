@@ -1,10 +1,9 @@
 const session = require('express-session')
 const pgSession = require('connect-pg-simple') (session)
-const db = require('./db')
 
 module.exports = session({
     store: new pgSession({
-        conString: db
+        conString: process.even.DATABASE_URL
     }),
     secret: '_0#@!($msT',
     resave: false,
