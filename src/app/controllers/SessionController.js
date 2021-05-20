@@ -33,6 +33,8 @@ module.exports = {
   async forgot(req, res) {
     const user = req.user;
 
+    const APP_URL =  process.env.APP_URL;
+
     try {
       // create token to user
       const token = crypto.randomBytes(20).toString("hex");
@@ -54,7 +56,7 @@ module.exports = {
         html: `<h2>Você perdeu sua senha?</h2>
                 <p>Não se preocupe, clique no link abaixo para criar uma nova senha</p>
                 <p>
-                    <a href="http://localhost:3000/session/password-reset?token=${token}" target="_blank">
+                    <a href="${APP_URL}/session/password-reset?token=${token}" target="_blank">
                         RECUPERAR SENHA
                     </a>
                 </p>

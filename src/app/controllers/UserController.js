@@ -12,6 +12,8 @@ const { getFirstName, date} = require('../../lib/utils')
 
 
 
+
+
 module.exports = {
     async registerForm(req, res) {
         const colleges = await Colleges.findAll()
@@ -115,10 +117,12 @@ module.exports = {
 
         const { tk: token } = req.query
 
+        const APP_URL =  process.env.APP_URL;
+
         const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
 
-        await page.goto(`http://localhost:3000/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
+        await page.goto(`${APP_URL}/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
 
         const pdf = await page.pdf({
             printBackground: true,
