@@ -1,4 +1,5 @@
 const express = require('express')
+const dotenv = require("dotenv");
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
 const methodOverride = require('method-override')
@@ -24,6 +25,8 @@ nunjucks.configure("src/app/views", {
     autoescape: false,
     noCache: true
 })
+
+dotenv.config();
 
 server.listen(5000, function (){
     console.log("server is running")
