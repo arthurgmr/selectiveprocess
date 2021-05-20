@@ -28,6 +28,6 @@ nunjucks.configure("src/app/views", {
 
 dotenv.config();
 
-server.listen(5000, function (){
+server.listen(process.env.PORT || 5000, function (){
     console.log("server is running")
 })
