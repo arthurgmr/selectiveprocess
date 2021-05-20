@@ -4,7 +4,7 @@ const db = require('./db')
 
 module.exports = session({
     store: new pgSession({
-        pool: db
+        conString: db
     }),
     secret: '_0#@!($msT',
     resave: false,
