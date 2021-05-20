@@ -1,14 +1,11 @@
-const session = require('express-session')
+const session = require('express-session');
+const db = require('./db');
 const pgSession = require('connect-pg-simple') (session)
-
-const connectionString = process.env.DATABASE_URL;
 
 module.exports = session({
     store: new pgSession({
-        conString: {
-            connectionString,
-            ssl: true,
-        }
+        pool: db,
+        tableName: "session"
     }),
     secret: '_0#@!($msT',
     resave: false,
