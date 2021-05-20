@@ -5,13 +5,16 @@ const connectionString = process.env.DATABASE_URL;
 
 module.exports = session({
     store: new pgSession({
-        conString: connectionString
+        conString: {
+            connectionString,
+            ssl: true,
+        }
     }),
     secret: '_0#@!($msT',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 10800000
+        maxAge: 3600000
     }
 })
 
