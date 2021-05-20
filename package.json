@@ -1,13 +1,14 @@
 {
-  "name": "F06_launchstore",
+  "name": "app-selectiveprocess",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
-    "start": "npm-run-all -p nodemon browsersync",
+    "dev": "npm-run-all -p nodemon browsersync",
     "nodemon": "nodemon src/server.js",
-    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, src/app/views'"
+    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, src/app/views'",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "connect-pg-simple": "^6.2.1",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "faker": "^5.4.0",
