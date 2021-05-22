@@ -119,7 +119,7 @@ module.exports = {
 
         const APP_URL =  process.env.APP_URL;
 
-        const browser = await puppeteer.launch({headless: true})
+        const browser = await puppeteer.launch({headless: false})
         const page = await browser.newPage()
 
         await page.goto(`${APP_URL}/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
