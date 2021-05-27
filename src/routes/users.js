@@ -20,8 +20,9 @@ routes.get('/print-form', onlyUsers, UserController.printForm)
 routes.get('/print-form/pdf',onlyUsers, UserController.formPdf)
 routes.get('/format-pdf',onlyToken, UserController.formatPdf)
 
+// edit user
 routes.get('/edit', onlyUsers, UserController.edit)
-routes.put('/edit',onlyUsers, UserValidator.put, UserController.put)
+routes.put('/edit', onlyUsers, UserValidator.put, UserController.put)
 // routes.put('/edit', onlyUsers, UserValidator.put, UserController.put)
 // routes.delete('/', UserController.delete)
 

@@ -14,9 +14,9 @@ module.exports = {
         FROM users
         LEFT JOIN courses ON(courses.id = users.college_id)
         LEFT JOIN colleges ON(colleges.id = users.college_id)
-        WHERE users.id = $1`, [id])
+        WHERE users.id = ?`, [id])
 
-        return results.rows[0]
+        return results[0]
     },
 
     async search({filter}) {
@@ -31,12 +31,12 @@ module.exports = {
             WHERE 1 = 1
         `
         if(filter) {
-            query += `AND users.name ILIKE '%${filter}%'
-            OR users.cpf ILIKE '%${filter}%'` 
+            query += `AND users.name LIKE '%${filter}%'
+            OR users.cpf LIKE '%${filter}%'` 
         }
 
         const results = await db.query(query)
-        return results.rows
+        return results
     },
 
     async classification() {
@@ -53,7 +53,7 @@ module.exports = {
             period_course DESC, 
             birth_date ASC
         `)
-        return results.rows
+        return results
     }
 
 

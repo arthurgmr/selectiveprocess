@@ -11,7 +11,8 @@ function find (filters, table) {
                 query += ` ${field} = '${filters[key][field]}'`
             })
         })
-    }    
+    }
+
     return db.query(query)
 }
 
@@ -30,11 +31,11 @@ const Base = {
     // },
     async findOne(filters) {
         const results = await find(filters, this.table)
-        return results.rows[0]      
+        return results[0]      
     },
     async findAll(filters) {
         const results = await find(filters, this.table)
-        return results.rows      
+        return results      
     },
     async create(fields) {
         try {
@@ -53,7 +54,7 @@ const Base = {
                 RETURNING id`
 
             const results = await db.query(query)
-            return results.rows[0].id
+            return results[0].id
 
         }catch(err) {
             console.log(err)

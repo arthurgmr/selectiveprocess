@@ -9,11 +9,6 @@ const Courses = require('../models/Courses')
 const LoadUserServices = require('../services/LoadUserServices')
 const { getFirstName, date} = require('../../lib/utils')
 
-
-
-
-
-
 module.exports = {
     async registerForm(req, res) {
         const colleges = await Colleges.findAll()
@@ -119,7 +114,7 @@ module.exports = {
 
         const APP_URL =  process.env.APP_URL;
 
-        const browser = await puppeteer.launch({headless: false})
+        const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
 
         await page.goto(`${APP_URL}/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
@@ -214,8 +209,13 @@ module.exports = {
                 phone2
             })
 
+            const colleges = await Colleges.findAll()
+            const courses = await Courses.findAll()
+
             return res.render("users/edit", {
                 user: req.body,
+                colleges,
+                courses,
                 success: "Dados Atualizados com Sucesso"
             })
 

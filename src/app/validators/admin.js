@@ -1,6 +1,4 @@
 
-const Colleges = require('../models/Colleges')
-const Courses = require('../models/Courses')
 const User = require('../models/User')
 
 function checkAllFields(body) {
