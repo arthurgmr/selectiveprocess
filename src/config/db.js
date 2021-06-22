@@ -1,9 +1,9 @@
-const mariadb = require("mariadb");
+const mysql = require("mysql");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
-const db = mariadb.createPool({
+const db = mysql.createPool({
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD,
