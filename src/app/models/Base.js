@@ -31,13 +31,10 @@ const Base = {
     // },
     async findOne(filters) {
         const results = await find(filters, this.table)
-        console.log(results);
-        return results[0]      
+        return results[0];      
     },
     async findAll(filters) {
         const results = await find(filters, this.table)
-        console.log(results);
-
         return results;      
     },
     async create(fields) {

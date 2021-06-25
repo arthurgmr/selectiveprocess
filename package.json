@@ -8,10 +8,10 @@
     "url": "https://github.com/arthurgmr/selectiveprocess"
   },
   "scripts": {
-    "debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
-    "nodemon": "nodemon src/server.js",
+    "debug": "nodemon --inspect=0.0.0.0:9229 server.js",
+    "nodemon": "nodemon server.js",
     "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, src/app/views'",
-    "start": "node src/server.js",
+    "start": "node server.js",
     "dev": "npm-run-all -p nodemon browsersync"
   },
   "keywords": [],
