@@ -45,7 +45,7 @@ module.exports = {
             courses.name AS course_name, 
             colleges.name AS college_name
         FROM users
-        LEFT JOIN courses ON(courses.id = users.college_id)
+        LEFT JOIN courses ON(courses.id = users.course_id)
         LEFT JOIN colleges ON(colleges.id = users.college_id)
         ORDER BY 
             deficient DESC, 

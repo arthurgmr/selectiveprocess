@@ -35,12 +35,24 @@ async function index(req, res, next) {
 }
 
 async function post(req, res, next) {
+    const colleges = await Colleges.findAll()
+    const courses = await Courses.findAll() 
+    
     //check if has all fields
-    const fillAllFields = checkAllFields(req.body)
-    if(fillAllFields) {
-        return res.render("users/register", fillAllFields)
+    let keys = Object.keys(req.body)
+
+    keys = keys.filter(key => key !== 'address_complement' && key !== 'phone2')
+
+    for(key of keys) {
+        if (req.body[key] == "") {
+            return res.render("users/register", {
+                user: req.body,
+                colleges,
+                courses,
+                error: 'Os campos obrigatórios não foram preenchidos.'
+            })
+        }           
     }
-        
 
     let { email, cpf, password, passwordRepeat } = req.body
     
@@ -52,9 +64,6 @@ async function post(req, res, next) {
         where: {email},
         or: {cpf}
     })
-
-    const colleges = await Colleges.findAll()
-    const courses = await Courses.findAll() 
 
     if(user) return res.render('users/register', {
         user: req.body,
