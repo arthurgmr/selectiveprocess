@@ -167,7 +167,7 @@ for(const func of functions) {
     func.addEventListener("click", handleselectedFunction)
 }
 
-const collectedFunc = document.querySelector("input[name=items");
+const collectedFunc = document.querySelector("input[name=funcs");
 
 let selectedFuncs = []
 

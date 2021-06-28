@@ -18,7 +18,7 @@ routes.get('/', onlyUsers, UserValidator.index, UserController.index)
 //print form
 routes.get('/print-form', onlyUsers, UserController.printForm)
 routes.get('/print-form/pdf',onlyUsers, UserController.formPdf)
-routes.get('/format-pdf',onlyToken, UserController.formatPdf)
+routes.get('/format-pdf', onlyToken, UserController.formatPdf)
 
 // edit user
 routes.get('/edit', onlyUsers, UserController.edit)

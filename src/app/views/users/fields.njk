@@ -13,7 +13,7 @@
         <p>Educação Especial</p>
     </li>
 </div>
-<input type="hidden" name="items">
+<input type="hidden" name="funcs" value="{{ user.funcs }}">
 
 
 <div class="sub-title">
@@ -229,29 +229,29 @@
         <div class="radio">        
             <span>
                 <input
-                    id="specialization1" 
+                    id="specialization_regular_1" 
                     type="radio" 
                     name="specialization_regular" 
                     value="1" 
-                    {% if user.specialization == '1'%}
+                    {% if user.specialization_regular == '1'%}
                         checked
                     {% endif %}
                     > 
-                <label for="specialization1">Sim</label>
+                <label for="specialization_regular_1">Sim</label>
                 
             </span>
         
             <span>
                 <input
-                id="specialization2" 
+                id="specialization_regular_2" 
                 type="radio" 
                 name="specialization_regular" 
                 value="0"
-                {% if user.specialization == '0'%}
+                {% if user.specialization_regular == '0'%}
                     checked
                 {% endif %}
                 >
-                <label for="specialization2">Não</label>
+                <label for="specialization_regular_2">Não</label>
             </span>
 
         </div>
@@ -262,29 +262,29 @@
         <div class="radio">        
             <span>
                 <input
-                    id="specialization1" 
+                    id="specialization_special_1" 
                     type="radio" 
                     name="specialization_special" 
                     value="1" 
-                    {% if user.specialization == '1'%}
+                    {% if user.specialization_special == '1'%}
                         checked
                     {% endif %}
                     > 
-                <label for="specialization1">Sim</label>
+                <label for="specialization_special_1">Sim</label>
                 
             </span>
         
             <span>
                 <input
-                id="specialization2" 
+                id="specialization_special_2" 
                 type="radio" 
                 name="specialization_special" 
                 value="0"
-                {% if user.specialization == '0'%}
+                {% if user.specialization_special == '0'%}
                     checked
                 {% endif %}
                 >
-                <label for="specialization2">Não</label>
+                <label for="specialization_special_2">Não</label>
             </span>
 
         </div>

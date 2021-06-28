@@ -14,9 +14,9 @@ CREATE TABLE `users` (
   `course_id` int NOT NULL,
   `college_id` int NOT NULL,
   `period_course` text NOT NULL,
-  `func` text NOT NULL,
+  `funcs` text NOT NULL,
   `specialization_regular` text NOT NULL,
-  `specialization_especial` text NOT NULL,
+  `specialization_special` text NOT NULL,
   `email` text NOT NULL,
   `phone1` text NOT NULL,
   `phone2` text,
@@ -82,3 +82,14 @@ CREATE TABLE `classification_partial` (
 ALTER TABLE `users` ADD FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 ALTER TABLE `users` ADD FOREIGN KEY (`college_id`) REFERENCES `colleges` (`id`);
+
+
+-- -- TO RUN SEEDS
+-- DELETE FROM users;
+-- DELETE FROM users_admin;
+-- DELETE FROM files;
+
+-- -- RESTAR SEQUENCE AUTO_INCREMENT FROM TABLES IDS
+-- ALTER SEQUENCE products_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE users_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE files_id_seq RESTART WITH 1;

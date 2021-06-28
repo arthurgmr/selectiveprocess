@@ -23,13 +23,21 @@
                 <div class="title">
                     <h3>
                         Ficha de Inscrição </br>
-                        Processe Seletivo Estágio - Edital n°00/2021
+                        Processe Seletivo Estágio - Edital n°002/2021
                     </h3>
                 </div>
             </div>
             
         </header>
         <section class="content container">
+            <div class="sub-title">
+                <h4>Função Desejada</h4>
+            </div>
+
+            <div class="item">
+                <div>{{ user.funcs }}</div>
+            </div>
+
             <div class="sub-title">
                 <h4>Dados Cadastrais</h4>
             </div>
@@ -116,7 +124,11 @@
                 <div class="item">
                     <div>Complemento</div>
                     <div class="input">
-                        <p>{{ user.address_complement }}</p>
+                        {% if address_complement %}
+                            <p>{{ address_complement }}</p> 
+                        {%else%}
+                            <p>-</p> 
+                        {% endif %}                                  
                     </div>
                 </div>
                 <div class="item">
@@ -153,42 +165,81 @@
                         <p>{{ user.period_course }}</p>
                     </div>
                 </div>
+            </div>
+
             
-                <div class="item">
-                    <div>Possui Curso Normal ou Magistério?</div>
-                    <div class="radio">        
-                        <span>
-                            <input
-                                id="radio1" 
-                                type="radio" 
-                                name="specialization" 
-                                value="1"
-                                disabled="" 
-                                {% if user.specialization == '1'%}
-                                    checked
-                                {% endif %}
-                                > 
-                            <label for="radio1">Sim</label>
-                            
-                        </span>
-                    
-                        <span>
-                            <input
-                            id="radio2" 
+            <div class="grid">
+            <div class="item">
+                <div>Possui Curso Normal ou Magistério?</div>
+                <div class="radio">        
+                    <span>
+                        <input
+                            id="radio1" 
                             type="radio" 
-                            name="specialization" 
-                            value="0"
-                            disabled=""
-                            {% if user.specialization == '0'%}
+                            name="specialization_regular" 
+                            value="1"
+                            disabled="" 
+                            {% if user.specialization_regular == '1'%}
                                 checked
                             {% endif %}
-                            >
-                            <label for="radio2">Não</label>
-                        </span>
+                            > 
+                        <label for="radio1">Sim</label>
+                        
+                    </span>
                 
-                    </div>
+                    <span>
+                        <input
+                        id="radio2" 
+                        type="radio" 
+                        name="specialization_regular" 
+                        value="0"
+                        disabled=""
+                        {% if user.specialization_regular == '0'%}
+                            checked
+                        {% endif %}
+                        >
+                        <label for="radio2">Não</label>
+                    </span>
+            
                 </div>
             </div>
+
+            <div class="item">
+                <div>Possui Curso Normal de Capacitação Especial?</div>
+                <div class="radio">        
+                    <span>
+                        <input
+                            id="radio1" 
+                            type="radio" 
+                            name="specialization_special" 
+                            value="1"
+                            disabled="" 
+                            {% if user.specialization_special == '1'%}
+                                checked
+                            {% endif %}
+                            > 
+                        <label for="radio1">Sim</label>
+                        
+                    </span>
+                
+                    <span>
+                        <input
+                        id="radio2" 
+                        type="radio" 
+                        name="specialization_special" 
+                        value="0"
+                        disabled=""
+                        {% if user.specialization_special == '0'%}
+                            checked
+                        {% endif %}
+                        >
+                        <label for="radio2">Não</label>
+                    </span>
+            
+                </div>
+            </div>
+            </div>
+
 
             <div class="sub-title">
                 <h4>Contatos</h4>
@@ -211,7 +262,11 @@
                 <div class="item">
                     <div>N° Telefone Celular 2</div>
                     <div class="input">
-                        <p>{{ user.phone2 }}</p>           
+                        {% if user.phone2 %}
+                            <p>{{ user.phone2 }}</p> 
+                        {%else%}
+                            <p>-</p> 
+                        {% endif %}                                  
                     </div>
                 </div>
             </div>
@@ -225,11 +280,11 @@
                 <div class="input">
                     <p>
                         Declaro ter ciência de todos os procedimentos estabelecidos no 
-                        Edital nº 00/2021 e conhecimento que a declaração de informações 
+                        Edital nº 002/2021 e conhecimento que a declaração de informações 
                         incorretas acarretará na exclusão do processo seletivo, conforme 
-                        previsto no item 1.8 deste edital.
+                        previsto no item 1.10 desse edital.
                     </p>
-                    <p>Muriaé, DATA ATUAL.</p>
+                    <p>Muriaé, {{ dateNow }}.</p>
                     <p>Assinatura legível do candidato, conforme Carteira de Identidade ou CNH</p>           
                 </div>
             </div>

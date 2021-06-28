@@ -30,7 +30,7 @@ module.exports = {
                 address_district,
                 course_id,
                 college_id,
-                func,
+                funcs,
                 period_course,
                 specialization_regular,
                 specialization_special,
@@ -61,7 +61,7 @@ module.exports = {
                 course_id,
                 college_id,
                 period_course,
-                func,
+                funcs,
                 specialization_regular,
                 specialization_special,
                 email,
@@ -121,7 +121,7 @@ module.exports = {
         const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
 
-        await page.goto(`${APP_URL}/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
+        await page.goto(`${APP_URL}users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
 
         const pdf = await page.pdf({
             printBackground: true,
@@ -144,10 +144,14 @@ module.exports = {
     async formatPdf (req, res) {
         let { user } = req
 
+        let dateNow = new Date()
+        dateNow = Date.parse(dateNow)
+        dateNow = date(dateNow).format
+
         user = await LoadUserServices.load('userDataComplete', user.id)
         user.birth_date = date(user.birth_date).format
 
-        return res.render('users/print-form', { user })
+        return res.render('users/print-form', { user, dateNow })
 
     },
 
@@ -183,8 +187,10 @@ module.exports = {
                 address_district,
                 course_id,
                 college_id,
+                funcs,
                 period_course,
-                specialization,
+                specialization_regular,
+                specialization_special,
                 email,
                 phone1,
                 phone2 } = req.body
@@ -206,8 +212,10 @@ module.exports = {
                 address_district,
                 course_id,
                 college_id,
+                funcs,
                 period_course,
-                specialization,
+                specialization_regular,
+                specialization_special,
                 email,
                 phone1,
                 phone2
