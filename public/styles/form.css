@@ -118,3 +118,42 @@ form .item input[type="radio"]:checked + label:before {
     color: white;
     margin-top: 1px;
 }
+
+/* select functions */
+form .functions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+form .functions-grid li {
+    background-color: #f5f5f5;
+    list-style: none;
+    border: 2px solid #f5f5f5;
+    border-radius: 8px;
+    height: 180px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+form .functions-grid li h4 {
+    color: var(--primary-color);
+}
+
+form .functions-grid li p {
+    font-size: 12px;
+}
+
+form .functions-grid li.selected {
+    background-color: #e2e7fd;
+    border: 2px solid #18286B;
+}
+
+form .functions-grid li p {
+    pointer-events: none;
+}

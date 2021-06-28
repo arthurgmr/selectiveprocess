@@ -1,4 +1,22 @@
 <div class="sub-title">
+    <h4>Selecione a função desejada</h4>
+</div>
+
+<div class="functions-grid">
+    <li data-id="Regular(F01)">
+        <h4>ESTÁGIO REGULAR</h4></br>
+        <p>Atividade Complementar</p>
+    </li>
+
+    <li data-id="Especial(F02)">
+        <h4>ESTÁGIO ESPECIAL</h4></br>
+        <p>Educação Especial</p>
+    </li>
+</div>
+<input type="hidden" name="items">
+
+
+<div class="sub-title">
     <h4>Dados Cadastrais</h4>
 </div>
 
@@ -204,14 +222,16 @@
         </div>
     </div>
 
-    <div class="item">
+</div>
+
+<div class="item">
         <div>Possui Curso Normal ou Magistério?</div>
         <div class="radio">        
             <span>
                 <input
                     id="specialization1" 
                     type="radio" 
-                    name="specialization" 
+                    name="specialization_regular" 
                     value="1" 
                     {% if user.specialization == '1'%}
                         checked
@@ -225,7 +245,7 @@
                 <input
                 id="specialization2" 
                 type="radio" 
-                name="specialization" 
+                name="specialization_regular" 
                 value="0"
                 {% if user.specialization == '0'%}
                     checked
@@ -237,7 +257,39 @@
         </div>
     </div>
 
-</div>
+    <div class="item">
+        <div>Possui Curso de Capacitação Especial?</div>
+        <div class="radio">        
+            <span>
+                <input
+                    id="specialization1" 
+                    type="radio" 
+                    name="specialization_special" 
+                    value="1" 
+                    {% if user.specialization == '1'%}
+                        checked
+                    {% endif %}
+                    > 
+                <label for="specialization1">Sim</label>
+                
+            </span>
+        
+            <span>
+                <input
+                id="specialization2" 
+                type="radio" 
+                name="specialization_special" 
+                value="0"
+                {% if user.specialization == '0'%}
+                    checked
+                {% endif %}
+                >
+                <label for="specialization2">Não</label>
+            </span>
+
+        </div>
+    </div>
+
 <div class="sub-title">
     <h4>Contatos</h4>
 </div>
