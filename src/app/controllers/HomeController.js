@@ -12,7 +12,6 @@ module.exports = {
   async post(req, res) {
     try {
       const colleges = await Colleges.findAll();
-      console.log(colleges);
       const courses = await Courses.findAll();
 
       return res.render("users/register", {
