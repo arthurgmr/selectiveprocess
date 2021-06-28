@@ -159,3 +159,41 @@ const Validate = {
         }
     }
 }
+
+// SELECT FUNCTIONS
+const functions = document.querySelectorAll(".functions-grid li");
+
+for(const func of functions) {
+    func.addEventListener("click", handleselectedFunction)
+}
+
+const collectedFunc = document.querySelector("input[name=items");
+
+let selectedFuncs = []
+
+function handleselectedFunction(event) {
+    const itemLi = event.target;
+
+    //toggle add or remove class;
+    itemLi.classList.toggle("selected")
+
+    const itemId = itemLi.dataset.id
+
+    const alreadySelected = selectedFuncs.findIndex(item => {
+        const itemFound = item == itemId
+        return itemFound
+    })
+
+    if(alreadySelected >= 0) {
+        const filteredItems = selectedFuncs.filter( item => {
+            const itemIsDifferent = item != itemId
+            return itemIsDifferent
+        })
+        selectedFuncs=filteredItems
+    } else {
+        selectedFuncs.push(itemId)
+    }
+
+    collectedFunc.value = selectedFuncs
+
+}
