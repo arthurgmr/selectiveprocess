@@ -163,11 +163,31 @@ const Validate = {
 // SELECT FUNCTIONS
 const functions = document.querySelectorAll(".functions-grid li");
 
+const collectedFunc = document.querySelector("input[name='funcs']");
+
+if(collectedFunc.value) {
+    const arraySelected = collectedFunc.value
+    const liRegular = document.querySelector(".functions-grid li[data-id='Regular(F01)']")   
+    const liEspecial = document.querySelector(".functions-grid li[data-id='Especial(F02)']")   
+
+    arraySelected.map(func => {
+        if(func == "Regular(F01") {
+            liRegular.classList.toggle("selected")            
+        } else {
+            liEspecial.classList.toggle("selected")
+        }
+    })
+}
+
+Especial(F02),Regular(F01)
+
 for(const func of functions) {
     func.addEventListener("click", handleselectedFunction)
 }
 
-const collectedFunc = document.querySelector("input[name='funcs']");
+
+
+
 
 let selectedFuncs = []
 

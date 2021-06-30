@@ -27,7 +27,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp DEFAULT (now())
 );
 
-CREATE TABLE `admin` (
+CREATE TABLE `users_admin` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` text NOT NULL,
   `email` text NOT NULL,
@@ -82,6 +82,14 @@ CREATE TABLE `classification_partial` (
 ALTER TABLE `users` ADD FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);
 
 ALTER TABLE `users` ADD FOREIGN KEY (`college_id`) REFERENCES `colleges` (`id`);
+
+-- express session mariadb
+
+CREATE TABLE session(
+  sid                     VARCHAR(100) PRIMARY KEY NOT NULL,   
+  session                 VARCHAR(2048) DEFAULT '{}',   
+  lastSeen                DATETIME DEFAULT NOW() 
+);
 
 
 -- -- TO RUN SEEDS
