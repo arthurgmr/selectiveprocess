@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer')
 const User = require('../models/User')
 const Colleges = require('../models/Colleges')
 const Courses = require('../models/Courses')
+const Configs = require('../models/Configs')
 
 const LoadUserServices = require('../services/LoadUserServices')
 const { getFirstName, date} = require('../../lib/utils')
@@ -151,7 +152,10 @@ module.exports = {
         user = await LoadUserServices.load('userDataComplete', user.id)
         user.birth_date = date(user.birth_date).format
 
-        return res.render('users/print-form', { user, dateNow })
+        let config = await Configs.findOne()
+        config.date_edict = date(Number(config.date_edict)).year
+
+        return res.render('users/print-form', { user, dateNow, config})
 
     },
 

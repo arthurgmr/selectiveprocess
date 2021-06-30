@@ -1,28 +1,27 @@
 
 const User = require('../models/User')
-
-function checkAllFields(body) {
-    //check if has all fields
-    const keys = Object.keys(body)
-
-    for(key of keys) {
-        if (body[key] == "") {
-            return {
-                user: body,
-                error: 'Os campos obrigatórios não foram preenchidos.'
-            }
-        }           
-    }
-}
-
+const Colleges = require('../models/Colleges')
+const Courses = require('../models/Courses')
 
 async function editUser (req, res, next) {
-    //check if has all fields;
-    const fillAllFields = checkAllFields(req.body)
-    if(fillAllFields) {
-        return res.render("users/edit", fillAllFields)
-    }
+    const colleges = await Colleges.findAll()
+    const courses = await Courses.findAll() 
+    
+    //check if has all fields
+    let keys = Object.keys(req.body)
 
+    keys = keys.filter(key => key !== 'address_complement' && key !== 'phone2')
+
+    for(key of keys) {
+        if (req.body[key] == "") {
+            return res.render("users/edit", {
+                user: req.body,
+                colleges,
+                courses,
+                error: 'Os campos obrigatórios não foram preenchidos.'
+            })
+        }           
+    }
     const { id } = req.params
 
     const user = await User.findOne({ where: {id} })

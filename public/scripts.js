@@ -61,6 +61,8 @@ const Mask = {
     }
 }
 
+// VALIDATION INPUT
+
 const Validate = {
     apply(input, func) {
         Validate.clearErrors(input)
@@ -161,59 +163,73 @@ const Validate = {
 }
 
 // SELECT FUNCTIONS
-const functions = document.querySelectorAll(".functions-grid li");
 
+//get li ;
+const functions = document.querySelectorAll(".functions-grid li");
+//get input of select itens;
 const collectedFunc = document.querySelector("input[name='funcs']");
 
-if(collectedFunc.value) {
-    const arraySelected = collectedFunc.value
-    const liRegular = document.querySelector(".functions-grid li[data-id='Regular(F01)']")   
-    const liEspecial = document.querySelector(".functions-grid li[data-id='Especial(F02)']")   
+if(functions && collectedFunc) {
+    
+    //items selected array;
+    let selectedFuncs = []
 
-    arraySelected.map(func => {
-        if(func == "Regular(F01") {
-            liRegular.classList.toggle("selected")            
-        } else {
-            liEspecial.classList.toggle("selected")
-        }
-    })
-}
-
-Especial(F02),Regular(F01)
-
-for(const func of functions) {
-    func.addEventListener("click", handleselectedFunction)
-}
-
-
-
-
-
-let selectedFuncs = []
-
-function handleselectedFunction(event) {
-    const itemLi = event.target;
-
-    //toggle add or remove class;
-    itemLi.classList.toggle("selected")
-
-    const itemId = itemLi.dataset.id
-
-    const alreadySelected = selectedFuncs.findIndex(item => {
-        const itemFound = item == itemId
-        return itemFound
-    })
-
-    if(alreadySelected >= 0) {
-        const filteredItems = selectedFuncs.filter( item => {
-            const itemIsDifferent = item != itemId
-            return itemIsDifferent
+    //if input has value, li stay select style;
+    if(collectedFunc.value) {
+        const arraySelected = collectedFunc.value.split(',')
+        const liRegular = document.querySelector(".functions-grid li[data-id='Regular(F01)']")   
+        const liEspecial = document.querySelector(".functions-grid li[data-id='Especial(F02)']")
+        
+        arraySelected.map((func) => {
+            selectedFuncs.push(func)
+            if(func === liRegular.dataset.id) {
+                liRegular.classList.toggle("selected")            
+            } else {
+                liEspecial.classList.toggle("selected")
+            }
         })
-        selectedFuncs=filteredItems
-    } else {
-        selectedFuncs.push(itemId)
     }
 
-    collectedFunc.value = selectedFuncs
+    //logic to select style item;
+    for(const func of functions) {
+        func.addEventListener("click", handleselectedFunction)
+    }
 
+    function handleselectedFunction(event) {
+        const itemLi = event.target;
+
+        //toggle add or remove class;
+        itemLi.classList.toggle("selected")
+
+        const itemId = itemLi.dataset.id
+
+        const alreadySelected = selectedFuncs.findIndex(item => {
+            const itemFound = item == itemId
+            return itemFound
+        })
+
+        if(alreadySelected >= 0) {
+            const filteredItems = selectedFuncs.filter( item => {
+                const itemIsDifferent = item != itemId
+                return itemIsDifferent
+            })
+            selectedFuncs=filteredItems
+        } else {
+            selectedFuncs.push(itemId)
+        }
+
+        collectedFunc.value = selectedFuncs
+    }
+}
+
+// WARNING BUTTON DELETE
+const deleteUser = document.querySelector("#delete-user")
+const deleteConfig = document.querySelector("#delete-config")
+if(deleteUser || deleteConfig) {
+    (deleteUser || deleteConfig).addEventListener("submit", (e) => {
+        const confirmation = confirm("Confirma a exclusão? Após excluídos os dados não poderão ser recuperados.")
+        if (!confirmation) {
+            e.preventDefault()
+        }
+    })
 }

@@ -2,7 +2,12 @@
     <div class="container">
         
         <div class="logo">
-            <a href="/">
+            <a href="{% if session.userId %}
+                        /users
+                    {% else %}
+                        /admin
+                    {% endif %}"
+            >
                 <img src="/images/logo-pq-5.png" alt="">
             </a>            
         </div>

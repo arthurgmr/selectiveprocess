@@ -85,14 +85,24 @@ async function post(req, res, next) {
 }
 
 async function put(req, res, next) {
-    // check if has all fields
-    const fillAllFields = checkAllFields(req.body)
-    if(fillAllFields) {
-        return res.render("users/index", fillAllFields)
-    }
-
     const colleges = await Colleges.findAll()
     const courses = await Courses.findAll() 
+    
+    //check if has all fields
+    let keys = Object.keys(req.body)
+
+    keys = keys.filter(key => key !== 'address_complement' && key !== 'phone2')
+
+    for(key of keys) {
+        if (req.body[key] == "") {
+            return res.render("users/register", {
+                user: req.body,
+                colleges,
+                courses,
+                error: 'Os campos obrigatórios não foram preenchidos.'
+            })
+        }           
+    }
 
     const { id, password } = req.body
 

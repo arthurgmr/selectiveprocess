@@ -39,6 +39,11 @@
     transition: all 0.2s;
 }
 
+.dashboard-admin .content .options a.disabled {
+    background-color: lightgrey;
+    pointer-events: none;
+}
+
 .dashboard-admin .content .options a:hover,
 .user-admin-edit a:hover {
     background-color: var(--third-color);

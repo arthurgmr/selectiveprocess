@@ -81,7 +81,7 @@ const Base = {
         }
     },
     delete(id) {
-        return db.query(`DELETE FROM ${this.table} WHERE id = $1`, [id])    
+        return db.query(`DELETE FROM ${this.table} WHERE id = ${id}`)    
     }
 }
 module.exports = Base

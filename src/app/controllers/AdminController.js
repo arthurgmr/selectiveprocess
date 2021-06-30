@@ -64,7 +64,7 @@ module.exports = {
   async putUser(req, res) {
     try {
       const { user } = req;
-      let {
+      let {                
         name,
         cpf,
         birth_date,
@@ -75,12 +75,13 @@ module.exports = {
         address_district,
         course_id,
         college_id,
+        funcs,
         period_course,
-        specialization,
+        specialization_regular,
+        specialization_special,
         email,
         phone1,
-        phone2,
-      } = req.body;
+        phone2 } = req.body
 
       birth_date = Date.parse(birth_date);
       cpf = cpf.replace(/\D/g, "");
@@ -99,12 +100,14 @@ module.exports = {
         address_district,
         course_id,
         college_id,
+        funcs,
         period_course,
-        specialization,
+        specialization_regular,
+        specialization_special,
         email,
         phone1,
-        phone2,
-      });
+        phone2
+    })
 
       return res.render("admin/index-search", {
         success: "Dados Atualizados com Sucesso",
@@ -150,11 +153,13 @@ module.exports = {
     try {
       const config = await Configs.findOne();
 
-      config.date_edict = date(Number(config.date_edict)).iso;
-      config.inicial_date = date(Number(config.inicial_date)).iso;
-      config.final_date = date(Number(config.final_date)).iso;
-
+      if(config) {
+        config.date_edict = date(Number(config.date_edict)).iso;
+        config.inicial_date = date(Number(config.inicial_date)).iso;
+        config.final_date = date(Number(config.final_date)).iso;
+      }
       return res.render("admin/configs", { config });
+      
     } catch (err) {
       console.log(err);
       return res.render("admin/configs", {

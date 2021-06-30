@@ -23,7 +23,7 @@
                 <div class="title">
                     <h3>
                         Ficha de Inscrição </br>
-                        Processe Seletivo Estágio - Edital n°002/2021
+                        Processe Seletivo Estágio - Edital n° {{config.edict_number}}/{{config.date_edict}}
                     </h3>
                 </div>
             </div>
@@ -205,7 +205,7 @@
             </div>
 
             <div class="item">
-                <div>Possui Curso Normal de Capacitação Especial?</div>
+                <div>Possui Curso de Capacitação Especial?</div>
                 <div class="radio">        
                     <span>
                         <input
@@ -278,12 +278,7 @@
             <div class="item authentication">
                 <div>Declaração</div>
                 <div class="input">
-                    <p>
-                        Declaro ter ciência de todos os procedimentos estabelecidos no 
-                        Edital nº 002/2021 e conhecimento que a declaração de informações 
-                        incorretas acarretará na exclusão do processo seletivo, conforme 
-                        previsto no item 1.10 desse edital.
-                    </p>
+                    <p>{{ config.declaration }}</p>
                     <p>Muriaé, {{ dateNow }}.</p>
                     <p>Assinatura legível do candidato, conforme Carteira de Identidade ou CNH</p>           
                 </div>

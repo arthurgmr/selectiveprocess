@@ -28,6 +28,7 @@
                 <th>Nome</th>
                 <th>Data Nasc</th>
                 <th>CPF</th>
+                <th>Telefone</th>
                 <th>Ação</th>
             </tr>
         </thead>
@@ -37,14 +38,12 @@
                     <td>{{user.name}}</td>
                     <td>{{user.birth_date}}</td>
                     <td>{{user.cpf}}</td>
+                    <td>{{user.phone1}}</td>
                     <td>
                         <div class="action">
                             <a class="button-action" href="/admin/user/{{ user.id }}" title="Editar Usuário">
                                 <img src="/images/edit-24.svg" alt="Editar Usuário">
                             </a>
-                            <button class="button-action delete" title="Excluir Usuário">
-                                <img src="/images/trash-24.svg" alt="Excluir Usuário" />
-                            </button>
                         </div>
                     </td>
                 </tr>

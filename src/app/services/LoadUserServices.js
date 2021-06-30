@@ -19,6 +19,7 @@ async function formatDate(user) {
     
     user.cpf = formatCpf(user.cpf)
     user.birth_date = format
+    user.phone1 = formatPhone(user.phone1)
 
     return user
 }

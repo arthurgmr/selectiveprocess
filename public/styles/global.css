@@ -116,8 +116,10 @@ header div.container a {
 /* LOGO */
 
 .logo img {
-    width: 253px;
-    height: 93px;
+    object-fit: contain;
+    width: 350px;
+    height: 70px;
+    padding: 8px 8px;
 }
 
 /* PRIMARY MENU */
