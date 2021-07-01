@@ -1,12 +1,26 @@
 const nodemailer = require('nodemailer')
 
 const transport = nodemailer.createTransport({
-    host: "smtp.mailtrap.io",
-    port: 2525,
-    auth: {
-      user: "49d38eb00b88a1",
-      pass: "50ff30cfd900e2"
-    }
-  });
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "estagio@edu.muriae.mg.gov.br",
+    pass: "@estagio2021"
+  },
+  tls: { rejectUnauthorized: false }
+});
 
   module.exports = transport
+
+
+ 
+//    host: "mail.digiescola.com.br",
+//    port: 25,
+//    secure: false,
+//   auth: {
+//      user: "mail@digiescola.com.br",
+//      pass: "0s3xrL@9"
+//    },
+//    tls: { rejectUnauthorized: false }
+ 

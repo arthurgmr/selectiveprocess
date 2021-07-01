@@ -49,9 +49,9 @@ module.exports = {
       });
 
       // send email with recover link
-      await mailer.sendMail({
+      const mailOptions = {
+        from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
         to: user.email,
-        from: "no-reply@edu.muriae.mg.gov.br",
         subject: "Recuperar Senha | Processo Seletico Estágio",
         html: `<h2>Você perdeu sua senha?</h2>
                 <p>Não se preocupe, clique no link abaixo para criar uma nova senha</p>
@@ -60,12 +60,20 @@ module.exports = {
                         RECUPERAR SENHA
                     </a>
                 </p>
-                <p>
-                Estamos a disposição para qualquer dúvudas </br></br>
-                Atenciosamente, </br>
-                Secretaria Municipal de Educação - Muriaé/MG
+                <p> Estamos a disposição para qualquer dúvudas</p>
+                <p> 
+                Att, </br>
+                Estágio Educação - SME-Muriaé/MG
                 </p>
                 `,
+      }
+
+      await mailer.sendMail(mailOptions, function(error, info) {
+        if(error) {
+          console.log(error)
+        } else {
+          console.log('Email enviado: ' + info.response)
+        }
       });
 
       // notify user
