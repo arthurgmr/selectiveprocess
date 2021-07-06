@@ -4,23 +4,46 @@
 
 {% block content %}
 
-{% call card.render('Painel de Controle', 'user-dashboard container') %}
-
-<h4>Olá Admin, seja bem vido(a).</h4>
+{% call card.render('Classificação Momentânea Regular (F01)', 'user-dashboard container') %}
 
 <div class="content">
 
-    <div class="options">
-        <a href="/" target="_blank">Pesquisar Candidato(a)</a>
-        <a href="/">Classificação Parcial</a>
-        <a href="/">Classificação Final</a>
-        <a href="/">Configuração do Processo</a>
-    </div>
-
-    <div class="classification">
-        <p>Número de inscritos</p>
-        <div><p>200</p></div>        
-    </div>
+ <table width="100%">
+        <thead>
+            <tr>
+                <th>Posição</th>
+                <th>Curso Superior</th>
+                <th>Nome</th>
+                <th>Data Nasc</th>
+                <th>Portador de Necessidades Especiais?</th>
+                <th>Magistério</th>
+                <th>Período/Semestre</th>
+                <th>IES</th>                
+                <th>Ação</th>                
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in classifiedUsers %}
+                <tr>
+                    <td>{{user.position}}º</td>
+                    <td>{{user.course_name}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.birth_date}}</td>
+                    <td>{{user.deficient}}</td>
+                    <td>{{user.specialization_regular}}</td>
+                    <td>{{user.period_course}}</td>
+                    <td>{{user.college_name}}</td>
+                    <td>
+                        <div class="action">
+                            <a class="button-action" href="/admin/user/{{ user.id }}" title="Editar Usuário">
+                                <img src="/images/edit-24.svg" alt="Editar Usuário">
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 </div>
 

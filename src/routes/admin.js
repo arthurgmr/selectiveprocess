@@ -6,6 +6,7 @@ const AdminValidator = require('../app/validators/admin')
 
 routes.get('/', AdminController.index)
 
+
 routes.get('/search', AdminController.indexSearch)
 routes.get('/search-', AdminController.search)
 
@@ -17,7 +18,9 @@ routes.get('/configs', AdminController.configs)
 routes.post('/configs', AdminController.configsCreateAndEdit)
 routes.delete('/configs', AdminController.configsDelete)
 
-routes.get('/classification', AdminController.showClassification)
+routes.get('/classification', AdminController.chooseClassification)
+routes.get('/classification/regular', AdminController.showClassificationRegular)
+routes.get('/classification/special', AdminController.showClassificationSpecial)
 
 
 

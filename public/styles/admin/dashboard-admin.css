@@ -49,6 +49,41 @@
     background-color: var(--third-color);
 }
 
+/* dashboard choose classification */
+
+.dashboard-admin .choose-classif {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.dashboard-admin .choose-classif a {
+    background-color: #f5f5f5;
+    list-style: none;
+    border: 2px solid #f5f5f5;
+    border-radius: 8px;
+    height: 180px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+
+    color: #18286B;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.dashboard-admin .choose-classif a:hover {
+    background-color: #e2e7fd;
+    border: 2px solid #18286B;
+} 
+
 .dashboard-admin .content .classification {
     display: flex;
     flex-direction: column;

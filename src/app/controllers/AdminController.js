@@ -7,7 +7,7 @@ const Colleges = require("../models/Colleges");
 const Courses = require("../models/Courses");
 
 const LoadUserServices = require("../services/LoadUserServices");
-const { getFirstName, date } = require("../../lib/utils");
+const { date, formatCpf, formatCep, formatPhone } = require("../../lib/utils");
 
 module.exports = {
   async index(req, res) {
@@ -129,13 +129,32 @@ module.exports = {
     });
   },
 
-  //controller to partial classification
-  async showClassification(req, res) {
+
+  //choose classification
+  chooseClassification(req, res) {
+    try {
+      return res.render("admin/choose-classif.njk");
+    } catch (err) {
+      console.log(err);
+    }    
+  },
+  //controller to partial classification special
+  async showClassificationRegular(req, res) {
     //save users in the array already ordered;
-    const ordenedUsers = await User.classification();
+    const ordenedUsers = await User.classificationRegular();
     //make map in users saving classification in column partialClassf
     const classifiedUsers = ordenedUsers.map((user) => {
       const position = ordenedUsers.indexOf(user) + 1;
+      const { format } = date(Number(user.birth_date))
+
+      user.cpf = formatCpf(user.cpf)
+      user.cep = formatCep(user.cep)
+      user.phone1 = formatPhone(user.phone1)
+      user.phone2 = formatPhone(user.phone2)
+      user.birth_date = format
+      user.deficient = user.deficient == 0 ? 'Não' : 'Sim';
+      user.specialization_regular = user.specialization_regular == 0 ? 'Não' : 'Sim';
+      user.specialization_special = user.specialization_special == 0 ? 'Não' : 'Sim';
 
       return {
         ...user,
@@ -143,7 +162,28 @@ module.exports = {
       };
     });
 
-    console.log(classifiedUsers);
+    return res.render("admin/partial-classif", { classifiedUsers });
+  },
+  //controller to partial classification regular
+  async showClassificationSpecial(req, res) {
+    //save users in the array already ordered;
+    const ordenedUsers = await User.classificationSpecial();
+    //make map in users saving classification in column partialClassf
+    const classifiedUsers = ordenedUsers.map((user) => {
+      const position = ordenedUsers.indexOf(user) + 1;
+      const { format } = date(Number(user.birth_date))
+
+      user.cpf = formatCpf(user.cpf)
+      user.cep = formatCep(user.cep)
+      user.phone1 = formatPhone(user.phone1)
+      user.phone2 = formatPhone(user.phone2)
+      user.birth_date = format
+
+      return {
+        ...user,
+        position,
+      };
+    });
 
     return res.render("admin/partial-classif", { classifiedUsers });
   },
