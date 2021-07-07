@@ -138,7 +138,7 @@ module.exports = {
       console.log(err);
     }    
   },
-  //controller to partial classification special
+  //controller to partial classification regular
   async showClassificationRegular(req, res) {
     //save users in the array already ordered;
     const ordenedUsers = await User.classificationRegular();
@@ -164,12 +164,12 @@ module.exports = {
 
     return res.render("admin/partial-classif", { classifiedUsers });
   },
-  //controller to partial classification regular
+  //controller to partial classification special
   async showClassificationSpecial(req, res) {
     //save users in the array already ordered;
     const ordenedUsers = await User.classificationSpecial();
-    //make map in users saving classification in column partialClassf
-    const classifiedUsers = ordenedUsers.map((user) => {
+    //make map in users saving position in column partialClassf
+    const classifiedUsersSpecial = ordenedUsers.map((user) => {
       const position = ordenedUsers.indexOf(user) + 1;
       const { format } = date(Number(user.birth_date))
 
@@ -178,6 +178,9 @@ module.exports = {
       user.phone1 = formatPhone(user.phone1)
       user.phone2 = formatPhone(user.phone2)
       user.birth_date = format
+      user.deficient = user.deficient == 0 ? 'Não' : 'Sim';
+      user.specialization_regular = user.specialization_regular == 0 ? 'Não' : 'Sim';
+      user.specialization_special = user.specialization_special == 0 ? 'Não' : 'Sim';
 
       return {
         ...user,
@@ -185,7 +188,7 @@ module.exports = {
       };
     });
 
-    return res.render("admin/partial-classif", { classifiedUsers });
+    return res.render("admin/partial-classif", { classifiedUsersSpecial });
   },
 
   //controlers configs

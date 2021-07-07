@@ -14,6 +14,7 @@
     align-items: center;
 }
 
+/* buttons/a link options */
 .dashboard-admin .content .options a {
 
     background-color: var(--primary-color);
@@ -49,8 +50,7 @@
     background-color: var(--third-color);
 }
 
-/* dashboard choose classification */
-
+/* dashboard choose subscribers */
 .dashboard-admin .choose-classif {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -82,15 +82,16 @@
 .dashboard-admin .choose-classif a:hover {
     background-color: #e2e7fd;
     border: 2px solid #18286B;
-} 
+}
 
-.dashboard-admin .content .classification {
+/* div subscribers */
+.dashboard-admin .content .subscribers {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.dashboard-admin .content .classification p {
+.dashboard-admin .content .subscribers p {
     font-size: 16px;
     text-transform: uppercase;
 
@@ -100,7 +101,7 @@
     margin-bottom: 12px;
 }
 
-.dashboard-admin .content .classification div {
+.dashboard-admin .content .subscribers div {
 
     background-color: var(--secundary-color);
     width: 80px;
@@ -117,7 +118,7 @@
 
 }
 
-.dashboard-admin .content .classification div p {
+.dashboard-admin .content .subscribers div p {
 
     font-size: 20px;
     position: absolute;

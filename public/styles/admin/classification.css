@@ -1,69 +1,70 @@
-.card.search-admin {
-    width: 70%;
+.classification {
+    width: 100%;
 }
 
-.search-admin .search-bar form{
-    display: grid;
-    grid-template-columns: 80% 1fr;
-    grid-gap: 8px;
-    align-items: center;
+.classification h4 {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--primary-color);
+    padding: 4px 0;
 }
 
-.search-admin .search-bar input {
-    padding: 11px 16px;
+.card-content .content h4 {
+    margin-top: 8px;
+    font-size: 12px;
 }
 
-.search-admin .content table {
+
+.classification .card-content {
+    font-size: 10px;
+}
+
+.card-content .content table {
     margin-top: 8px;
     border-spacing: 0;
 }
 
-.search-admin .content table tr {
+/* table row */
+.card-content .content table tr {
+    text-align: center;
+}
+
+/* table course */
+.card-content .content table tbody td:nth-child(2) {
+    width: 100px;
+}
+
+/* table name */
+.card-content .content table tbody td:nth-child(3) {
     text-align: left;
+    /* width: 300px; */
 }
 
-.search-admin .content table tr th {
+/* table deficient and specialization-regular  */
+.card-content .content table tbody td:nth-child(5),
+.card-content .content table tbody td:nth-child(6) {
+    width: 70px;
+}
+
+/* table head */
+.card-content .content table tr th {
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 9px;
     color: #77777F;
-    padding: 6px 0;
+    padding: 4px 0;
 }
-
-.search-admin .content table tr td {
-    padding: 8px 0;
-    border-bottom: 1px solid #e7e7e7
+.card-content .content table tr td {
+    padding: 4px 0;
+    border-bottom: 1px solid #e7e7e7;
 }
-
-.search-admin .content table tr:last-child td {
+.card-content .content table tr:last-child td {
     border-bottom: none;
 }
 
-.search-admin .content table tr td .action {
-    background: #FCFDFF;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+
+
+.card-content .content table tr td .action img {
+    height: 20px;
+
 }
 
-.search-admin .content table tr td .action .button-action {
-    background: #FCFDFF;
-    border: 1px solid #E1E3E6;
-    border-radius: 4px;
-    padding: 0;
-    height: 35px;
-    width: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 200ms;
-    
-}
-
-.search-admin .content table tr td .action .button-action:hover {
-    background: #F0F2F5;
-}
-
-.search-admin .content table tr td .action .button-action.delete {
-    margin-left: 8px;
-    cursor: pointer;
-}

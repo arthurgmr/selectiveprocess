@@ -70,8 +70,8 @@ module.exports = {
         AND users.funcs LIKE '%Especial(F02)%'
         ORDER BY 
             deficient DESC, 
-            specialization_regular DESC, 
             specialization_special DESC, 
+            specialization_regular DESC, 
             period_course DESC, 
             birth_date ASC
         `)

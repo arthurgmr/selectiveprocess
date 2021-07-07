@@ -4,26 +4,35 @@
 
 {% block content %}
 
-{% call card.render('Classificação Momentânea Regular (F01)', 'user-dashboard container') %}
+{% call card.render('Classificação Momentânea', 'user-dashboard container classification') %}
 
 <div class="content">
 
- <table width="100%">
+    {% if classifiedUsers %}
+        <h4>Função Regular F01</h4>
+    {% else %}
+        <h4>Função Especial F02</h4>
+    {% endif %}
+
+    <table class="classification">
         <thead>
             <tr>
-                <th>Posição</th>
-                <th>Curso Superior</th>
+                <th>CL</th>
+                <th>Curso</th>
                 <th>Nome</th>
                 <th>Data Nasc</th>
-                <th>Portador de Necessidades Especiais?</th>
+                <th>Deficiente</th>
                 <th>Magistério</th>
+                {% if classifiedUsersSpecial %}
+                    <th>Especial</th>
+                {% endif %}
                 <th>Período/Semestre</th>
                 <th>IES</th>                
                 <th>Ação</th>                
             </tr>
         </thead>
         <tbody>
-            {% for user in classifiedUsers %}
+            {% for user in classifiedUsers or classifiedUsersSpecial %}
                 <tr>
                     <td>{{user.position}}º</td>
                     <td>{{user.course_name}}</td>
@@ -31,6 +40,9 @@
                     <td>{{user.birth_date}}</td>
                     <td>{{user.deficient}}</td>
                     <td>{{user.specialization_regular}}</td>
+                    {% if classifiedUsersSpecial %}
+                        <td>{{user.specialization_special}}</td>
+                    {% endif %}
                     <td>{{user.period_course}}</td>
                     <td>{{user.college_name}}</td>
                     <td>
@@ -45,7 +57,17 @@
         </tbody>
     </table>
 
+    <div class="legend">
+        <h4>Legenda</h4>
+        <p>
+            CL: Classificação </br>
+            IES: Instituição de Ensino Superior
+        </p>
+    </div>
+
+
 </div>
+
 
 
 {% endcall %}
