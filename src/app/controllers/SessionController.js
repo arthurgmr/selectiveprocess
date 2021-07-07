@@ -52,18 +52,19 @@ module.exports = {
       const mailOptions = {
         from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
         to: user.email,
-        subject: "Recuperar Senha | Processo Seletico Estágio",
+        subject: "Recuperar Senha | Processo Seletivo Estágio",
         html: `<h2>Você perdeu sua senha?</h2>
                 <p>Não se preocupe, clique no link abaixo para criar uma nova senha</p>
                 <p>
-                    <a href="${APP_URL}/session/password-reset?token=${token}" target="_blank">
-                        RECUPERAR SENHA
-                    </a>
+                  <a href="${APP_URL}/session/password-reset?token=${token}" target="_blank">
+                      RECUPERAR SENHA
+                  </a>
                 </p>
-                <p> Estamos a disposição para qualquer dúvudas</p>
+                <p>Estamos a disposição para qualquer dúvudas</p>
                 <p> 
-                Att, </br>
-                Estágio Educação - SME-Muriaé/MG
+                  Att, </br>
+                  Estágio Educação - SME Muriaé/MG </br>
+                  32 3696-3376
                 </p>
                 `,
       }

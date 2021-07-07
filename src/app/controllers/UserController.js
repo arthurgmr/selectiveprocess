@@ -1,5 +1,6 @@
 const { hash} = require('bcryptjs')
 const crypto = require('crypto')
+const mailer = require("../../lib/mailer");
 const puppeteer = require('puppeteer')
 
 const User = require('../models/User')
@@ -70,6 +71,42 @@ module.exports = {
                 phone2,
                 password
             })
+
+            // send email with recover link
+            const APP_URL =  process.env.APP_URL;
+            let config = await Configs.findOne();
+            config.date_edict = date(Number(config.date_edict)).year
+            const mailOptions = {
+                from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
+                to: email,
+                subject: "Confirmação da Inscrição | Processo Seletivo Estágio",
+                html: `<h2>Recebemos sua Inscrição!</h2>
+                        <p>Esse e-mail confirma sua inscrição no Processo Seletivo do Estágio - Edital nº ${config.edict_number}/${config.date_edict}</p>
+                        <p>
+                            <a href="${APP_URL}/session/login" target="_blank">
+                                Clique aqui
+                            </a>
+                                e acesse com suas credencias para imprimir a Ficha de Inscrição.
+                        </p>
+                        <p>A Ficha de Inscrição é impressindível no momento da Convocação.</p> </br>
+                        <p>Estamos a disposição para qualquer dúvudas.</p>
+                        <p> 
+                            Att, </br>
+                            Estágio Educação - SME Muriaé/MG </br>
+                            32 3696-3376
+                        </p>
+                        `,
+            }
+
+            await mailer.sendMail(mailOptions, function(error, info) {
+                if(error) {
+                console.log(error)
+                } else {
+                console.log('Email enviado: ' + info.response)
+                }
+            });
+
+
             
             return res.render('users/success')
 
