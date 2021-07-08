@@ -9,7 +9,7 @@
     padding: 4px 0;
 }
 
-.card-content .content h4 {
+.classification .card-content .content h4 {
     margin-top: 8px;
     font-size: 12px;
 }
@@ -19,51 +19,51 @@
     font-size: 10px;
 }
 
-.card-content .content table {
+.classification .card-content .content table {
     margin-top: 8px;
     border-spacing: 0;
 }
 
 /* table row */
-.card-content .content table tr {
+.classification .card-content .content table tr {
     text-align: center;
 }
 
 /* table course */
-.card-content .content table tbody td:nth-child(2) {
+.classification .card-content .content table tbody td:nth-child(2) {
     width: 100px;
 }
 
 /* table name */
-.card-content .content table tbody td:nth-child(3) {
+.classification .card-content .content table tbody td:nth-child(3) {
     text-align: left;
     /* width: 300px; */
 }
 
 /* table deficient and specialization-regular  */
-.card-content .content table tbody td:nth-child(5),
-.card-content .content table tbody td:nth-child(6) {
+.classification .card-content .content table tbody td:nth-child(5),
+.classification .card-content .content table tbody td:nth-child(6) {
     width: 70px;
 }
 
 /* table head */
-.card-content .content table tr th {
+.classification .card-content .content table tr th {
     text-transform: uppercase;
     font-size: 9px;
     color: #77777F;
     padding: 4px 0;
 }
-.card-content .content table tr td {
+.classification .card-content .content table tr td {
     padding: 4px 0;
     border-bottom: 1px solid #e7e7e7;
 }
-.card-content .content table tr:last-child td {
+.classification .card-content .content table tr:last-child td {
     border-bottom: none;
 }
 
 
 
-.card-content .content table tr td .action img {
+.classification .card-content .content table tr td .action img {
     height: 20px;
 
 }
