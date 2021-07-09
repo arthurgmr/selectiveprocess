@@ -42,10 +42,16 @@ module.exports = {
                 password
             } = req.body
 
+            name = name.toUpperCase();
+            address = address.toUpperCase();
+            address_complement.toUpperCase();
+            address_district = address_district.toUpperCase();
             cpf = cpf.replace(/\D/g, "");
             birth_date = Date.parse(birth_date);
             cep = cep.replace(/\D/g, "");
-            email = email.toLowerCase()
+            email = email.toLowerCase();
+            specialization_regular = specialization_regular.replace(",", "");
+            specialization_special = specialization_special.replace(",", "");
             phone1 = phone1.replace(/\D/g, "");
             phone2 = phone2.replace(/\D/g, "");
             password = await hash(password, 8);

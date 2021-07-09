@@ -184,7 +184,8 @@ if(functions && collectedFunc) {
             selectedFuncs.push(func)
             if(func === liRegular.dataset.id) {
                 liRegular.classList.toggle("selected")            
-            } else {
+            } 
+            if(func === liEspecial.dataset.id) {
                 liEspecial.classList.toggle("selected")
             }
         })
