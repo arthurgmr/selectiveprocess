@@ -35,13 +35,13 @@ async function onlyToken(req, res, next) {
     })
 
     //check if token has expired
-    let now = new Date()
-    now = now.setHours(now.getHours())
+    // let now = new Date()
+    // now = now.setHours(now.getHours())
 
-    if(now > user.reset_token_expires) 
-    return res.render('users/index', {         
-        error: 'Token expirado'
-    })
+    // if(now > user.reset_token_expires) 
+    // return res.render('users/index', {         
+    //     error: 'Token expirado'
+    // })
     
     req.user = user
 

@@ -144,12 +144,12 @@ module.exports = {
             const token =  crypto.randomBytes(20).toString("hex")
             
             // create expire token
-            let now = new Date()
-            now = now.setHours(now.getHours() + 1)
+            // let now = new Date()
+            // now = now.setHours(now.getHours() + 1)
 
             await User.update(id, {
                 reset_token: token,
-                reset_token_expires: now
+                // reset_token_expires: now
             })
          
             return res.redirect(`/users/print-form/pdf?tk=${token}`)
