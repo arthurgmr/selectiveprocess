@@ -5,12 +5,13 @@ const UserController = require('../app/controllers/UserController')
 
 const UserValidator = require('../app/validators/user')
 
-const { onlyUsers, onlyToken }= require('../app/middlewares/session')
+const { onlyUsers, onlyToken } = require('../app/middlewares/session')
+const { applicationPeriod } = require('../app/middlewares/application-period')
 
 
 // //user register
-routes.get('/register', UserController.registerForm)
-routes.post('/register', UserValidator.post, UserController.post)
+routes.get('/register', applicationPeriod, UserController.registerForm)
+routes.post('/register', applicationPeriod, UserValidator.post, UserController.post)
 
 // dashboard
 routes.get('/', onlyUsers, UserValidator.index, UserController.index)
@@ -21,7 +22,7 @@ routes.get('/print-form/pdf',onlyUsers, UserController.formPdf)
 routes.get('/format-pdf', onlyToken, UserController.formatPdf)
 
 // edit user
-routes.get('/edit', onlyUsers, UserController.edit)
+routes.get('/edit', applicationPeriod, onlyUsers, UserController.edit)
 routes.put('/edit', onlyUsers, UserValidator.put, UserController.put)
 // routes.put('/edit', onlyUsers, UserValidator.put, UserController.put)
 // routes.delete('/', UserController.delete)

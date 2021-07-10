@@ -1,0 +1,16 @@
+{% extends "layout.njk" %}
+
+{% import "parts/card.njk" as card %}
+
+
+
+{% block content %}
+
+
+{% call card.render('Período de Inscrição Encerrado', 'login container') %}
+
+<p><a href="/session/login">Clique aqui</a> para visualizar sua inscrição.<p/>
+
+{% endcall %}
+
+{% endblock content %}

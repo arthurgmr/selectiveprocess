@@ -44,6 +44,11 @@
     background-color: var(--third-color);
 }
 
+.user-dashboard .content .options a.disabled {
+    background-color: lightgrey;
+    pointer-events: none;
+}
+
 .user-dashboard .content .classification {
     display: flex;
     flex-direction: column;
