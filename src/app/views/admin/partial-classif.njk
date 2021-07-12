@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% call card.render('Classificação Momentânea', 'user-dashboard container classification') %}
+{% call card.render('Classificação do Processo Seletivo', 'user-dashboard container classification') %}
 
 <div class="content">
 
@@ -13,6 +13,8 @@
     {% else %}
         <h4>Função Especial F02</h4>
     {% endif %}
+
+    
 
     <div class="options">
     
@@ -33,7 +35,12 @@
         {% else %}
             <a href="/clf/especial">Imprimr Classificação</a>
         {% endif %}
-            
+
+        <div>
+            <h4>Orientação</h4>
+            <p><strong>*</strong> Gere a classificação e posteriormente realize a impressão.</p>
+            <p><strong>*</strong> Todos os candidatos são notificados do resultado ao "Gerar a Classifcação".</p>
+        </div>
     </div>
 
     <table class="classification">

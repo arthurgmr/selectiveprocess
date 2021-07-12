@@ -1,4 +1,5 @@
 const { hash } = require("bcryptjs");
+const mailer = require("../../lib/mailer");
 const puppeteer = require("puppeteer");
 
 const Configs = require("../models/Configs");
@@ -177,17 +178,18 @@ module.exports = {
         //make map in users saving classification in column partialClassf
         const classifiedUsersPromise = ordenedUsers.map((user) => {
           const position = ordenedUsers.indexOf(user) + 1;
-          const { format } = date(Number(user.birth_date))
+          const { format } = date(Number(user.birth_date));
     
-          user.cpf = formatCpf(user.cpf)
-          user.cep = formatCep(user.cep)
-          user.phone1 = formatPhone(user.phone1)
-          user.phone2 = formatPhone(user.phone2)
-          user.birth_date = format
+          user.cpf = formatCpf(user.cpf);
+          user.cep = formatCep(user.cep);
+          user.phone1 = formatPhone(user.phone1);
+          user.phone2 = formatPhone(user.phone2);
+          user.birth_date = format;
           user.deficient = user.deficient == 0 ? 'Não' : 'Sim';
           user.specialization_regular = user.specialization_regular == 0 ? 'Não' : 'Sim';
           user.specialization_special = user.specialization_special == 0 ? 'Não' : 'Sim';
 
+          // save data in Classification table on db;
           ClassificationRegular.create({
             position,
             course_name: user.course_name,
@@ -198,6 +200,40 @@ module.exports = {
             period_course: user.period_course,
             college_name: user.college_name,
           })
+
+          // notify user;
+          const APP_URL =  process.env.APP_URL;
+          const mailOptions = {
+            from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
+            to: user.email,
+            subject: "Classificação Publicada | Processo Seletivo Estágio",
+            html: `<h2>Verifique sua classificação</h2>
+                    <p>Olá ${user.name}!</p>
+                    <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Regular (F01), foi publicada!</p>
+                    <p>
+                        <a href="${APP_URL}/session/login" target="_blank">
+                            Clique aqui
+                        </a>
+                            e acesse com suas credencias para <strong>verificar a sua posição.</strong>
+                    </p>
+                    <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
+                    <p>Estamos a disposição para qualquer dúvida.</p>
+                    <p> 
+                        Att, </br>
+                        Estágio Educação - SME Muriaé/MG </br>
+                        32 3696-3376
+                    </p>
+                    `,
+        }
+
+        mailer.sendMail(mailOptions, function(error, info) {
+            if(error) {
+            console.log(error)
+            } else {
+            console.log('Email enviado: ' + info.response)
+            }
+        });
+
     
           return {
             ...user,
@@ -216,7 +252,7 @@ module.exports = {
   },
   //print classification
   async printClfRegular(req, res) {
-    const classifiedUsers = await ClassificationRegular.findAll();
+    const classifiedUsers = await ClassificationRegular.fixOrdernation();
 
     let config = await Configs.findOne()
     config.date_edict = date(Number(config.date_edict)).year
@@ -289,6 +325,39 @@ module.exports = {
         college_name: user.college_name,
       })
 
+      // notify user;
+      const APP_URL =  process.env.APP_URL;
+      const mailOptions = {
+        from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
+        to: user.email,
+        subject: "Classificação Publicada | Processo Seletivo Estágio",
+        html: `<h2>Verifique sua classificação</h2>
+                <p>Olá ${user.name}!</p>
+                <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Especial (F02), foi publicada!</p>
+                <p>
+                    <a href="${APP_URL}/session/login" target="_blank">
+                        Clique aqui
+                    </a>
+                        e acesse com suas credencias para <strong>verificar a sua posição.</strong>
+                </p>
+                <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
+                <p>Estamos a disposição para qualquer dúvida.</p>
+                <p> 
+                    Att, </br>
+                    Estágio Educação - SME Muriaé/MG </br>
+                    32 3696-3376
+                </p>
+                `,
+      }
+
+      mailer.sendMail(mailOptions, function(error, info) {
+          if(error) {
+          console.log(error)
+          } else {
+          console.log('Email enviado: ' + info.response)
+          }
+      });
+
       return {
         ...user,
         position,
@@ -306,7 +375,7 @@ module.exports = {
   },
   //print classification
   async printClfSpecial(req, res) {
-    const classifiedUsersSpecial = await ClassificationSpecial.findAll();
+    const classifiedUsersSpecial = await ClassificationSpecial.fixOrdernation();
 
     let config = await Configs.findOne()
     config.date_edict = date(Number(config.date_edict)).year
