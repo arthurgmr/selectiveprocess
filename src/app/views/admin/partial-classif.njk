@@ -18,20 +18,20 @@
     
         {# condition to generate classification (regular or special) #}
         {% if classifiedUsers %}
-            <form action="/classification/regular" method="post" >
+            <form action="/admin/classification/regular" method="post" >
                 <button class="button" type="submit">Gerar Classificação</button> 
             </form>
         {% else %}
-            <form action="/classification/special" method="post" >
+            <form action="/admin/classification/special" method="post" >
                 <button class="button" type="submit">Gerar Classificação</button> 
             </form>
         {% endif %}
 
         {# condition to print classification (regular or special) #}
         {% if classifiedUsers %}
-            <a href="/clf/regular">Imprimri Classificação</a>
+            <a href="/clf/regular">Imprimr Classificação</a>
         {% else %}
-            <a href="/clf/especial">Imprimri Classificação</a>
+            <a href="/clf/especial">Imprimr Classificação</a>
         {% endif %}
             
     </div>

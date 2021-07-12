@@ -22,6 +22,7 @@ routes.get('/classification', AdminController.chooseClassification)
 routes.get('/classification/regular', AdminController.showClassificationRegular)
 routes.post('/classification/regular', AdminController.generateClassifRegular)
 routes.get('/classification/special', AdminController.showClassificationSpecial)
+routes.post('/classification/special', AdminController.generateClassifSpecial)
 
 
 

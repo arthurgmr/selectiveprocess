@@ -5,8 +5,6 @@ async function applicationPeriod(req, res, next) {
     //get dateNow
     let dateNow = new Date();
     dateNow = Date.parse(dateNow)
-    console.log(dateNow)
-
 
     //get final date application period;
     const configs = await Configs.findOne();

@@ -209,7 +209,7 @@ module.exports = {
 
           return res.render("admin/partial-classif", { 
             classifiedUsers,
-            success: "Classificação Gerada com Sucesso, em breve você receberá um e-mail contendo o arquivo em Excel!"
+            success: "Classificação gerada com Sucesso, em breve você receberá um e-mail contendo o arquivo em Excel!"
            }); 
 
         
@@ -218,12 +218,15 @@ module.exports = {
   async printClfRegular(req, res) {
     const classifiedUsers = await ClassificationRegular.findAll();
 
+    let config = await Configs.findOne()
+    config.date_edict = date(Number(config.date_edict)).year
+
     if(!classifiedUsers) {
       return res.render("admin/print-classif", {
         error: "Gera a classificação primeiro para depois realizar a impressão."
       })
     }
-     return res.render("admin/print-classif", classifiedUsers);
+     return res.render("admin/print-classif", { classifiedUsers, config });
   },
 
   //controller to partial classification special
@@ -251,6 +254,69 @@ module.exports = {
     });
 
     return res.render("admin/partial-classif", { classifiedUsersSpecial });
+  },
+  //generate classification regular
+  async generateClassifSpecial(req, res) {
+    //save users in the array already ordered;
+    const ordenedUsers = await User.classificationSpecial();
+
+    //delete all registers in classification;
+    await ClassificationSpecial.deleteAll();
+
+    //make map in users saving classification in column partialClassf
+    const classifiedUsersPromise = ordenedUsers.map((user) => {
+      const position = ordenedUsers.indexOf(user) + 1;
+      const { format } = date(Number(user.birth_date))
+
+      user.cpf = formatCpf(user.cpf)
+      user.cep = formatCep(user.cep)
+      user.phone1 = formatPhone(user.phone1)
+      user.phone2 = formatPhone(user.phone2)
+      user.birth_date = format
+      user.deficient = user.deficient == 0 ? 'Não' : 'Sim';
+      user.specialization_regular = user.specialization_regular == 0 ? 'Não' : 'Sim';
+      user.specialization_special = user.specialization_special == 0 ? 'Não' : 'Sim';
+
+      ClassificationSpecial.create({
+        position,
+        course_name: user.course_name,
+        name: user.name,
+        birth_date: user.birth_date,
+        deficient: user.deficient,
+        specialization_regular: user.specialization_regular,
+        specialization_special: user.specialization_special,
+        period_course: user.period_course,
+        college_name: user.college_name,
+      })
+
+      return {
+        ...user,
+        position,
+      };
+    });
+
+      const classifiedUsers = await Promise.all(classifiedUsersPromise);
+
+      return res.render("admin/partial-classif", { 
+        classifiedUsers,
+        success: "Classificação gerada com Sucesso, em breve você receberá um e-mail contendo o arquivo em Excel!"
+        }); 
+
+      
+  },
+  //print classification
+  async printClfSpecial(req, res) {
+    const classifiedUsersSpecial = await ClassificationSpecial.findAll();
+
+    let config = await Configs.findOne()
+    config.date_edict = date(Number(config.date_edict)).year
+
+    if(!classifiedUsersSpecial) {
+      return res.render("admin/print-classif", {
+        error: "Gera a classificação primeiro para depois realizar a impressão."
+      })
+    }
+     return res.render("admin/print-classif", { classifiedUsersSpecial, config });
   },
 
   //controlers configs

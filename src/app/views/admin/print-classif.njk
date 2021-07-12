@@ -1,99 +1,89 @@
-{% extends "admin/layout-adm.njk" %}
+<!DOCTYPE html>
 
-{% import "parts/card.njk" as card %}
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-{% block content %}
 
-{% call card.render('Classificação Momentânea', 'user-dashboard container classification') %}
+        <link rel="stylesheet" href="/styles/print-classif.css">
 
-<div class="content">
+        <title>Classificação</title>        
+    </head>
 
-    {% if classifiedUsers %}
-        <h4>Função Regular F01</h4>
-    {% else %}
-        <h4>Função Especial F02</h4>
-    {% endif %}
-
-    <div class="options">
-    
-        {# condition to generate classification (regular or special) #}
-        {% if classifiedUsers %}
-            <form action="/classification/regular" method="post" >
-                <button class="button" type="submit">Gerar Classificação</button> 
-            </form>
-        {% else %}
-            <form action="/classification/special" method="post" >
-                <button class="button" type="submit">Gerar Classificação</button> 
-            </form>
-        {% endif %}
-
-        {# condition to print classification (regular or special) #}
-        {% if classifiedUsers %}
-            <a href="/clf/regular">Imprimri Classificação</a>
-        {% else %}
-            <a href="/clf/especial">Imprimri Classificação</a>
-        {% endif %}
+    <body>
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/images/logo-pq-5.png" alt="">
+                    </a>  
+                </div>
+                <div class="title">
+                    <h3>
+                        Classificação </br>
+                        Processe Seletivo Estágio - Edital n° {{config.edict_number}}/{{config.date_edict}}
+                    </h3>
+                </div>
+            </div>
             
-    </div>
+        </header>
 
-    <table class="classification">
-        <thead>
-            <tr>
-                <th>CL</th>
-                <th>Curso</th>
-                <th>Nome</th>
-                <th>Data Nasc</th>
-                <th>Deficiente</th>
-                <th>Magistério</th>
-                {% if classifiedUsersSpecial %}
-                    <th>Especial</th>
-                {% endif %}
-                <th>Período/Semestre</th>
-                <th>IES</th>                
-                <th>Ação</th>                
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in classifiedUsers or classifiedUsersSpecial %}
-                <tr>
-                    <td>{{user.position}}º</td>
-                    <td>{{user.course_name}}</td>
-                    <td>{{user.name}}</td>
-                    <td>{{user.birth_date}}</td>
-                    <td>{{user.deficient}}</td>
-                    <td>{{user.specialization_regular}}</td>
-                    {% if classifiedUsersSpecial %}
-                        <td>{{user.specialization_special}}</td>
-                    {% endif %}
-                    <td>{{user.period_course}}</td>
-                    <td>{{user.college_name}}</td>
-                    <td>
-                        <div class="action">
-                            <a class="button-action" href="/admin/user/{{ user.id }}" title="Editar Usuário">
-                                <img src="/images/edit-24.svg" alt="Editar Usuário">
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <div class="content">
 
-    <div class="legend">
-        <h4>Legenda</h4>
-        <p>
-            CL: Classificação </br>
-            IES: Instituição de Ensino Superior
-        </p>
-    </div>
+            {% if classifiedUsers %}
+                <h4>Função Regular F01</h4>
+            {% else %}
+                <h4>Função Especial F02</h4>
+            {% endif %}
 
+            <table class="classification">
+                <thead>
+                    <tr>
+                        <th>CL</th>
+                        <th>Curso</th>
+                        <th>Nome</th>
+                        <th>Data Nasc</th>
+                        <th>Deficiente</th>
+                        <th>Magistério</th>
+                        {% if classifiedUsersSpecial %}
+                            <th>Especial</th>
+                        {% endif %}
+                        <th>Período/Semestre</th>
+                        <th>IES</th>                               
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in classifiedUsers or classifiedUsersSpecial %}
+                        <tr>
+                            <td>{{user.position}}º</td>
+                            <td>{{user.course_name}}</td>
+                            <td>{{user.name}}</td>
+                            <td>{{user.birth_date}}</td>
+                            <td>{{user.deficient}}</td>
+                            <td>{{user.specialization_regular}}</td>
+                            {% if classifiedUsersSpecial %}
+                                <td>{{user.specialization_special}}</td>
+                            {% endif %}
+                            <td>{{user.period_course}}</td>
+                            <td>{{user.college_name}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-</div>
+            <div class="legend">
+                <h4>Legenda</h4>
+                <p>
+                    CL: Classificação </br>
+                    IES: Instituição de Ensino Superior
+                </p>
+            </div>
+        </div>
 
+        <footer>
+            <p>Av. Maestro Sansão, 236 - Centro, Muriaé/MG - 1º Andar - Tel.: (32) 3729-1233 - E-mail: educacao@muriae.mg.gov.br</p>
+        </footer>
 
-
-{% endcall %}
-
-
-
-{% endblock content %}
+    </body>
+</html>

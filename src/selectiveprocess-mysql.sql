@@ -65,7 +65,7 @@ CREATE TABLE `classification_regular` (
   `course_name` text NOT NULL,
   `name` text NOT NULL,
   `birth_date` text NOT NULL,
-  `deficent` text NOT NULL,
+  `deficient` text NOT NULL,
   `specialization_regular` text NOT NULL,
   `period_course` text NOT NULL,
   `college_name` text NOT NULL
@@ -77,7 +77,7 @@ CREATE TABLE `classification_special` (
   `course_name` text NOT NULL,
   `name` text NOT NULL,
   `birth_date` text NOT NULL,
-  `deficent` text NOT NULL,
+  `deficient` text NOT NULL,
   `specialization_regular` text NOT NULL,
   `specialization_special` text NOT NULL,
   `period_course` text NOT NULL,

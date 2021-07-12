@@ -3,6 +3,7 @@ const routes = express.Router()
 
 const HomeController = require('../app/controllers/HomeController')
 const HomeValidator = require('../app/validators/home')
+const AdminController = require('../app/controllers/AdminController')
 
 const { applicationPeriod } = require('../app/middlewares/application-period')
 const { onlyUsersAdmin, isLoggedRedirectToUsers } = require('../app/middlewares/session')
@@ -17,8 +18,8 @@ routes.post('/',applicationPeriod, HomeValidator.post, HomeController.post)
 routes.use('/users', users)
 
 routes.use('/admin', onlyUsersAdmin, admin)
-// routes.use('/clf/regular', )
-// routes.use('/clf/especial', )
+routes.use('/clf/regular', AdminController.printClfRegular)
+routes.use('/clf/especial', AdminController.printClfSpecial)
 
 routes.use('/session', session)
 
