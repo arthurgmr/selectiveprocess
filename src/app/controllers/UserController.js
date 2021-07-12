@@ -168,7 +168,7 @@ module.exports = {
         const browser = await puppeteer.launch({headless: true})
         const page = await browser.newPage()
 
-        await page.goto(`${APP_URL}users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
+        await page.goto(`${APP_URL}/users/format-pdf?tk=${token}`, { waitUntil: 'networkidle0'})
 
         const pdf = await page.pdf({
             printBackground: true,
@@ -177,7 +177,7 @@ module.exports = {
 
         await browser.close()
 
-        //update user
+        // update user
         await User.update(id, {
             reset_token: "",
             reset_token_expires: ""
