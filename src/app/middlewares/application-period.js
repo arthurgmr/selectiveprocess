@@ -11,7 +11,6 @@ async function applicationPeriod(req, res, next) {
     //get final date application period;
     const configs = await Configs.findOne();
     const finalDate = configs.final_date;
-    console.log(finalDate)
 
     //if dateNow > finalDate return expired period;
     if (dateNow > finalDate) {
