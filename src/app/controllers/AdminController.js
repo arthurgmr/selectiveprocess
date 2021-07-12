@@ -211,10 +211,10 @@ module.exports = {
                     <p>Olá ${user.name}!</p>
                     <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Regular (F01), foi publicada!</p>
                     <p>
-                        <a href="${APP_URL}/session/login" target="_blank">
+                        <a href="https://digiescola.com.br/estagio-graduacao/" target="_blank">
                             Clique aqui
                         </a>
-                            e acesse com suas credencias para <strong>verificar a sua posição.</strong>
+                            para <strong>verificar a sua posição.</strong>
                     </p>
                     <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
                     <p>Estamos a disposição para qualquer dúvida.</p>
@@ -335,10 +335,10 @@ module.exports = {
                 <p>Olá ${user.name}!</p>
                 <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Especial (F02), foi publicada!</p>
                 <p>
-                    <a href="${APP_URL}/session/login" target="_blank">
+                    <a href="https://digiescola.com.br/estagio-graduacao/" target="_blank">
                         Clique aqui
                     </a>
-                        e acesse com suas credencias para <strong>verificar a sua posição.</strong>
+                        para <strong>verificar a sua posição.</strong>
                 </p>
                 <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
                 <p>Estamos a disposição para qualquer dúvida.</p>
