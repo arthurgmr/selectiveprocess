@@ -15,7 +15,11 @@ routes.get('/', applicationPeriod, isLoggedRedirectToUsers, HomeController.index
 routes.post('/',applicationPeriod, HomeValidator.post, HomeController.post)
 
 routes.use('/users', users)
+
 routes.use('/admin', onlyUsersAdmin, admin)
+// routes.use('/clf/regular', )
+// routes.use('/clf/especial', )
+
 routes.use('/session', session)
 
 // routes.use('/admin', products) 

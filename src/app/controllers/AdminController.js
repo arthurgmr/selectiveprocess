@@ -5,6 +5,8 @@ const Configs = require("../models/Configs");
 const User = require("../models/User");
 const Colleges = require("../models/Colleges");
 const Courses = require("../models/Courses");
+const ClassificationRegular = require("../models/ClassificationRegular")
+const ClassificationSpecial = require("../models/ClassificationSpecial")
 
 const LoadUserServices = require("../services/LoadUserServices");
 const { date, formatCpf, formatCep, formatPhone } = require("../../lib/utils");
@@ -164,6 +166,66 @@ module.exports = {
 
     return res.render("admin/partial-classif", { classifiedUsers });
   },
+  //generate classification regular
+  async generateClassifRegular(req, res) {
+        //save users in the array already ordered;
+        const ordenedUsers = await User.classificationRegular();
+
+        //delete all registers in classification;
+        await ClassificationRegular.deleteAll();
+
+        //make map in users saving classification in column partialClassf
+        const classifiedUsersPromise = ordenedUsers.map((user) => {
+          const position = ordenedUsers.indexOf(user) + 1;
+          const { format } = date(Number(user.birth_date))
+    
+          user.cpf = formatCpf(user.cpf)
+          user.cep = formatCep(user.cep)
+          user.phone1 = formatPhone(user.phone1)
+          user.phone2 = formatPhone(user.phone2)
+          user.birth_date = format
+          user.deficient = user.deficient == 0 ? 'Não' : 'Sim';
+          user.specialization_regular = user.specialization_regular == 0 ? 'Não' : 'Sim';
+          user.specialization_special = user.specialization_special == 0 ? 'Não' : 'Sim';
+
+          ClassificationRegular.create({
+            position,
+            course_name: user.course_name,
+            name: user.name,
+            birth_date: user.birth_date,
+            deficient: user.deficient,
+            specialization_regular: user.specialization_regular,
+            period_course: user.period_course,
+            college_name: user.college_name,
+          })
+    
+          return {
+            ...user,
+            position,
+          };
+        });
+
+          const classifiedUsers = await Promise.all(classifiedUsersPromise);
+
+          return res.render("admin/partial-classif", { 
+            classifiedUsers,
+            success: "Classificação Gerada com Sucesso, em breve você receberá um e-mail contendo o arquivo em Excel!"
+           }); 
+
+        
+  },
+  //print classification
+  async printClfRegular(req, res) {
+    const classifiedUsers = await ClassificationRegular.findAll();
+
+    if(!classifiedUsers) {
+      return res.render("admin/print-classif", {
+        error: "Gera a classificação primeiro para depois realizar a impressão."
+      })
+    }
+     return res.render("admin/print-classif", classifiedUsers);
+  },
+
   //controller to partial classification special
   async showClassificationSpecial(req, res) {
     //save users in the array already ordered;

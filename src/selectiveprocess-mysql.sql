@@ -59,24 +59,29 @@ CREATE TABLE `configs` (
   `warnings` text
 );
 
-CREATE TABLE `classification_final` (
+CREATE TABLE `classification_regular` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
+  `position` int NOT NULL,
+  `course_name` text NOT NULL,
   `name` text NOT NULL,
-  `bith_date` text NOT NULL,
+  `birth_date` text NOT NULL,
   `deficent` text NOT NULL,
-  `couse_name` text NOT NULL,
+  `specialization_regular` text NOT NULL,
   `period_course` text NOT NULL,
-  `specialization` text NOT NULL
+  `college_name` text NOT NULL
 );
 
-CREATE TABLE `classification_partial` (
+CREATE TABLE `classification_special` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
+  `position` int NOT NULL,
+  `course_name` text NOT NULL,
   `name` text NOT NULL,
-  `bith_date` text NOT NULL,
+  `birth_date` text NOT NULL,
   `deficent` text NOT NULL,
-  `couse_name` text NOT NULL,
+  `specialization_regular` text NOT NULL,
+  `specialization_special` text NOT NULL,
   `period_course` text NOT NULL,
-  `specialization` text NOT NULL
+  `college_name` text NOT NULL
 );
 
 ALTER TABLE `users` ADD FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`);

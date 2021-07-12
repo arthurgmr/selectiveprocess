@@ -20,6 +20,7 @@ routes.delete('/configs', AdminController.configsDelete)
 
 routes.get('/classification', AdminController.chooseClassification)
 routes.get('/classification/regular', AdminController.showClassificationRegular)
+routes.post('/classification/regular', AdminController.generateClassifRegular)
 routes.get('/classification/special', AdminController.showClassificationSpecial)
 
 
