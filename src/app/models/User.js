@@ -51,8 +51,8 @@ module.exports = {
         AND users.funcs LIKE '%Regular(F01)%'
         ORDER BY 
             deficient DESC, 
-            CAST(specialization_regular AS UNSIGNED) DESC, 
-            period_course DESC, 
+            specialization_regular DESC, 
+            CAST(period_course AS UNSIGNED) DESC, 
             birth_date ASC
         `)
         return results
@@ -72,7 +72,7 @@ module.exports = {
             deficient DESC, 
             specialization_special DESC, 
             specialization_regular DESC, 
-            period_course DESC, 
+            CAST(period_course AS UNSIGNED) DESC, 
             birth_date ASC
         `)
         return results
