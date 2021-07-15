@@ -78,7 +78,7 @@ module.exports = {
       });
 
       // notify user
-      return res.render("session/forgot-password", {
+      return res.render("session/login", {
         success: "Verifique seu e-mail para criar uma nova senha",
       });
     } catch (err) {

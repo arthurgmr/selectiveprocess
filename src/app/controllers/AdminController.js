@@ -202,37 +202,37 @@ module.exports = {
           })
 
           // notify user;
-          const APP_URL =  process.env.APP_URL;
-          const mailOptions = {
-            from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
-            to: user.email,
-            subject: "Classificação Publicada | Processo Seletivo Estágio",
-            html: `<h2>Verifique sua classificação</h2>
-                    <p>Olá ${user.name}!</p>
-                    <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Regular (F01), foi publicada!</p>
-                    <p>
-                        <a href="https://digiescola.com.br/estagio-graduacao/" target="_blank">
-                            Clique aqui
-                        </a>
-                            para <strong>verificar a sua posição.</strong>
-                    </p>
-                    <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
-                    <p>Estamos a disposição para qualquer dúvida.</p>
-                    <p> 
-                        Att, </br>
-                        Estágio Educação - SME Muriaé/MG </br>
-                        32 3696-3376
-                    </p>
-                    `,
-        }
+        //   const APP_URL =  process.env.APP_URL;
+        //   const mailOptions = {
+        //     from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
+        //     to: user.email,
+        //     subject: "Classificação Publicada | Processo Seletivo Estágio",
+        //     html: `<h2>Verifique sua classificação</h2>
+        //             <p>Olá ${user.name}!</p>
+        //             <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Regular (F01), foi publicada!</p>
+        //             <p>
+        //                 <a href="https://digiescola.com.br/estagio-graduacao/" target="_blank">
+        //                     Clique aqui
+        //                 </a>
+        //                     para <strong>verificar a sua posição.</strong>
+        //             </p>
+        //             <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
+        //             <p>Estamos a disposição para qualquer dúvida.</p>
+        //             <p> 
+        //                 Att, </br>
+        //                 Estágio Educação - SME Muriaé/MG </br>
+        //                 32 3696-3376
+        //             </p>
+        //             `,
+        // }
 
-        mailer.sendMail(mailOptions, function(error, info) {
-            if(error) {
-            console.log(error)
-            } else {
-            console.log('Email enviado: ' + info.response)
-            }
-        });
+        // mailer.sendMail(mailOptions, function(error, info) {
+        //     if(error) {
+        //     console.log(error)
+        //     } else {
+        //     console.log('Email enviado: ' + info.response)
+        //     }
+        // });
 
     
           return {
@@ -326,37 +326,37 @@ module.exports = {
       })
 
       // notify user;
-      const APP_URL =  process.env.APP_URL;
-      const mailOptions = {
-        from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
-        to: user.email,
-        subject: "Classificação Publicada | Processo Seletivo Estágio",
-        html: `<h2>Verifique sua classificação</h2>
-                <p>Olá ${user.name}!</p>
-                <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Especial (F02), foi publicada!</p>
-                <p>
-                    <a href="https://digiescola.com.br/estagio-graduacao/" target="_blank">
-                        Clique aqui
-                    </a>
-                        para <strong>verificar a sua posição.</strong>
-                </p>
-                <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
-                <p>Estamos a disposição para qualquer dúvida.</p>
-                <p> 
-                    Att, </br>
-                    Estágio Educação - SME Muriaé/MG </br>
-                    32 3696-3376
-                </p>
-                `,
-      }
+      // const APP_URL =  process.env.APP_URL;
+      // const mailOptions = {
+      //   from: 'Estágio Educação<estagio@edu.muriae.mg.gov.br>',
+      //   to: user.email,
+      //   subject: "Classificação Publicada | Processo Seletivo Estágio",
+      //   html: `<h2>Verifique sua classificação</h2>
+      //           <p>Olá ${user.name}!</p>
+      //           <p>A classificação do Processo Seletivo de Estagiários da SME/Muriaé, Função Especial (F02), foi publicada!</p>
+      //           <p>
+      //               <a href="https://digiescola.com.br/estagio-graduacao/" target="_blank">
+      //                   Clique aqui
+      //               </a>
+      //                   para <strong>verificar a sua posição.</strong>
+      //           </p>
+      //           <p><strong>Lembre de imprimir a Ficha de Inscrição, ela é impressindível no momento da Convocação.</strong></p>
+      //           <p>Estamos a disposição para qualquer dúvida.</p>
+      //           <p> 
+      //               Att, </br>
+      //               Estágio Educação - SME Muriaé/MG </br>
+      //               32 3696-3376
+      //           </p>
+      //           `,
+      // }
 
-      mailer.sendMail(mailOptions, function(error, info) {
-          if(error) {
-          console.log(error)
-          } else {
-          console.log('Email enviado: ' + info.response)
-          }
-      });
+      // mailer.sendMail(mailOptions, function(error, info) {
+      //     if(error) {
+      //     console.log(error)
+      //     } else {
+      //     console.log('Email enviado: ' + info.response)
+      //     }
+      // });
 
       return {
         ...user,
