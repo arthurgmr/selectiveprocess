@@ -67,10 +67,12 @@ module.exports = {
   async putUser(req, res) {
     try {
       const { user } = req;
+      console.log(user);
       let {                
         name,
         cpf,
         birth_date,
+        deficient,
         cep,
         address,
         address_number,
@@ -96,6 +98,7 @@ module.exports = {
         name,
         cpf,
         birth_date,
+        deficient,
         cep,
         address,
         address_number,
