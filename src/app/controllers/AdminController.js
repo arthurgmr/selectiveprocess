@@ -67,7 +67,6 @@ module.exports = {
   async putUser(req, res) {
     try {
       const { user } = req;
-      console.log(user);
       let {                
         name,
         cpf,
