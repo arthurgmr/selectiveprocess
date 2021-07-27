@@ -10,7 +10,7 @@
 
 <div class="content">
 
-    <form action="/admin/configs" method="post">
+    <form action="/admin/configs/data" method="post">
         <div class="fields">
 
             <div class="item">
@@ -90,7 +90,7 @@
                
         </div>
     </form>
-    <form action="/admin/configs/?_method=DELETE" method="post" id="delete-config">
+    <form action="/admin/configs/data/?_method=DELETE" method="post" id="delete-config">
         <input type="hidden" name="configId" value="{{config.id}}">
     </form>
     </form> 

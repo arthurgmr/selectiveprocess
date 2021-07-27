@@ -14,9 +14,17 @@ routes.get('/user/:id', AdminController.showUser)
 routes.put('/user/:id', AdminValidator.editUser, AdminController.putUser)
 routes.delete('/user', AdminController.deleteUser)
 
-routes.get('/configs', AdminController.configs)
-routes.post('/configs', AdminController.configsCreateAndEdit)
-routes.delete('/configs', AdminController.configsDelete)
+routes.get('/configs', AdminController.indexConfigs)
+
+routes.get('/configs/colleges', AdminController.indexColleges)
+routes.get('/configs/colleges/:id', AdminController.configs)
+routes.post('/configs/colleges/:id', AdminController.configs)
+routes.put('/configs/colleges/:id', AdminController.configs)
+routes.delete('/configs/colleges/:id', AdminController.configs)
+
+routes.get('/configs/data', AdminController.configs)
+routes.post('/configs/data', AdminController.configsCreateAndEdit)
+routes.delete('/configs/data', AdminController.configsDelete)
 
 routes.get('/classification', AdminController.chooseClassification)
 routes.get('/classification/regular', AdminController.showClassificationRegular)

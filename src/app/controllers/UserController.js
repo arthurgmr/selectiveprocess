@@ -287,5 +287,9 @@ module.exports = {
                 error: "Algum erro aconteceu"
             })
         }
+    },
+
+    async generatTerm(req, res) {
+        
     }
 }

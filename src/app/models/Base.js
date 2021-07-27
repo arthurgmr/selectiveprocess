@@ -13,6 +13,10 @@ function find (filters, table) {
         })
     }
 
+    if(table === "courses" || table === "colleges") {
+        query += ` ORDER BY ${table}.name ASC`
+    }
+
     return db.query(query)
 }
 

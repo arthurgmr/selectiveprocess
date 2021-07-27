@@ -8,10 +8,18 @@ async function applicationPeriod(req, res, next) {
 
     //get final date application period;
     const configs = await Configs.findOne();
-    const finalDate = configs.final_date;
+    const finalDate = Number(configs.final_date);
+
+    //get one day mileseconds;
+    const oneDay = 1000*60*60*24;
+
+    //if process dont has config;
+    if(!finalDate) {
+        return res.render("session/login")
+    }
 
     //if dateNow > finalDate return expired period;
-    if (dateNow > finalDate) {
+    if (dateNow > finalDate + oneDay) {
         return res.render("users/finish-subs")
     }
 

@@ -391,6 +391,15 @@ module.exports = {
   },
 
   //controlers configs
+  async indexConfigs(req, res) {
+    return res.render("admin/index-configs")
+  },
+  async indexColleges(req, res) {
+    return res.render("admin/colleges/index")
+  },
+
+
+
   async configs(req, res) {
     try {
       const config = await Configs.findOne();

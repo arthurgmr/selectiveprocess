@@ -31,8 +31,8 @@ module.exports = {
             WHERE 1 = 1
         `
         if(filter) {
-            query += `AND users.name LIKE '%${filter}%'
-            OR users.cpf LIKE '%${filter}%'` 
+            query += `AND users.name ILIKE '%${filter}%'
+            OR users.cpf ILIKE '%${filter}%'` 
         }
 
         const results = await db.query(query)
