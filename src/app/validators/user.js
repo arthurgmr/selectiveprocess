@@ -113,7 +113,7 @@ async function put(req, res, next) {
         error: "Digite sua senha para atualizar as informações"
     })
 
-    const user = await User.findOne({ where: {id} })
+    const user = await User.findOne({ where: { id } })
 
     const passed = await compare(password, user.password)
 

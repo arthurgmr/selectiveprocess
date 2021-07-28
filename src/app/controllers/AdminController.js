@@ -390,16 +390,112 @@ module.exports = {
      return res.render("admin/print-classif", { classifiedUsersSpecial, config });
   },
 
-  //controlers configs
+  //controlers configs general
   async indexConfigs(req, res) {
     return res.render("admin/index-configs")
   },
+
+  //configs of colleges;
   async indexColleges(req, res) {
-    return res.render("admin/colleges/index")
+    try {
+      const colleges = await Colleges.findAll();
+
+      return res.render("admin/colleges/index", { colleges })
+      
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async collegeShow(req, res) {
+    try {
+      const { id } = req.params;
+      const college = await Colleges.findOne({ where: { id } });
+
+      return res.render("admin/colleges/show", { college })
+      
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async collegeCreateAndEdit(req, res) {
+    try {
+      const { id } =  req.params;
+      const college = await Colleges.findOne({ where: { id } })
+
+      if(college) {
+        let {
+          name,
+          full_name,
+          cnpj,
+          city,
+          state,
+          director_name,
+          director_cpf,
+        } = req.body;
+
+        await Colleges.update({
+          name,
+          full_name,
+          cnpj,
+          city,
+          state,
+          director_name,
+          director_cpf,
+        })
+
+        return res.render("admin/colleges/index", {
+          colleges: await Configs.findAll(),
+          success: "Dados salvos com Sucesso!",
+        });
+
+      } else {
+        let {
+          name,
+          full_name,
+          cnpj,
+          city,
+          state,
+          director_name,
+          director_cpf,
+        } = req.body;
+
+        await Colleges.create({
+          name,
+          full_name,
+          cnpj,
+          city,
+          state,
+          director_name,
+          director_cpf,
+        })
+
+        return res.render("admin/colleges/index", {
+          colleges: await Configs.findAll(),
+          success: "Dados salvos com Sucesso!",
+        });
+      }
+
+
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async collegeDelete(req, res) {
+    try {
+      const { collegeId } = req.body;
+      await Colleges.delete(collegeId);
+
+      return res.render("admin/colleges/index", {
+        colleges: await Colleges.findAll(),
+        success: "Cadastro Deletado!"
+      })
+
+    } catch (error) {
+      console.log(error)
+    }
   },
 
-
-
+  // config of process;
   async configs(req, res) {
     try {
       const config = await Configs.findOne();

@@ -45,7 +45,13 @@ CREATE TABLE `courses` (
 
 CREATE TABLE `colleges` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` text NOT NULL
+  `name` text NOT NULL,
+  `full_name` text NOT NULL,
+  `cnpj` text NOT NULL,
+  `city` text NOT NULL,
+  `state` text NOT NULL,
+  `director_name` text NOT NULL,
+  `director_cpf` text NOT NULL
 );
 
 CREATE TABLE `configs` (
@@ -106,3 +112,12 @@ CREATE TABLE session(
 -- ALTER SEQUENCE products_id_seq RESTART WITH 1;
 -- ALTER SEQUENCE users_id_seq RESTART WITH 1;
 -- ALTER SEQUENCE files_id_seq RESTART WITH 1;
+
+
+ALTER TABLE colleges
+  ADD `full_name` text NOT NULL,
+  ADD `cnpj` text NOT NULL,
+  ADD `city` text NOT NULL,
+  ADD `state` text NOT NULL,
+  ADD `director_name` text NOT NULL,
+  ADD `director_cpf` text NOT NULL

@@ -17,7 +17,7 @@ routes.delete('/user', AdminController.deleteUser)
 routes.get('/configs', AdminController.indexConfigs)
 
 routes.get('/configs/colleges', AdminController.indexColleges)
-routes.get('/configs/colleges/:id', AdminController.configs)
+routes.get('/configs/colleges/:id', AdminController.collegeShow)
 routes.post('/configs/colleges/:id', AdminController.configs)
 routes.put('/configs/colleges/:id', AdminController.configs)
 routes.delete('/configs/colleges/:id', AdminController.configs)

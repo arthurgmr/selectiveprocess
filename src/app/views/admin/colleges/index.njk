@@ -8,7 +8,7 @@
 
 <div class="menu-bar">
 
-        <a class="button-action" href="/admin/user/{{ user.id }}" title="Editar Usuário">Cadastrar IES</a>
+        <a class="button-action" href="/admin/college/{{ college.id }}" title="Editar Usuário">Cadastrar IES</a>
 
 </div>
 
@@ -17,21 +17,21 @@
     <table width="100%">
         <thead>
             <tr>
-                <th>SIGLA</th>
+                <th>Sigla</th>
                 <th>Razão Social</th>
-                <th>Telefone</th>
+                <th>CNPJ</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            {% for user in users %}
+            {% for college in colleges %}
                 <tr>
-                    <td>{{user.name}}</td>
-                    <td>{{user.birth_date}}</td>
-                    <td>{{user.cpf}}</td>
-                    <td>{{user.phone1}}</td>
+                    <td>{{college.name}}</td>
+                    <td>{{college.full_name}}</td>
+                    <td>{{college.cnpj}}</td>
                     <td>
                         <div class="action">
-                            <a class="button-action" href="/admin/user/{{ user.id }}" title="Editar Usuário">
+                            <a class="button-action" href="/admin/configs/colleges/{{ college.id }}" title="Editar Usuário">
                                 <img src="/images/edit-24.svg" alt="Editar Usuário">
                             </a>
                         </div>
