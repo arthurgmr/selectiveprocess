@@ -4,15 +4,22 @@
 
 {% block content %}
 
-{% call card.render('Cadastro IES', 'configs-dashboard container') %}
+{% call card.render('Cadastro Instituição de Ensino Superior', 'configs-dashboard container') %}
 
-<h4>Todas as informações são necessárias para gerar o Termo de Compromisso completas.</h4>
+<h4>Todas as informações são necessárias para gerar o Termo de Compromisso.</h4>
 
-<div class="content">
+<div class="content form-college">
 
-    <form action="/admin/configs/colleges" method="post">
+    <form action="
+        {% if college%}
+            /admin/configs/colleges/{{ college.id }}
+        {% else %}
+            /admin/configs/colleges/create
+        {% endif %}
+        " method="post"
+    >
         <div class="fields">
-
+        
             <div class="item">
                 <div>Razão Social</div>
                 <div class="input">
@@ -22,91 +29,93 @@
                         value="{{ college.full_name }}"
                     >           
                 </div>
-            </div>
+            
+            <div class="grid">
 
-            <div class="item">
-                <div>Sigla</div>
-                <div class="input">
-                    <input 
-                        type="text" 
-                        name="name"
-                        value="{{ college.name }}"
-                    >           
+                <div class="item">
+                    <div>Sigla</div>
+                    <div class="input">
+                        <input 
+                            type="text" 
+                            name="name"
+                            value="{{ college.name }}"
+                        >           
+                    </div>
+                </div>            
+
+                <div class="item">
+                    <div>CNPJ</div>
+                    <div class="input">
+                        <input 
+                            type="text" 
+                            name="cnpj"
+                            autocomplete="off"
+                            value="{{ college.cnpj }}"
+                            onkeydown="Mask.apply(this, 'cnpj')"
+                            onblur="Validate.apply(this, 'isCnpj')" 
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Cidade da Sede IES</div>
+                    <div class="input">
+                        <input 
+                            type="text" 
+                            name="city"
+                            value="{{ college.city }}"
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Estado da Sede IES</div>
+                    <div class="input">
+                        <input 
+                            type="text" 
+                            name="state"
+                            value="{{ college.state }}"
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>Diretor Geral</div>
+                    <div class="input">
+                        <input 
+                            type="text" 
+                            name="director_name"
+                            value="{{ college.director_name }}"
+                        >           
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div>CPF Diretor</div>
+                    <div class="input">
+                        <input 
+                            type="text" 
+                            name="director_cpf"
+                            autocomplete="off"
+                            value="{{ college.director_cpf }}"
+                            onkeydown="Mask.apply(this, 'cpf')"
+                            onblur="Validate.apply(this, 'isCpf')" 
+
+                        >           
+                    </div>
                 </div>
             </div>
-
-            <div class="item">
-                <div>CNPJ</div>
-                <div class="input">
-                    <input 
-                        type="text" 
-                        name="cnpj"
-                        autocomplete="off"
-                        value="{{ college.cnpj }}"
-                        onkeydown="Mask.apply(this, 'cnpj')"
-                        onblur="Validate.apply(this, 'isCnpj')" 
-
-                    >           
-                </div>
-            </div>
-
-            <div class="item">
-                <div>Cidade da Sede IES</div>
-                <div class="input">
-                    <input 
-                        type="text" 
-                        name="city"
-                        value="{{ college.city }}"
-                    >           
-                </div>
-            </div>
-
-            <div class="item">
-                <div>Estado da Sede IES</div>
-                <div class="input">
-                    <input 
-                        type="text" 
-                        name="state"
-                        value="{{ college.state }}"
-                    >           
-                </div>
-            </div>
-
-            <div class="item">
-                <div>Diretor Geral</div>
-                <div class="input">
-                    <input 
-                        type="text" 
-                        name="director_name"
-                        value="{{ college.director_name }}"
-                    >           
-                </div>
-            </div>
-
-            <div class="item">
-                <div>CPF Diretor</div>
-                <div class="input">
-                    <input 
-                        type="text" 
-                        name="director_cpf"
-                        autocomplete="off"
-                        value="{{ college.director_cpf }}"
-                        onkeydown="Mask.apply(this, 'cpf')"
-                        onblur="Validate.apply(this, 'isCpf')" 
-
-                    >           
-                </div>
-            </div>
-        
         </div>
         <div class="buttons">
-            <button class="button" type="submit">Salvar</button> 
-            <button class="button delete" type="submit" form="delete-college">Deletar</button>
+            <button class="button" type="submit">Salvar</button>
+            {% if college %}
+                <button class="button delete" type="submit" form="delete-college">Deletar</button>
+            {% endif %} 
         </div>
 
     </form>
-    <form action="/admin/configs/colleges/?_method=DELETE" method="post" id="delete-config">
-        <input type="hidden" name="collegeId" value="{{config.id}}">
+    <form action="/admin/configs/colleges/?_method=DELETE" method="post" id="delete-college">
+        <input type="hidden" name="collegeId" value="{{college.id}}">
     </form>
     </form> 
 

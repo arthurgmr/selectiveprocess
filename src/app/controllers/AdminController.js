@@ -389,7 +389,6 @@ module.exports = {
     }
      return res.render("admin/print-classif", { classifiedUsersSpecial, config });
   },
-
   //controlers configs general
   async indexConfigs(req, res) {
     return res.render("admin/index-configs")
@@ -406,6 +405,40 @@ module.exports = {
       console.log(error)
     }
   },
+  async formCollege(req, res) {
+    try {
+      return res.render("admin/colleges/show")
+      
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async collegeCreate(req, res) {
+    let {
+      name,
+      full_name,
+      cnpj,
+      city,
+      state,
+      director_name,
+      director_cpf,
+    } = req.body;
+
+    await Colleges.create({
+      name,
+      full_name,
+      cnpj,
+      city,
+      state,
+      director_name,
+      director_cpf,
+    })
+
+    return res.render("admin/colleges/index", {
+      colleges: await Colleges.findAll(),
+      success: "Dados salvos com Sucesso!",
+    });
+  },
   async collegeShow(req, res) {
     try {
       const { id } = req.params;
@@ -417,12 +450,11 @@ module.exports = {
       console.log(error)
     }
   },
-  async collegeCreateAndEdit(req, res) {
+  async collegeEdit(req, res) {
     try {
       const { id } =  req.params;
       const college = await Colleges.findOne({ where: { id } })
 
-      if(college) {
         let {
           name,
           full_name,
@@ -433,7 +465,7 @@ module.exports = {
           director_cpf,
         } = req.body;
 
-        await Colleges.update({
+        await Colleges.update(college.id, {
           name,
           full_name,
           cnpj,
@@ -444,37 +476,9 @@ module.exports = {
         })
 
         return res.render("admin/colleges/index", {
-          colleges: await Configs.findAll(),
+          colleges: await Colleges.findAll(),
           success: "Dados salvos com Sucesso!",
         });
-
-      } else {
-        let {
-          name,
-          full_name,
-          cnpj,
-          city,
-          state,
-          director_name,
-          director_cpf,
-        } = req.body;
-
-        await Colleges.create({
-          name,
-          full_name,
-          cnpj,
-          city,
-          state,
-          director_name,
-          director_cpf,
-        })
-
-        return res.render("admin/colleges/index", {
-          colleges: await Configs.findAll(),
-          success: "Dados salvos com Sucesso!",
-        });
-      }
-
 
     } catch (error) {
       console.log(error)
